@@ -9,3 +9,10 @@ brew install zsh
 sudo vim /etc/shells >> /usr/local/bin/zsh 
 chsh -s /usr/local/bin/zsh
 ```
+## how to setup tex
+```
+sudo tlmgr update --self --all
+sudo tlmgr paper a4
+sudo tlmgr install collection-langjapanese
+sudo tlmgr install latexmk
+```

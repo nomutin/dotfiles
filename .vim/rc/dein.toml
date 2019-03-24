@@ -18,8 +18,8 @@ hook_add = '''
 	let g:ale_echo_msg_format = '[%linter%]%code: %%s'
 	highlight link ALEErrorSign Tag
 	highlight link ALEWarningSign StorageClass
-	nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-	nmap <silent> <C-j> <Plug>(ale_next_wrap)
+	nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
+	nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 	'''
 	
 [[plugins]]
@@ -48,3 +48,20 @@ repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+hook_add = '''
+	nnoremap <silent><C-p> :QuickRun<CR>
+	nnoremap <silent><C-c> :!latexmk -c<CR>
+	let g:quickrun_config = {}
+	let g:quickrun_config['tex'] = {
+            \   'command' : 'latexmk', 
+            \   'outputter' : 'error',
+            \   'outputter/error/error' : 'quickfix',
+            \   'args' : '-pv', 
+            \   'cmdopt': '-pdfdvi',
+            \   'exec': ['%c %a %o %s'],
+            \ }
+	'''
+
