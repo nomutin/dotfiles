@@ -8,15 +8,16 @@ set ruler "カーソル位置を表示
 syntax on "コードに色をつける
 
 "===== 文字、カーソル設定 =====
-"set fenc=utf-8 "文字コードを指定
+"set fenc=utf-8 "文字コードtabstop指定
 set virtualedit=onemore "カーソルを行末の一つ先まで移動可能にする
 set autoindent "自動インデント
 set smartindent "オートインデント
-set tabstop=4 "インデントをスペース2つ分に設定
 set shiftwidth=4 "自動的に入力されたインデントの空白を2つ分に設定
 set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮ "不可視文字の指定
 set whichwrap=b,s,h,l,<,>,[,],~ "行頭、行末で行のカーソル移動を可能にする
 let &t_ti.="\e[5 q" "カーソルの形状を変更
+set cursorline
+autocmd FileType python setl tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
 "===== 検索設定 =====
 set ignorecase "大文字、小文字の区別をしない
