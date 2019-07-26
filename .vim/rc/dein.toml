@@ -52,8 +52,8 @@ repo = 'ryanoasis/vim-devicons'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 hook_add = '''
-	nnoremap <silent><C-p> :QuickRun<CR>
-	nnoremap <silent><C-c> :!latexmk -c<CR>
+	nnoremap <silent> <C-p> :QuickRun <CR>
+	nnoremap <silent> <C-c> !latexmk -c <CR>
 	let g:quickrun_config = {}
 	let g:quickrun_config['tex'] = {
             \   'command' : 'latexmk', 

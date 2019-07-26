@@ -8,3 +8,5 @@
 	email = nomura0508@icloud.com
 [alias]
     graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
+[core]
+    excludesfile = /Users/nomura/.gitignore
