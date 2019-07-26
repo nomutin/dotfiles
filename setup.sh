@@ -21,7 +21,7 @@ if !([ -e ~/.vim/dein/repos/github.com/Shougo/dein.vim ]); then
 fi
 
 #"===== make dotfiles alias ====="
-DOT_FILES=(.vimrc .gitconfig .bash_profile .zshrc .latexmkrc)
+DOT_FILES=(.vimrc .gitconfig .bash_profile .zshrc .latexmkrc .gitignore)
 for file in ${DOT_FILES[@]};
 do
     if !([ -e $HOME/$file ]); then
@@ -51,14 +51,14 @@ fi
 
 #"===== setting for tex =====
 if !(type 'tex' > /dev/null 2>&1); then
-    brew install ghostscript
+    brew install ghostscript zsh
     brew cask install basictex skim 
 fi
 
 #"===== startup apps =====
 if !([ -e /Applications/clipy.app ]); then
-    brew cask install clipy alfred coteditor insomniax touchswitcher
-    open -a 'Safari' "https://www.jetbrains.com/idea/download/download-thanks.html?code=IIC"
+    brew cask install clipy alfred coteditor insomniax touchswitcher atom
+#     open -a 'Safari' "https://www.jetbrains.com/idea/download/download-thanks.html?code=IIC"
 fi
 
 #"===== setting for matplotlib =====

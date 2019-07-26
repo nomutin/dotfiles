@@ -69,6 +69,7 @@ set noundofile
 
 "=====色関係=====
 colorscheme molokai
+"colorscheme lucario
 
 syntax on
 set t_Co=256
