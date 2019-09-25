@@ -65,3 +65,7 @@ hook_add = '''
             \ }
 	'''
 
+[[plugins]]
+repo = 'previm/previm'
+
+

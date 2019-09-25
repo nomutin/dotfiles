@@ -45,7 +45,7 @@ done
 
 #"===== install python =====
 if !(type 'python3' > /dev/null 2>&1); then
-    brew install pyenv python3
+    brew install python3
     pip3 install pipenv flake8
 fi	
 
@@ -57,7 +57,7 @@ fi
 
 #"===== startup apps =====
 if !([ -e /Applications/clipy.app ]); then
-    brew cask install clipy alfred coteditor insomniax touchswitcher atom
+    brew cask install clipy alfred coteditor insomniax touchswitcher atom onyx
 #     open -a 'Safari' "https://www.jetbrains.com/idea/download/download-thanks.html?code=IIC"
 fi
 
