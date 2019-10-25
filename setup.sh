@@ -21,7 +21,7 @@ if !([ -e ~/.vim/dein/repos/github.com/Shougo/dein.vim ]); then
 fi
 
 #"===== make dotfiles alias ====="
-DOT_FILES=(.vimrc .gitconfig .bash_profile .zshrc .latexmkrc .gitignore)
+DOT_FILES=(.vimrc .gitconfig .bash_profile .zshrc .latexmkrc )
 for file in ${DOT_FILES[@]};
 do
     if !([ -e $HOME/$file ]); then
