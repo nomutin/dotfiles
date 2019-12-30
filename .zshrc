@@ -7,3 +7,5 @@ SAVEHIST=6000000
 
  
 alias brup='brew update && brew upgrade'
+
+export PIPENV_VENV_IN_PROJECT=1
