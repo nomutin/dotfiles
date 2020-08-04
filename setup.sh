@@ -10,7 +10,7 @@ fi
 #"===== install nightly-itrem2 ====="
 if !([ -e /Applications/iTerm.app ]); then
     open -a 'Safari' "https://www.iterm2.com/nightly/latest"
-    https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Hack.zip
+     % https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Hack.zip
 fi
 
 #"===== dein install ====="
@@ -21,7 +21,7 @@ if !([ -e ~/.vim/dein/repos/github.com/Shougo/dein.vim ]); then
 fi
 
 #"===== make dotfiles alias ====="
-DOT_FILES=(.vimrc .gitconfig .bash_profile .zshrc .latexmkrc )
+DOT_FILES=(.vimrc .gitconfig .zshrc .latexmkrc )
 for file in ${DOT_FILES[@]};
 do
     if !([ -e $HOME/$file ]); then
@@ -43,22 +43,18 @@ do
         done
 done
 
-#"===== install python =====
-if !(type 'python3' > /dev/null 2>&1); then
-    brew install python3
+#"===== install pyenv =====
+if !(type 'pyenv' > /dev/null 2>&1); then
+    brew install pyenv docker
 fi	
-
-#"===== setting for tex =====
-if !(type 'tex' > /dev/null 2>&1); then
-    brew install ghostscript zsh
-    brew cask install basictex skim 
-fi
 
 #"===== startup apps =====
 if !([ -e /Applications/clipy.app ]); then
-    brew cask install clipy alfred coteditor insomniax touchswitcher atom onyx
+    brew cask install clipy coteditor skim docker
 fi
 
 #"===== setting for matplotlib =====
 mkdir $HOME/.matplotlib
  ln -s $HOME/dotfiles/matplotlibrc $HOME/.matplotlib/matplotlibrc
+ 
+defaults write com.apple.dock autohide-time-modifier -int 0 && killall Dock

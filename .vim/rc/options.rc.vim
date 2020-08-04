@@ -6,6 +6,7 @@ set list "タブ、空白、改行を可視化
 set visualbell "ビープ音を視覚表示
 set ruler "カーソル位置を表示
 syntax on "コードに色をつける
+set clipboard=unnamed,autoselect  "ンクした時にクリップボードにコピーする
 
 "===== 文字、カーソル設定 =====
 "set fenc=utf-8 "文字コードtabstop指定
@@ -75,3 +76,8 @@ syntax on
 set t_Co=256
 set termguicolors
 set background=dark
+
+"===プラグインのキーマップ===
+nnoremap <silent><C-e> :NERDTreeToggle<CR>　"nerdtreeの起動
+
+let g:airline_theme = 'molokai'  "vim-airlineのステータスラインのテーマを変更する
