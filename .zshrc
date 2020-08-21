@@ -2,8 +2,8 @@ autoload -U compinit
 compinit
 
 HISTFILE=~/.zsh_history
-HISTSIZE=100
-SAVEHIST=100
+HISTSIZE=9999
+SAVEHIST=9999
 
 
 #自作基本コマンド
@@ -48,5 +48,7 @@ function lmc {
 	fi
 }
 
+#html
+alias brsync='browser-sync start --server --directory --files "**/*"'
 
 
