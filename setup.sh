@@ -14,9 +14,10 @@ brew install pyenv docker
 brew cask install iterm2 clipy coteditor skim docker
 
 #"===== make dotfiles alias ====="
-DOT_FILES=(.gitconfig .zshrc .latexmkrc)
+DOT_FILES=(.gitconfig .zshrc .latexmkrc .gitignore)
 for file in ${DOT_FILES[@]};
-    ln -s $HOME/dotfiles/$file $HOME/$file
+do
+    ln -sf $HOME/dotfiles/$file $HOME/$file
 done
 
 #"===== setting for matplotlib =====
