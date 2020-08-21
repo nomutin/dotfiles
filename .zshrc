@@ -15,6 +15,7 @@ function cdmk {
 	return 0
 }
 
+alias paths="echo $PATH | tr ':' '\n'"
 
 # C
 function cco {
@@ -31,24 +32,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# latexmk
-function lmk {
-	if [ -f main.tex ]; then
-		latexmk -pvc main.tex
-	else
-		latexmk -pvc
-	fi
-}
-
-function lmc {
-	if [ -f main.tex ]; then
-		latexmk -c main.tex
-	else
-		latexmk -c
-	fi
-}
-
 #html
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 alias brsync='browser-sync start --server --directory --files "**/*"'
-
-

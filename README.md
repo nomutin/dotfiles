@@ -9,13 +9,8 @@ git clone https://github.com/nomutin/dotfiles && sh dotfiles/setup.sh
 現在のsetup.shに記述してあるコマンドは，以下の項目
 
 1. homebrew及びxcode-selectのインストール
-2. brewで各機能をインストール
-	
-	- docker
-	- pyenv 
 
-
-3. スタートアップアプリのインストール
+2. スタートアップアプリのインストール
 
 	現在(2020/8/20)は，caskを用いて以下のアプリをインストール
 
@@ -23,11 +18,17 @@ git clone https://github.com/nomutin/dotfiles && sh dotfiles/setup.sh
 	- sublime-text
 	- docker (for latex)
 	- clipy
-	- insomnia
 	- skim (for latex)
+	- deepl
 
-4. ドットファイルのエイリアスの作成(.gitconfig .zshrc .latexmkrc)
+3. ドットファイルのエイリアスの作成(.gitconfig .zshrc .latexmkrc .gitignore)
 
-5. matplotlibのアクティベート
+	.zshrcによってPATHを通しておく
 
-6. Dock・カーソルの加速
+4. 各種設定・インストール
+
+	- matplotlib
+	- Dock速度
+	- docker
+	- node.js
+	- python
