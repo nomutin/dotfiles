@@ -15,7 +15,10 @@ function cdmk {
 	return 0
 }
 
-alias paths="echo $PATH | tr ':' '\n'"
+
+function clone {
+	git clone https://github.com/nomutin/$1.git
+}
 
 # C
 function cco {
@@ -25,13 +28,20 @@ function cco {
 }
 
 alias cru='./a.out'
+export C_INCLUDE_PATH='/Users/nomura/.pyenv/versions/3.8.5/include/python3.8'
 
 # python
 export PIPENV_VENV_IN_PROJECT=1
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PYENV_ROOT/shims:$PATH"
 eval "$(pyenv init -)"
+
 
 #html
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 alias brsync='browser-sync start --server --directory --files "**/*"'
+
+#latex
+alias lmk='docker run -v $(pwd):/root/work -it texlive latexmk --pvc ./main.tex'
+alias lmc='docker run -v $(pwd):/root/work -it texlive latexmk -c ./main.tex && rm main.dvi && rm main.synctex.gz'
+# docker rm `docker ps -a -q`
