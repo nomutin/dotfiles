@@ -8,10 +8,10 @@ if !(type 'brew' > /dev/null 2>&1); then
 fi	
 
 #"===== startup apps =====
-brew cask install iterm2 clipy skim sublime-text deepl
+brew cask install iterm2 clipy skim deepl coteditor alfred
 
 #"===== make dotfiles alias ====="
-DOT_FILES=(.gitconfig .zshrc .latexmkrc .gitignore)
+DOT_FILES=(.gitconfig .zshrc .latexmkrc .gitignore .vimrc .vim)
 for file in ${DOT_FILES[@]};
 do
     ln -sf $HOME/dotfiles/$file $HOME/$file
