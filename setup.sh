@@ -4,11 +4,10 @@
 if !(type 'brew' > /dev/null 2>&1); then
     xcode-select --install
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew tap caskroom/cask
 fi	
 
 #"===== startup apps =====
-brew cask install iterm2 clipy skim deepl coteditor alfred
+brew install iterm2 clipy skim deepl coteditor alfred
 
 #"===== make dotfiles alias ====="
 DOT_FILES=(.gitconfig .zshrc .latexmkrc .gitignore .vimrc .vim)
@@ -27,7 +26,7 @@ defaults write com.apple.dock autohide-time-modifier -int 0 && killall Dock
 
 #===== docker settings =====
 brew install docker
-brew cask install docker
+brew install --cask docker
 
 #"===== node.js settigs =====
 brew install nodebrew
