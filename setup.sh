@@ -3,11 +3,11 @@
 #"===== brew install ====="
 if !(type 'brew' > /dev/null 2>&1); then
     xcode-select --install
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi	
 
 #"===== startup apps =====
-brew install iterm2 clipy skim deepl coteditor alfred
+brew install iterm2 clipy skim deepl coteditor alfred swiftdefaultappsprefpane
 
 #"===== make dotfiles alias ====="
 DOT_FILES=(.gitconfig .zshrc .latexmkrc .gitignore .vimrc .vim)

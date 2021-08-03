@@ -1,0 +1,41 @@
+\special{pdf:mapline rml H hiramin.ttc}
+\usepackage[top=20truemm,bottom=20truemm,left=26truemm,right=26truemm]{geometry}
+
+\usepackage[dvipdfmx]{graphicx} 
+\usepackage{amsmath}            %align-casesで連立方程式
+\usepackage{bm}
+\usepackage{amssymb}            %\therefore \because
+\usepackage{url}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{mhchem}
+
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+\hypersetup{
+  draft=false
+  bookmarks=false,
+  bookmarksnumbered=true,
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+}
+\usepackage{listings}
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex
+}
