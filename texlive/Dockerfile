@@ -28,6 +28,7 @@ RUN tlmgr install collection-fontsrecommended
 RUN tlmgr install collection-fontutils
 RUN tlmgr install mhchem
 RUN tlmgr install siunitx
+RUN tlmgr install enumitem
 
 RUN apk del xz tar
 RUN rm -rf /var/cache/apk/*
