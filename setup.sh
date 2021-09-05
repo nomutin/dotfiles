@@ -1,6 +1,8 @@
 #!/bin/bash
 
 #"===== brew install ====="
+xcode-select --install
+
 if !(type 'brew' > /dev/null 2>&1); then
     xcode-select --install
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

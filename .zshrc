@@ -42,8 +42,14 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 alias brsync='browser-sync start --server --directory --files "**/*"'
 
 #latex
+function lset {
+	cp -r '/Users/nomura/dotfiles/texlive/template' $PWD
+	mv template $1
+}
+
+
+
 alias lmk='docker run -v $(pwd):/root/work -it texlive latexmk --pvc ./main.tex'
 alias lmc='docker run -v $(pwd):/root/work -it texlive latexmk -c ./main.tex && rm main.dvi && rm main.synctex.gz'
 # docker rm `docker ps -a -q`
 
-export PATH="/usr/local/texlive/2021basic/bin/universal-darwin:$PATH"
