@@ -1,0 +1,37 @@
+\documentclass[a4paper,10pt,uplatex]{jsarticle}
+\usepackage[top=35truemm,bottom=25truemm,left=30truemm,right=30truemm]{geometry}
+
+\usepackage[dvipdfmx]{color}              % 画像処理
+\usepackage[dvipdfmx]{graphicx}         % 画像処理
+\usepackage{amsmath}                        % align-casesで連立方程式
+\usepackage{amssymb}                       % \therefore \because
+\usepackage{url}                                 % \url{}
+\usepackage{siunitx}                            % \SI{}・\si{}
+\usepackage{enumerate}                      % enumetate拡張
+\usepackage{multirow}                         % 表の列結合
+\usepackage[dvipdfmx]{hyperref}         % hyperref/hypertarget
+\usepackage{pxjahyper}
+\usepackage{here}
+
+\hypersetup{
+  bookmarks=false,
+  bookmarksnumbered=true,
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+}
+
+\pagestyle{plain}
+
+\usepackage{otf}
+\AtBeginDvi{\special{pdf:mapline rml H hirakakuw4.ttf}}
+\AtBeginDvi{\special{pdf:mapline gbm H hirakakuw4.ttf}}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\end{document}

@@ -5,6 +5,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=9999
 SAVEHIST=9999
 
+export PATH="$PATH:/opt/homebrew/bin/"
 
 #自作基本コマンド
 alias brup='brew update && brew upgrade'
@@ -43,13 +44,13 @@ alias brsync='browser-sync start --server --directory --files "**/*"'
 
 #latex
 function lset {
-	cp -r '/Users/nomura/dotfiles/texlive/template' $PWD
-	mv template $1
+	cp -r '/Users/nomura/dotfiles/TexTemplate' $PWD
+	mv TexTemplate $1
 }
 
+export PATH="/usr/local/texlive/2021basic/bin/universal-darwin:$PATH"
 
-
-alias lmk='docker run -v $(pwd):/root/work -it texlive latexmk --pvc ./main.tex'
-alias lmc='docker run -v $(pwd):/root/work -it texlive latexmk -c ./main.tex && rm main.dvi && rm main.synctex.gz'
+alias lmk='latexmk -pvc ./main.tex'
+alias lmc='latexmk -c ./main.tex && rm main.dvi && rm main.synctex.gz'
 # docker rm `docker ps -a -q`
 
