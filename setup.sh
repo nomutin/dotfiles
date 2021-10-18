@@ -12,7 +12,7 @@ fi
 brew install iterm2 clipy skim deepl coteditor alfred swiftdefaultappsprefpane
 
 #"===== make dotfiles alias ====="
-DOT_FILES=(.gitconfig .zshrc .latexmkrc .gitignore .vimrc .vim)
+DOT_FILES=(.gitconfig .zshrc .gitignore .vimrc .vim)
 for file in ${DOT_FILES[@]};
 do
     ln -sf $HOME/dotfiles/$file $HOME/$file
@@ -27,11 +27,10 @@ ln -sf $HOME/dotfiles/matplotlibrc $HOME/.matplotlib/matplotlibrc
 defaults write com.apple.dock autohide-time-modifier -int 0 && killall Dock
 
 #===== docker settings =====
-brew install docker
 brew install --cask docker
 
 #"===== node.js settigs =====
-brew install nodebrew
+brew install nodebrewß
 mkdir -p ~/.nodebrew/src
 nodebrew install-binary stable
 nodebrew use stable

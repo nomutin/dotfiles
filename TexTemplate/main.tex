@@ -1,5 +1,5 @@
 \documentclass[a4paper,10pt,uplatex]{jsarticle}
-\usepackage[top=25truemm,bottom=25truemm,left=28truemm,right=28truemm]{geometry}
+\usepackage[top=35truemm,bottom=25truemm,left=30truemm,right=30truemm]{geometry}
 
 \usepackage[dvipdfmx]{color}              % 画像処理
 \usepackage[dvipdfmx]{graphicx}         % 画像処理
@@ -11,8 +11,9 @@
 \usepackage{multirow}                         % 表の列結合
 \usepackage[dvipdfmx]{hyperref}         % hyperref/hypertarget
 \usepackage{pxjahyper}
+\usepackage{here}
+
 \hypersetup{
-  draft=true
   bookmarks=false,
   bookmarksnumbered=true,
   colorlinks=true,
@@ -20,11 +21,11 @@
   citecolor=blue,
 }
 
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\lhead{}
-\renewcommand{\headrulewidth}{1pt}
-\renewcommand{\footrulewidth}{1pt}
+\pagestyle{plain}
+
+\usepackage{otf}
+\AtBeginDvi{\special{pdf:mapline rml H hirakakuw4.ttf}}
+\AtBeginDvi{\special{pdf:mapline gbm H hirakakuw4.ttf}}
 
 \title{}
 \author{}
