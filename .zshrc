@@ -51,6 +51,6 @@ function lset {
 export PATH="/usr/local/texlive/2021basic/bin/universal-darwin:$PATH"
 
 alias lmk='latexmk -pvc ./main.tex'
-alias lmc='latexmk -c ./main.tex && rm main.dvi && rm main.synctex.gz'
+alias lmc='latexmk -c ./main.tex && rm main.dvi && rm main.bbl'
 # docker rm `docker ps -a -q`
 
