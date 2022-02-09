@@ -9,7 +9,7 @@ if !(type 'brew' > /dev/null 2>&1); then
 fi	
 
 #"===== startup apps =====
-brew install --cask iterm2 clipy deepl coteditor alfred swiftdefaultappsprefpane visual-studio-code rectangle keyboardcleantool dozer mathpix-snipping-tool google-drive biscuit
+brew install --cask iterm2 clipy deepl coteditor alfred swiftdefaultappsprefpane visual-studio-code rectangle keyboardcleantool dozer mathpix-snipping-tool google-drive slack zoom
 
 #"===== make dotfiles alias ====="
 DOT_FILES=(.gitconfig .zshrc .gitignore .vimrc .vim .latexmkrc)
@@ -17,7 +17,6 @@ for file in ${DOT_FILES[@]};
 do
     ln -sf $HOME/dotfiles/$file $HOME/$file
 done
-source ~/.zshrc
 
 #"===== MacBook settings =====
 defaults write com.apple.dock autohide-time-modifier -int 0 && killall Dock
