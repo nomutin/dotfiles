@@ -51,6 +51,21 @@ function lset {
 export PATH="/usr/local/texlive/2021basic/bin/universal-darwin:$PATH"
 
 alias lmk='latexmk -pvc ./main.tex'
-alias lmc='latexmk -c ./main.tex && rm main.dvi && rm main.bbl'
+alias lmc='latexmk -c ./main.tex && rm -f main.dvi && rm -f main.bbl && rm -f main.synctex.gz'
 # docker rm `docker ps -a -q`
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/nomura/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/nomura/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/Users/nomura/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/nomura/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
