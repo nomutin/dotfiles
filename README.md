@@ -1,7 +1,17 @@
 # dotfiles
 ## 💻 Usage
 ```
-git clone https://github.com/nomutin/dotfiles && sh dotfiles/setup.sh
+git clone https://github.com/nomutin/dotfiles && sh dotfiles/setup.sh && source ~/.zshrc
+```
+
+### tex
+```
+sh dotfiles/texSetup.sh
+```
+
+### python
+```
+sh dotfiles/pySetup.sh
 ```
 
 ## ✅ Subject
@@ -17,7 +27,10 @@ git clone https://github.com/nomutin/dotfiles && sh dotfiles/setup.sh
 ## ⚡️ 現在自動化できていないコマンド
 
 - runcatのインストール
+- flowのインストール
 - USキーボードの日本語対応
-- Dockの表示速度
+- Dockの表示速度・常時表示設定
 - マウス速度
-- finderサイドバー表示  etc...
+- バックグラウンド画像
+- finderサイドバーに表示するもの
+- DockやLaunchPadの配置  etc...
