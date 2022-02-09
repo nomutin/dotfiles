@@ -11,21 +11,13 @@ git clone https://github.com/nomutin/dotfiles && sh dotfiles/setup.sh
 
 2. スタートアップアプリのインストール
 
-	現在(2020/8/20)は，caskを用いて以下のアプリをインストール
+3. ドットファイルのエイリアスの作成
 
-	- iterm2
-	- docker (for latex)
-	- clipy
-	- skim (for latex)
 
-3. ドットファイルのエイリアスの作成(.gitconfig .zshrc .latexmkrc .gitignore)
+## ⚡️ 現在自動化できていないコマンド
 
-	.zshrcによってPATHを通しておく
-
-4. 各種設定・インストール
-
-	- matplotlib
-	- Dock速度
-	- docker
-	- node.js
-	- python
+- runcatのインストール
+- USキーボードの日本語対応
+- Dockの表示速度
+- マウス速度
+- finderサイドバー表示  etc...

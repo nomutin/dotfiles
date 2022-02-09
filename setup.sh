@@ -9,35 +9,15 @@ if !(type 'brew' > /dev/null 2>&1); then
 fi	
 
 #"===== startup apps =====
-brew install iterm2 clipy skim deepl coteditor alfred swiftdefaultappsprefpane
+brew install --cask iterm2 clipy deepl coteditor alfred swiftdefaultappsprefpane visual-studio-code rectangle keyboardcleantool dozer mathpix-snipping-tool google-drive biscuit
 
 #"===== make dotfiles alias ====="
-DOT_FILES=(.gitconfig .zshrc .gitignore .vimrc .vim)
+DOT_FILES=(.gitconfig .zshrc .gitignore .vimrc .vim .latexmkrc)
 for file in ${DOT_FILES[@]};
 do
     ln -sf $HOME/dotfiles/$file $HOME/$file
 done
 source ~/.zshrc
 
-#"===== setting for matplotlib =====
-mkdir $HOME/.matplotlib
-ln -sf $HOME/dotfiles/matplotlibrc $HOME/.matplotlib/matplotlibrc
- 
 #"===== MacBook settings =====
 defaults write com.apple.dock autohide-time-modifier -int 0 && killall Dock
-
-#===== docker settings =====
-brew install --cask docker
-
-#"===== node.js settigs =====
-brew install nodebrewß
-mkdir -p ~/.nodebrew/src
-nodebrew install-binary stable
-nodebrew use stable
-npm install -g browser-sync
-
-#"===== python setting ====="
-brew install pyenv
-pyenv install 3.8.5
-pyenv global 3.8.5
-pip install pipenv
