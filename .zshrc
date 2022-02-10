@@ -37,6 +37,15 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/shims:$PATH"
 eval "$(pyenv init -)"
 
+# tensorflow + poetry
+export SYSTEM_VERSION_COMPAT=1
+export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
+export GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1
+export GRPC_PYTHON_BUILD_SYSTEM_ZLIB=true
+export HDF5_DIR=/opt/homebrew/opt/hdf5
+
 
 #html
 export PATH=$HOME/.nodebrew/current/bin:$PATH
@@ -54,18 +63,4 @@ alias lmk='latexmk -pvc ./main.tex'
 alias lmc='latexmk -c ./main.tex && rm -f main.dvi && rm -f main.bbl && rm -f main.synctex.gz'
 # docker rm `docker ps -a -q`
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/nomura/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/nomura/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/Users/nomura/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/nomura/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
