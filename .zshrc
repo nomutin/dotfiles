@@ -39,12 +39,6 @@ eval "$(pyenv init -)"
 
 # tensorflow + poetry
 export SYSTEM_VERSION_COMPAT=1
-export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
-export GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1
-export GRPC_PYTHON_BUILD_SYSTEM_ZLIB=true
-export HDF5_DIR=/opt/homebrew/opt/hdf5
 
 
 #html
