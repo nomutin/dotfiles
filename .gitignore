@@ -8,6 +8,7 @@
 
 **/.venv/*
 
+*.ttc
 
 ### swift
 ###  reference: https://qiita.com/higan96/items/36d3877a85ab8fc36ea7
