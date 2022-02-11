@@ -29,8 +29,9 @@ sh dotfiles/pySetup.sh
 - runcatのインストール
 - flowのインストール
 - USキーボードの日本語対応
-- Dockの表示速度・常時表示設定
+- 常時表示設定
 - マウス速度
 - バックグラウンド画像
 - finderサイドバーに表示するもの
+- ホットコーナーへのスクリーンセーバの割り当て
 - DockやLaunchPadの配置  etc...

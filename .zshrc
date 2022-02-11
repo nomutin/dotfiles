@@ -51,10 +51,37 @@ function lset {
 	mv TexTemplate $1
 }
 
+function fset {
+	cp '/Users/nomura/dotfiles/TexTemplate/hiramin.ttc' $PWD
+	cp '/Users/nomura/dotfiles/TexTemplate/hirakakuW4.ttc' $PWD
+}
+
 export PATH="/usr/local/texlive/2021basic/bin/universal-darwin:$PATH"
 
 alias lmk='latexmk -pvc ./main.tex'
 alias lmc='latexmk -c ./main.tex && rm -f main.dvi && rm -f main.bbl && rm -f main.synctex.gz'
 # docker rm `docker ps -a -q`
 
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/nomura/.pyenv/versions/miniforge3-4.10.3-10/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/nomura/.pyenv/versions/miniforge3-4.10.3-10/etc/profile.d/conda.sh" ]; then
+        . "/Users/nomura/.pyenv/versions/miniforge3-4.10.3-10/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/nomura/.pyenv/versions/miniforge3-4.10.3-10/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+# Pytorch
+export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig"
 
