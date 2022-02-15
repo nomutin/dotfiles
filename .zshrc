@@ -63,23 +63,6 @@ alias lmc='latexmk -c ./main.tex && rm -f main.dvi && rm -f main.bbl && rm -f ma
 # docker rm `docker ps -a -q`
 
 
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/nomura/.pyenv/versions/miniforge3-4.10.3-10/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/nomura/.pyenv/versions/miniforge3-4.10.3-10/etc/profile.d/conda.sh" ]; then
-        . "/Users/nomura/.pyenv/versions/miniforge3-4.10.3-10/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/nomura/.pyenv/versions/miniforge3-4.10.3-10/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
 # Pytorch
 export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
