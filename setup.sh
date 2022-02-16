@@ -14,9 +14,7 @@ for file in ${DOT_FILES[@]};
 do
     ln -sf $HOME/dotfiles/$file $HOME/$file
 done
- 
- #"===== python ====="
- git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+
  
 #"===== startup apps =====
 brew install --cask iterm2 clipy deepl coteditor alfred swiftdefaultappsprefpane visual-studio-code rectangle keyboardcleantool dozer mathpix-snipping-tool google-drive slack zoom
