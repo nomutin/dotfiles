@@ -1,7 +1,7 @@
 # dotfiles
 ## 💻 Usage
 ```
-git clone https://github.com/nomutin/dotfiles && sh dotfiles/setup.sh && source ~/.zshrc
+git clone https://github.com/nomutin/dotfiles && sh dotfiles/setup.sh && sudo reboot && source ~/.zshrc
 ```
 
 ### tex
@@ -27,7 +27,10 @@ sh dotfiles/pySetup.sh
 ## ⚡️ 現在自動化できていないコマンド
 
 - runcat・flowのインストール
-- USキーボードの日本語対応
+- 入力ソースの変更コマンド 
 - finderサイドバーに表示するもの
+- ログイン項目
 - ホットコーナーへのスクリーンセーバの割り当て
-- DockやLaunchPadの配置  etc...
+- 明るさの自動調節off
+- キーボードバックライトのoff
+- Dockの配置  etc...

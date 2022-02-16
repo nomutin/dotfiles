@@ -10,3 +10,9 @@ ARCH=$(uname -m)
    # export PATH=${BREW_BASE}/bin:${BREW_BASE}/sbin${PATH:+:${PATH}}
    export PATH=${PATH//¥/homebrew¥//¥/brew_x86¥/}
  fi
+
+# Pyenv
+ export PYENV_ROOT="${HOME}/.pyenv"
+ if [ -x "${PYENV_ROOT}/bin" ]; then
+   export PATH=${PYENV_ROOT}/bin:${PATH}
+ fi
