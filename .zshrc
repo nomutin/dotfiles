@@ -5,9 +5,9 @@ HISTFILE=~/.zsh_history
 HISTSIZE=9999
 SAVEHIST=9999
 
-export PATH="$PATH:/opt/homebrew/bin/"
-
 #自作基本コマンド
+alias x86='arch -x86_64 zsh'
+alias arm='arch -arm64 zsh'
 alias brup='brew update && brew upgrade'
 
 function cdmk {
@@ -29,17 +29,18 @@ function cco {
 }
 
 alias cru='./a.out'
-export C_INCLUDE_PATH='/Users/nomura/.pyenv/versions/3.8.5/include/python3.8'
 
 # python
 export PIPENV_VENV_IN_PROJECT=1
-export PYENV_ROOT="$HOME/.pyenv"
+
+# pyenv
 export PATH="$PYENV_ROOT/shims:$PATH"
-eval "$(pyenv init -)"
+ if [ -x "$(which pyenv)" ]; then
+   eval "$(pyenv init -zsh)"
+ fi
 
 # tensorflow + poetry
 export SYSTEM_VERSION_COMPAT=1
-
 
 #html
 export PATH=$HOME/.nodebrew/current/bin:$PATH
