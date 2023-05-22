@@ -9,15 +9,14 @@ if !(type 'brew' > /dev/null 2>&1); then
 fi	
 
 #"===== make dotfiles alias ====="
-DOT_FILES=(.gitconfig .zshrc .gitignore .vimrc .vim .latexmkrc .zshenv)
+DOT_FILES=(.gitconfig .zshrc .gitignore .vimrc .vim .latexmkrc)
 for file in ${DOT_FILES[@]};
 do
     ln -sf $HOME/dotfiles/$file $HOME/$file
 done
 
- 
 #"===== startup apps =====
-brew install --cask iterm2 clipy deepl coteditor alfred swiftdefaultappsprefpane visual-studio-code rectangle keyboardcleantool dozer mathpix-snipping-tool google-drive slack zoom
+brew install --cask iterm2 clipy deepl coteditor alfred visual-studio-code rectangle keyboardcleantool dozer mathpix-snipping-tool google-drive slack zoom
 
 #"===== MacBook settings =====
 sudo scutil --set HostName MBA
@@ -31,11 +30,6 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults write -g com.apple.trackpad.scaling 3
 defaults write -g com.apple.trackpad.tapBehavior -int 1
-brew install blacktop/tap/lporg
-lporg /Users/nomura/dotfiles/.launchpad.yaml
-
-chmod +x /Users/nomura/dotfiles/us-login-keymap.sh # not work
-sudo defaults write com.apple.loginwindow LoginHook /Users/nomura/dotfiles/us-login-keymap.sh # not work
 
 defaults write com.apple.finder NewWindowTarget -string PfHm
 defaults write com.apple.finder NewWindowTargetPath -string "file:///Users/nomura/"
