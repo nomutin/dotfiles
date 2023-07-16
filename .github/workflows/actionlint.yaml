@@ -1,0 +1,22 @@
+name: actionlint
+
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+
+jobs:
+  actionlint:
+    name: Lint workflows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download actionlint
+        id: get_actionlint
+        run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+        shell: bash
+
+      - name: actionlint
+        run: make actionlint
