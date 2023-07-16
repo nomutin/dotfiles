@@ -8,6 +8,7 @@ files=(
     scripts/install.sh
     scripts/shellckeck.sh
     scripts/actionlint.sh
+    scripts/shfmt.sh
 )
 for file in "${files[@]}"
 do
