@@ -16,7 +16,7 @@ do
 done
 
 #"===== startup apps =====
-brew install --cask iterm2 clipy deepl coteditor alfred visual-studio-code rectangle keyboardcleantool dozer mathpix-snipping-tool google-drive slack zoom
+brew install --cask iterm2 deepl coteditor visual-studio-code keyboardcleantool dozer mathpix-snipping-tool google-drive zoom arc raycast slack discord qlmarkdown
 
 #"===== MacBook settings =====
 sudo scutil --set HostName MBA
@@ -38,16 +38,16 @@ defaults write com.apple.finder ShowMountedServersOnDesktop -int 0
 defaults write com.apple.finder SidebarTagsSctionDisclosedState -int 1
 defaults write com.apple.finder PreferencesWindow.LastSelection -string SDBR
 
-open /Applications/Clipy.app
 open /Applications/DeepL.app
-open /Applications/"Alfred 4.app"
+open /Applications/Raycast.app
 open /Applications/"Visual Studio Code.app"
-open /Applications/Rectangle.app
 open /Applications/KeyboardCleanTool.app
 open /Applications/"Mathpix Snipping Tool.app"
 open /Applications/"Google Drive.app"
+open /Applications/Discord.app
 open /Applications/Slack.app
 open /Applications/zoom.us.app
+open /Applications/arc.app
 
 killall Finder
 killall Dock
