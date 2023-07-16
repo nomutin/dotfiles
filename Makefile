@@ -15,5 +15,5 @@ actionlint:
 	zsh scripts/actionlint.sh
 
 .PHONY: shfmt
-actionlint:
+shfmt:
 	zsh scripts/shfmt.sh
