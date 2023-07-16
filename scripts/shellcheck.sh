@@ -7,7 +7,6 @@ files=(
   scripts/init.sh
   scripts/install.sh
   scripts/shellcheck.sh
-  scripts/actionlint.sh
 )
 
 for file in "${files[@]}"; do
