@@ -8,12 +8,12 @@ init:
 
 .PHONY: shellcheck
 shellcheck:
-	zsh scripts/shellcheck.sh
+	bash scripts/shellcheck.sh
 
 .PHONY: actionlint
 actionlint:
-	zsh scripts/actionlint.sh
+	bash scripts/actionlint.sh
 
 .PHONY: shfmt
 shfmt:
-	zsh scripts/shfmt.sh
+	bash scripts/shfmt.sh
