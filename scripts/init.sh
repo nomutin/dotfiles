@@ -6,7 +6,7 @@ brew bundle install --file="${HOME}"/dotfiles/.Brewfile
 
 #"===== MacBook settings =====
 sudo scutil --set HostName MBA
-defaults write com.apple.dock autohide-time-modifier -int 0 
+defaults write com.apple.dock autohide-time-modifier -int 0
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.dock tilesize -int 100
