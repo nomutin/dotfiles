@@ -12,5 +12,5 @@ files=(
 )
 for file in "${files[@]}"
 do
-    shellcheck "${file}"
+    shfmt "${file}"
 done

@@ -13,3 +13,7 @@ shellcheck:
 .PHONY: actionlint
 actionlint:
 	zsh scripts/actionlint.sh
+
+.PHONY: shfmt
+actionlint:
+	zsh scripts/shfmt.sh
