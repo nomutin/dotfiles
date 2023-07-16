@@ -1,37 +1,3 @@
-### python
-
 *.DS_Store
-
-**/.idea/*
-
-**/__pycache__/*
-
-**/.venv/*
-
-### swift
-###  reference: https://qiita.com/higan96/items/36d3877a85ab8fc36ea7
-
-xcuserdata/
-*.xccheckout
-*.xcscmblueprint
-build/
-DerivedData/
-*.moved-aside
-*.pbxuser
-*.mode1v3
-*.mode2v3
-*.perspectivev3
-
-!default.pbxuser
-!default.mode1v3
-!default.mode2v3
-!default.perspectivev3
-
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcworkspace/contents.xcworkspacedata
-**/xcshareddata/WorkspaceSettings.xcsettings
-/*.gcno
-Pods/*
-**/GoogleService-Info.plist
+!.gitkeep
+git_find_big.sh
