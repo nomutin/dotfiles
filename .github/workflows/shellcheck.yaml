@@ -5,12 +5,12 @@ on:
     branches:
       - master
 
+
 jobs:
-  test:
+  shellcheck:
     name: shellcheck
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: shellcheck
-        run: make shellcheck
+      - uses: actions/checkout@v3
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master

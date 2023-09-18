@@ -1,1 +1,0 @@
-/Users/nomura/dotfiles/.vim
