@@ -12,6 +12,7 @@ brew "shellcheck"
 brew "tree"
 brew "mas"
 brew "pyenv"
+brew "rvenv"
 brew "wget"
 
 cask "arc"

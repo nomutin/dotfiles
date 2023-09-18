@@ -77,3 +77,10 @@ alias brsync='browser-sync start --server --directory --files "**/*"'
 alias lmk='latexmk -pvc ./main.tex'
 alias lmc='latexmk -c ./main.tex && rm -f main.dvi && rm -f main.bbl && rm -f main.synctex.gz'
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/nomura/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/nomura/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/nomura/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/nomura/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
