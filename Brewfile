@@ -6,12 +6,12 @@ tap "homebrew/cask-fonts"
 tap "homebrew/core"
 
 brew "Docker"
+brew "deno"
 brew "ffmpeg"
 brew "git"
 brew "shellcheck"
 brew "tree"
 brew "mas"
-brew "pyenv"
 brew "rvenv"
 brew "wget"
 
