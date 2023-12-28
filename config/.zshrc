@@ -8,6 +8,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=99999
 export SAVEHIST=99999
 
+# Apple Silicon or Rosetta2
 ARCH=$(uname -m)
 if [ "$ARCH" = "arm64" ]; then
     export BREWx86_BASE=/opt/brew_x86
@@ -19,6 +20,8 @@ if [ "$ARCH" = "x86_64" ]; then
     export BREW_BASE=/opt/brew_x86
     export PATH=${PATH//¥/homebrew¥//¥/brew_x86¥/}
 fi
+alias x86='arch -x86_64 zsh'
+alias arm='arch -arm64 zsh'
 
 # terminal color
 alias grep='grep --color=auto'
@@ -28,36 +31,10 @@ export CLICOLOR=1
 export LSCOLORS=GxGxBxDxCxEgEdxbxgxcxd
 
 # command
-alias x86='arch -x86_64 zsh'
-alias arm='arch -arm64 zsh'
 alias brup='brew update && brew upgrade'
-
 function cdmk {
 	mkdir "$1"
 	cd "$1" || exit
 	return 0
 }
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-fi
-
-export PATH="$PYENV_ROOT/shims:$PATH"
-if [ -x "$(which pyenv)" ]; then
-    eval "$(pyenv init -zsh)"
-fi
-
-# c++
-export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig"
-export LIBGL_ALWAYS_INDIRECT=1
-
-# latex
-alias lmk='latexmk -pvc ./main.tex'
-alias lmc='latexmk -c ./main.tex && rm -f main.dvi && rm -f main.bbl && rm -f main.synctex.gz'
 
