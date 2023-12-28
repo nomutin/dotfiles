@@ -24,6 +24,8 @@ fi
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
+export CLICOLOR=1
+export LSCOLORS=GxGxBxDxCxEgEdxbxgxcxd
 
 # command
 alias x86='arch -x86_64 zsh'
@@ -58,3 +60,4 @@ export LIBGL_ALWAYS_INDIRECT=1
 # latex
 alias lmk='latexmk -pvc ./main.tex'
 alias lmc='latexmk -c ./main.tex && rm -f main.dvi && rm -f main.bbl && rm -f main.synctex.gz'
+
