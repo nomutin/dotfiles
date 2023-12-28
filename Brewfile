@@ -23,6 +23,7 @@ cask "mathpix-snipping-tool"
 cask "raycast"
 cask "visual-studio-code"
 cask "zoom"
+cask "font-hack-nerd-font"
 
 mas Flow, id: 1423210932
 mas RunCat, id: 1429033973
