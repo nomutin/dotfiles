@@ -2,7 +2,7 @@
 
 set -eu
 
-brew bundle install --file="${HOME}"/dotfiles/Brewfile
+brew bundle install --file="${HOME}"/.dotfiles/Brewfile
 
 #"===== MacBook settings =====
 sudo scutil --set HostName MBA

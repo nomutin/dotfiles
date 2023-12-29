@@ -11,7 +11,7 @@ if ! (type 'brew' >/dev/null 2>&1); then
 fi
 
 if [ ! -d dotfiles ]; then
-  git clone https://github.com/nomutin/dotfiles.git
+  git clone https://github.com/nomutin/dotfiles.git .dotfiles
 fi
 
 cd dotfiles
