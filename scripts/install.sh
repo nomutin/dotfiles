@@ -12,6 +12,7 @@ cd .dotfiles
 
 make deploy
 
+# shellcheck disable=SC1090
 source ~/.zshrc
 
 if ! (type 'brew' >/dev/null 2>&1); then
