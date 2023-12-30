@@ -8,7 +8,7 @@
 ## Installation
 
 ```shell
-bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/main/scripts/install.sh)"
+bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/scripts/install.sh)"
 ```
 
 This command contains;
