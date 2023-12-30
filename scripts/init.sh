@@ -9,7 +9,7 @@ sudo scutil --set HostName MBA
 
 # 動きを高速化
 defaults write -g com.apple.trackpad.scaling 3
-defaults write -g com.apple.mouse.scaling
+defaults write -g com.apple.mouse.scaling 1.5
 defaults write -g KeyRepeat -int 1
 defaults write -g InitialKeyRepeat -int 10
 
@@ -19,10 +19,10 @@ defaults write -g com.apple.mouse.tapBehavior -int 1
 # クラッシュレポートを無効化する
 defaults write com.apple.CrashReporter DialogType -string "none"
 
-## 未確認のアプリケーションを実行する際のダイアログを無効にする
+# 未確認のアプリケーションを実行する際のダイアログを無効にする
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
-## ダウンロードしたファイルを開くときの警告ダイアログをなくす
+# ダウンロードしたファイルを開くときの警告ダイアログをなくす
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # ゴミ箱を空にする前の警告の無効化
@@ -61,7 +61,7 @@ defaults write com.apple.screencapture type jpg
 defaults write -g AppleShowAllExtensions -bool true
 
 # .DS_Storeを作成しない
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 killall Finder
 killall Dock

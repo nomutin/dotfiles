@@ -15,6 +15,10 @@ make deploy
 # shellcheck disable=SC1090
 source ~/.zshrc
 
+if ! (xcode-select -p &>/dev/null); then
+  xcode-select --install
+fi
+
 if ! (type 'brew' >/dev/null 2>&1); then
   xcode-select --install
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
