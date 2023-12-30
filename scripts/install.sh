@@ -6,7 +6,7 @@ cd "${HOME}"
 
 if ! (type 'brew' >/dev/null 2>&1); then
   xcode-select --install
-  /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   export PATH=$PATH:/opt/homebrew/bin
 fi
 
