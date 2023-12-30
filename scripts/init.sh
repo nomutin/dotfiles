@@ -32,7 +32,7 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 defaults write com.apple.dock autohide-time-modifier -int 0
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock show-recents -bool false
-defaults write com.apple.dock tilesize -int 100
+defaults write com.apple.dock tilesize -int 128
 
 # ネットワークストアファイルを作成しない
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
