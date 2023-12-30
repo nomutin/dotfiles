@@ -3,7 +3,6 @@ cask_args appdir: "/Applications"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 
-brew "docker"
 brew "deno"
 brew "ffmpeg"
 brew "gitmoji"
