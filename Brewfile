@@ -12,7 +12,6 @@ brew "mas"
 brew "wget"
 
 cask "arc"
-cask "coteditor"
 cask "deepl"
 cask "docker"
 cask "font-hack-nerd-font"
