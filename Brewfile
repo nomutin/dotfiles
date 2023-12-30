@@ -26,4 +26,4 @@ cask "raycast"
 cask "visual-studio-code"
 cask "zoom"
 
-mas RunCat, id: 1429033973
+mas "RunCat", id: 1429033973
