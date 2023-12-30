@@ -19,7 +19,7 @@ This command contains;
 
 ## Other Applications
 
-### vim
+### vim settings
 
 ```shell
 bash -c "$(curl https://raw.githubusercontent.com/nomutin/vim-settings/main/scripts/install.sh)"
@@ -27,13 +27,13 @@ bash -c "$(curl https://raw.githubusercontent.com/nomutin/vim-settings/main/scri
 
 See [this repo](https://github.com/nomutin/vim-settings.git) for details.
 
-### MS Office
+### MS Office applications
 
 Only users with access privilege can open from the link.
 
 [google drive](https://drive.google.com/file/d/1soT3UK_pYMM_M9VxWZdm-dVIBGhS8xBi/view?usp=sharing)
 
-### ssh
+### ssh keys&configs
 
 Only users with access privilege can open from the link.
 
