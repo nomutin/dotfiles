@@ -15,11 +15,8 @@ make deploy
 # shellcheck disable=SC1090
 source ~/.zshrc
 
-if ! xcode-select -p &>/dev/null; then
-    xcode-select --install
-    until xcode-select -p &>/dev/null; do
-        sleep 5
-    done
+if ! (xcode-select -p &>/dev/null); then
+  xcode-select --install
 fi
 
 if ! (type 'brew' >/dev/null 2>&1); then
