@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # zsh settings
-if [ -n "$ZSH_VERSION" ]; then
+if [ "$0" = "zsh" ]; then
     autoload -U compinit
     compinit
 fi
