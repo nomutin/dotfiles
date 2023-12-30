@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # zsh settings
-autoload -U compinit
-compinit
+if [ -n "$ZSH_VERSION" ]; then
+    autoload -U compinit
+    compinit
+fi
 
 HISTFILE=~/.zsh_history
 HISTSIZE=99999
