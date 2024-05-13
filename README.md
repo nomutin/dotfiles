@@ -19,13 +19,9 @@ This command contains;
 
 ## Other Applications
 
-### vim settings
+### vim/nvim
 
-```shell
-bash -c "$(curl https://raw.githubusercontent.com/nomutin/vim-settings/main/scripts/install.sh)"
-```
-
-See [this repo](https://github.com/nomutin/vim-settings.git) for details.
+See my repos ([vim](https://github.com/nomutin/vim-settings.git) / [nvim](https://github.com/nomutin/nvim-settings.git)).
 
 ### MS Office applications
 
