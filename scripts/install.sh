@@ -29,4 +29,3 @@ Set up macOS
 if [ "$(uname)" = "Darwin" ]; then
   make init-macos
 fi
-

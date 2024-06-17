@@ -17,6 +17,5 @@ ln -sf "${HOME}"/.dotfiles/config/mise/config.toml "${HOME}"/.config/mise/config
 ln -sf "${HOME}"/.dotfiles/config/shell/.profile "${HOME}"/.zprofile
 ln -sf "${HOME}"/.dotfiles/config/shell/.zshrc "${HOME}"/.zshrc
 
-
 # shellcheck disable=SC1090
 source ~/.zshrc
