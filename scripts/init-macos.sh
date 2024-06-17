@@ -2,6 +2,15 @@
 
 set -eu
 
+if ! (xcode-select -p &>/dev/null); then
+  xcode-select --install
+fi
+
+if ! (type 'brew' >/dev/null 2>&1); then
+  xcode-select --install
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
 brew bundle install --file="${HOME}"/.dotfiles/Brewfile
 
 # terminalの表示名を`MBA`に変更

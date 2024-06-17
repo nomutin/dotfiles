@@ -1,0 +1,6 @@
+[tools]
+node = "20"
+ripgrep = "latest"
+neovim = "latest"
+zellij = "latest"
+rye = "latest"
