@@ -23,7 +23,9 @@ else
   make deploy-linux
 fi
 
-# Set up macOS
+mise install -y
+
+Set up macOS
 if [ "$(uname)" = "Darwin" ]; then
   make init-macos
 fi
