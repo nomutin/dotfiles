@@ -15,4 +15,3 @@ mkdir -p "${HOME}"/.config/mise
 ln -sf "${HOME}"/.dotfiles/config/mise/config.toml "${HOME}"/.config/mise/config.toml
 
 ln -sf "${HOME}"/.dotfiles/config/shell/.profile "${HOME}"/.profile
-
