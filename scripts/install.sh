@@ -4,24 +4,28 @@ set -eu
 
 cd "${HOME}"
 
+# Install my dotfiles
 if [ ! -d .dotfiles ]; then
   git clone https://github.com/nomutin/dotfiles.git .dotfiles
 fi
 
+# Install mise
+if ! (type 'mise' >/dev/null 2>&1); then
+  curl https://mise.run | sh
+fi
+
 cd .dotfiles
 
-make deploy
-
-# shellcheck disable=SC1090
-source ~/.zshrc
-
-if ! (xcode-select -p &>/dev/null); then
-  xcode-select --install
+# Deploy dotfiles
+if [ "$(uname)" = "Darwin" ]; then
+  make deploy-macos
+else
+  make deploy-linux
 fi
 
-if ! (type 'brew' >/dev/null 2>&1); then
-  xcode-select --install
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
+mise install -y
 
-make init
+Set up macOS
+if [ "$(uname)" = "Darwin" ]; then
+  make init-macos
+fi

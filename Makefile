@@ -1,10 +1,10 @@
-deploy:
-	bash scripts/deploy.sh
+deploy-macos:
+	bash scripts/deploy-macos.sh
 
-init:
-	bash scripts/init.sh
+deploy-linux:
+	bash scripts/deploy-linux.sh
 
-shellcheck:
-	bash scripts/shellcheck.sh
+init-macos:
+	bash scripts/init-macos.sh
 
-.PHONY: shellcheck init deploy
+.PHONY: deploy-macos deploy-linux init-macos
