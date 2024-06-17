@@ -151,6 +151,7 @@ require("lazy").setup {
           "hadolint",     -- dockerfile
           "stylua",       -- lua
           "markdownlint", -- markdown
+          "shellcheck",   -- sh
           "shfmt",        -- sh
           "actionlint",   -- yaml
           "prettier",     -- javascript etc.
