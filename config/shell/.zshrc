@@ -31,5 +31,7 @@ alias ls='ls --color=auto'
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export CLICOLOR=1
 export LSCOLORS=GxGxBxDxCxEgEdxbxgxcxd
+
+# shellcheck disable=SC1091
 eval "$(~/.local/bin/mise activate zsh)"
 source "$HOME/.rye/env"
