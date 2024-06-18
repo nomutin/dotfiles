@@ -16,7 +16,7 @@ fi
 
 cd .dotfiles
 
-# Deploy 
+# Deploy
 make deploy
 
 mise install -y
