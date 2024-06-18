@@ -19,7 +19,7 @@ bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/script
 
 ### Shell
 
-* [zsh](https://www.zsh.org): for macOS
+* [zsh](https://www.zsh.org): ![platform](https://img.shields.io/badge/platform-macOS-blue)
 * [bash](https://www.gnu.org/software/bash/): for Linux
 
 ### Package Manager

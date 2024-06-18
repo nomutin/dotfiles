@@ -20,10 +20,8 @@ if [ "$(uname)" = "Darwin" ]; then
   source ~/.zshrc
 
 elif [ "$(uname)" = "Linux" ]; then
-  echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
-  echo 'source "$HOME/.rye/env"' >> ~/.bashrc
+  echo "eval '$(~/.local/bin/mise activate bash)'" >>~/.bashrc
+  echo "source '$HOME/.rye/env'" >>~/.bashrc
   # shellcheck disable=SC1090
   source ~/.bashrc
 fi
-
-
