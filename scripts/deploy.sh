@@ -14,8 +14,16 @@ ln -sf "${HOME}"/.dotfiles/config/neovim/init.lua "${HOME}"/.config/nvim/init.lu
 mkdir -p "${HOME}"/.config/mise
 ln -sf "${HOME}"/.dotfiles/config/mise/config.toml "${HOME}"/.config/mise/config.toml
 
-ln -sf "${HOME}"/.dotfiles/config/shell/.profile "${HOME}"/.zprofile
-ln -sf "${HOME}"/.dotfiles/config/shell/.zshrc "${HOME}"/.zshrc
+if [ "$(uname)" = "Darwin" ]; then
+  ln -sf "${HOME}"/.dotfiles/config/shell/.zshrc "${HOME}"/.zshrc
+  # shellcheck disable=SC1090
+  source ~/.zshrc
 
-# shellcheck disable=SC1090
-source ~/.zshrc
+elif [ "$(uname)" = "Linux" ]; then
+  echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
+  echo 'source "$HOME/.rye/env"' >> ~/.bashrc
+  # shellcheck disable=SC1090
+  source ~/.bashrc
+fi
+
+
