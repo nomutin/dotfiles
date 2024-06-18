@@ -13,26 +13,14 @@ Dotfiles for my own `macOS` and non-root `Linux`.
 bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/scripts/install.sh)"
 ```
 
-<details>
+## Contents
 
-<summary><strong>Contents</strong></summary>
-
-### Shell
-
-* [zsh](https://www.zsh.org): ![platform](https://img.shields.io/badge/platform-macOS-blue)
-* [bash](https://www.gnu.org/software/bash/): for Linux
-
-### Package Manager
-
-* [Homebrew](https://brew.sh): for macOS
-* [mise](https://mise.jdx.dev/): for macOS and Linux
-
-### Terminal Emulator
-
-* [iterm2](https://iterm2.com): for macOS
-
-### Terminal Multiplexer
-
-* [zellij](https://zellij.dev): for macOS and Linux
-
-</details>
+|  |  | Platform | Config |
+| --- | --- | --- | :---: |
+| shell | [zsh](https://www.zsh.org) | ![platform](https://img.shields.io/badge/platform-macOS-blue) | [🔍](./config/shell/.zshrc) |
+|  | [bash](https://www.gnu.org/software/bash/) | ![platform](https://img.shields.io/badge/platform-Linux-blue) | |
+| Package Manager | [Homebrew](https://brew.sh) | macOS | |
+|  | [mise](https://mise.jdx.dev/) | macOS and Linux | |
+| Terminal Emulator | [iterm2](https://iterm2.com) | macOS | |
+| Terminal Multiplexer | [zellij](https://zellij.dev) | macOS and Linux | |
+| Text Editor | [neovim](https://neovim.io) | macOS and Linux | |
