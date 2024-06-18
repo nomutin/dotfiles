@@ -32,6 +32,6 @@ export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export CLICOLOR=1
 export LSCOLORS=GxGxBxDxCxEgEdxbxgxcxd
 
-# shellcheck disable=SC1091
 eval "$(~/.local/bin/mise activate zsh)"
+# shellcheck disable=SC1091
 source "$HOME/.rye/env"
