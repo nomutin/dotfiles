@@ -16,12 +16,8 @@ fi
 
 cd .dotfiles
 
-# Deploy dotfiles
-if [ "$(uname)" = "Darwin" ]; then
-  make deploy-macos
-else
-  make deploy-linux
-fi
+# Deploy
+make deploy
 
 mise install -y
 
