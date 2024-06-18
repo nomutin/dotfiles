@@ -20,7 +20,7 @@ bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/script
 | Shell | [zsh](https://www.zsh.org) | ![platform](https://img.shields.io/badge/platform-macOS-blue) | [🔍](./config/shell/.zshrc) |
 |  | [bash](https://www.gnu.org/software/bash/) | ![platform](https://img.shields.io/badge/platform-Linux-blue) | |
 | Package Manager | [Homebrew](https://brew.sh) | ![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue) | [🔍](./Brewfile) |
-|  | [mise](https://mise.jdx.dev/) | ![platform](https://img.shields.io/badge/platform-Linux-blue) | [🔍](./config/mise/config.toml) |
+|  | [mise](https://mise.jdx.dev/) | ![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue) | [🔍](./config/mise/config.toml) |
 | Terminal Emulator | [iterm2](https://iterm2.com) | ![platform](https://img.shields.io/badge/platform-macOS-blue) | |
 | Terminal Multiplexer | [zellij](https://zellij.dev) | ![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue) | [🔍](./config/zellij/config.kdl) |
 | Text Editor | [neovim](https://neovim.io) | ![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue) | [🔍](./config/neovim/README.md) |
