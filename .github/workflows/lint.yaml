@@ -33,11 +33,11 @@ jobs:
         run: ${{ steps.get_actionlint.outputs.executable }} -color
         shell: bash
 
-      # - uses: JohnnyMorganz/stylua-action@v4
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     version: latest
-      #     args: --check .
+      - uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check .
 
       - uses: ludvighz/vint-action@v1
         with:
