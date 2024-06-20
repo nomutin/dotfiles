@@ -31,7 +31,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { "shaunsingh/nord.nvim",      lazy = false },
+  { "shaunsingh/nord.nvim", lazy = false },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -42,7 +42,7 @@ require("lazy").setup({
     keys = { { "<c-\\>", "<cmd>ToggleTerm<cr>" } },
     config = true,
   },
-  { "github/copilot.vim", event = "BufRead" },
+  { "github/copilot.vim",   event = "BufRead" },
   {
     "nvim-tree/nvim-tree.lua",
     keys = { { "<leader>n", mode = "n", "<cmd>NvimTreeToggle<cr>" } },
