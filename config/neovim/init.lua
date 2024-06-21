@@ -22,6 +22,26 @@ vim.opt.sidescrolloff = 8                       -- スクロール時に画面�
 vim.opt.laststatus = 3                          -- ステータスラインを常に表示し、現在のウィンドウだけでなく全てのウィンドウに適用
 vim.opt.list = true                             -- 制御文字を表示
 
+-- ====== KEYMAP ======
+vim.keymap.set("i", "jk", "<ESC>")                          -- Insert Mode 時jkでノーマルモードに戻る
+vim.keymap.set("t", "jk", [[<C-\><C-n>]])                   -- Terminal Mode 時jkでノーマルモードに戻る
+vim.keymap.set("x", "<M-k>", ":move '<-2<CR>gv=gv")         -- 選択範囲を上に移動
+vim.keymap.set("x", "<M-j>", ":move '>+1<CR>gv=gv")         -- 選択範囲を下に移動
+vim.keymap.set("n", "K", vim.lsp.buf.hover)                 -- 定義やドキュメントをホバー
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)           -- 定義にジャンプ
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float) -- diagnosticをホバー
+vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)       -- フォーマット
+vim.keymap.set("n", "<leader>ll", "<cmd>LspInfo<cr>")       -- LSP情報の表示
+
+-- ====== COLORS ======
+vim.api.nvim_set_hl(0, "Function", { fg = "NvimLightBlue" })
+vim.api.nvim_set_hl(0, "Identifier", { fg = "NvimLightBlue" })
+vim.api.nvim_set_hl(0, "Constant", { fg = "NvimLightCyan" })
+vim.api.nvim_set_hl(0, "Statement", { fg = "NvimLightBlue", bold = true })
+vim.api.nvim_set_hl(0, "Special", { link = "Constant" })
+vim.api.nvim_set_hl(0, "@string.documentation", { fg = "NvimLightGreen", bold = true })
+vim.api.nvim_set_hl(0, "@variable.parameter", { fg = "NvimLightCyan", italic = true })
+
 -- ====== PLUGIN ======
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -31,18 +51,17 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { "shaunsingh/nord.nvim", lazy = false },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = true
+    config = true,
   },
   {
     "akinsho/toggleterm.nvim",
     keys = { { "<c-\\>", "<cmd>ToggleTerm<cr>" } },
     config = true,
   },
-  { "github/copilot.vim",   event = "BufRead" },
+  { "github/copilot.vim", event = "BufRead" },
   {
     "nvim-tree/nvim-tree.lua",
     keys = { { "<leader>n", mode = "n", "<cmd>NvimTreeToggle<cr>" } },
@@ -128,8 +147,8 @@ require("lazy").setup({
     dependencies = { "petertriho/nvim-scrollbar" },
     event = "BufReadPre",
     keys = {
-      { "n", "<leader>hd", "<cmd>Gitsigns diffthis()<cr>" },
-      { "n", "<leader>hp", "<cmd>Gitsigns preview_hunk()<cr>" },
+      { "<leader>hd", mode = "n", "<cmd>Gitsigns diffthis<cr>" },
+      { "<leader>hp", mode = "n", "<cmd>Gitsigns preview_hunk<cr>" },
     },
     config = function()
       require("gitsigns").setup()
@@ -140,15 +159,3 @@ require("lazy").setup({
   defaults = { lazy = true },
   performance = { cache = { enabled = true } },
 })
-
--- ====== KEYMAP ======
-vim.cmd("colorscheme nord")
-vim.keymap.set("i", "jk", "<ESC>")                          -- Insert Mode 時jkでノーマルモードに戻る
-vim.keymap.set("t", "jk", [[<C-\><C-n>]])                   -- Terminal Mode 時jkでノーマルモードに戻る
-vim.keymap.set("x", "<M-j>", ":move '>+1<CR>gv=gv")         -- 選択範囲を下に移動
-vim.keymap.set("x", "<M-k>", ":move '<-2<CR>gv=gv")         -- 選択範囲を上に移動
-vim.keymap.set("n", "K", vim.lsp.buf.hover)                 -- 定義やドキュメントをホバー
-vim.keymap.set("n", "gd", vim.lsp.buf.definition)           -- 定義にジャンプ
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float) -- diagnosticをホバー
-vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)       -- フォーマット
-vim.keymap.set("n", "<leader>ll", "<cmd>LspInfo<cr>")       -- LSP情報の表示

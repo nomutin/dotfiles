@@ -25,12 +25,14 @@ fi
 alias x86='arch -x86_64 zsh'
 alias arm='arch -arm64 zsh'
 
+# ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
 # terminal color
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
-export CLICOLOR=1
-export LSCOLORS=GxGxBxDxCxEgEdxbxgxcxd
 
 eval "$(~/.local/bin/mise activate zsh)"
 # shellcheck disable=SC1091
