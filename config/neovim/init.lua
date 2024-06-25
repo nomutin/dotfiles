@@ -23,15 +23,13 @@ vim.opt.laststatus = 3                          -- ステータスラインを�
 vim.opt.list = true                             -- 制御文字を表示
 
 -- ====== KEYMAP ======
-vim.keymap.set("i", "jk", "<ESC>")                          -- Insert Mode 時jkでノーマルモードに戻る
 vim.keymap.set("t", "jk", [[<C-\><C-n>]])                   -- Terminal Mode 時jkでノーマルモードに戻る
 vim.keymap.set("x", "<M-k>", ":move '<-2<CR>gv=gv")         -- 選択範囲を上に移動
 vim.keymap.set("x", "<M-j>", ":move '>+1<CR>gv=gv")         -- 選択範囲を下に移動
 vim.keymap.set("n", "K", vim.lsp.buf.hover)                 -- 定義やドキュメントをホバー
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)           -- 定義にジャンプ
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float) -- diagnosticをホバー
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float) -- diagnostic をホバー
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)       -- フォーマット
-vim.keymap.set("n", "<leader>ll", "<cmd>LspInfo<cr>")       -- LSP情報の表示
 
 -- ====== COLORS ======
 vim.api.nvim_set_hl(0, "Function", { fg = "NvimLightBlue" })
@@ -51,22 +49,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = true,
-  },
-  {
-    "akinsho/toggleterm.nvim",
-    keys = { { "<c-\\>", "<cmd>ToggleTerm<cr>" } },
-    config = true,
-  },
   { "github/copilot.vim", event = "BufRead" },
-  {
-    "nvim-tree/nvim-tree.lua",
-    keys = { { "<leader>n", mode = "n", "<cmd>NvimTreeToggle<cr>" } },
-    config = true,
-  },
   {
     "folke/flash.nvim",
     keys = {
@@ -75,20 +58,24 @@ require("lazy").setup({
     },
   },
   {
-    "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    "lewis6991/gitsigns.nvim",
+    dependencies = { "petertriho/nvim-scrollbar" },
+    event = "BufReadPre",
     keys = {
-      { "<leader>ff", mode = "n", "<cmd>Telescope find_files<cr>" },
-      { "<leader>fg", mode = "n", "<cmd>Telescope live_grep<cr>" },
-      { "<leader>fb", mode = "n", "<cmd>Telescope buffers<cr>" },
+      { "<leader>hd", mode = "n", "<cmd>Gitsigns diffthis<cr>" },
+      { "<leader>hp", mode = "n", "<cmd>Gitsigns preview_hunk<cr>" },
     },
+    config = function()
+      require("gitsigns").setup()
+      require("scrollbar").setup()
+      require("scrollbar.handlers.gitsigns").setup()
+    end,
   },
   {
-    "nvim-treesitter/nvim-treesitter",
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "BufRead",
-    build = ":TSUpdate",
-    main = "nvim-treesitter.configs",
-    opts = { highlight = { enable = true }, indent = { enable = true } },
+    config = true,
   },
   {
     "williamboman/mason.nvim",
@@ -103,30 +90,8 @@ require("lazy").setup({
     },
     config = function()
       require("mason").setup()
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "bashls",        -- bash
-          "dockerls",      -- dockerfile
-          "html",          -- html
-          "lua_ls",        -- lua
-          "tsserver",      -- typescript
-          "pyright",       -- python
-          "ruff",          -- python
-          "rust_analyzer", -- rust
-          "yamlls",        -- yaml
-        },
-      })
-      require("mason-null-ls").setup({
-        ensure_installed = {
-          "hadolint",
-          "stylua",
-          "markdownlint",
-          "shellcheck",
-          "prettier",
-        },
-        automatic_installation = false,
-        handlers = {},
-      })
+      require("mason-lspconfig").setup()
+      require("mason-null-ls").setup({ handlers = {} })
       require("null-ls").setup()
       require("mason-lspconfig").setup_handlers({
         function(server_name)
@@ -143,19 +108,25 @@ require("lazy").setup({
     end,
   },
   {
-    "lewis6991/gitsigns.nvim",
-    dependencies = { "petertriho/nvim-scrollbar" },
-    event = "BufReadPre",
+    "nvim-tree/nvim-tree.lua",
+    keys = { { "<leader>n", mode = "n", "<cmd>NvimTreeToggle<cr>" } },
+    config = true,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    event = "BufRead",
+    build = ":TSUpdate",
+    main = "nvim-treesitter.configs",
+    opts = { highlight = { enable = true }, indent = { enable = true } },
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
-      { "<leader>hd", mode = "n", "<cmd>Gitsigns diffthis<cr>" },
-      { "<leader>hp", mode = "n", "<cmd>Gitsigns preview_hunk<cr>" },
+      { "<leader>ff", mode = "n", "<cmd>Telescope find_files<cr>" },
+      { "<leader>fg", mode = "n", "<cmd>Telescope live_grep<cr>" },
+      { "<leader>fb", mode = "n", "<cmd>Telescope buffers<cr>" },
     },
-    config = function()
-      require("gitsigns").setup()
-      require("scrollbar").setup()
-      require("scrollbar.handlers.gitsigns").setup()
-    end,
   },
   defaults = { lazy = true },
-  performance = { cache = { enabled = true } },
 })
