@@ -26,3 +26,4 @@
 ### Misc
 
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim): git 系
+- [akinsho/toggleterm.nvim](https://gihtub/com/akinsho/toggleterm.nvim): ターミナル

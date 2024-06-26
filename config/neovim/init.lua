@@ -2,6 +2,7 @@
 vim.loader.enable()
 vim.g.mapleader = " "
 vim.opt.title = true                            -- ウィンドウのタイトルを現在開いているファイル名で更新
+vim.opt.termguicolors = true                    -- ターミナルの色を24ビットカラーに設定
 vim.opt.clipboard = "unnamedplus"               -- システムのクリップボードを直接使用
 vim.opt.completeopt = { "menuone", "noselect" } -- 補完メニューを表示し、自動で選択しない
 vim.opt.ignorecase = true                       -- 検索時に大文字小文字を区別しない
@@ -23,6 +24,7 @@ vim.opt.laststatus = 3                          -- ステータスラインを�
 vim.opt.list = true                             -- 制御文字を表示
 
 -- ====== KEYMAP ======
+vim.keymap.set("i", "jk", "<ESC>")
 vim.keymap.set("t", "jk", [[<C-\><C-n>]])                   -- Terminal Mode 時jkでノーマルモードに戻る
 vim.keymap.set("x", "<M-k>", ":move '<-2<CR>gv=gv")         -- 選択範囲を上に移動
 vim.keymap.set("x", "<M-j>", ":move '>+1<CR>gv=gv")         -- 選択範囲を下に移動
@@ -128,5 +130,6 @@ require("lazy").setup({
       { "<leader>fb", mode = "n", "<cmd>Telescope buffers<cr>" },
     },
   },
+  { "akinsho/toggleterm.nvim", keys = { { "<c-\\>", "<cmd>ToggleTerm<cr>" } }, config = true },
   defaults = { lazy = true },
 })
