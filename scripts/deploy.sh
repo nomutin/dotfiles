@@ -22,6 +22,7 @@ if [ "$(uname)" = "Darwin" ]; then
   ln -sf "${HOME}"/.dotfiles/config/shell/.zshrc "${HOME}"/.zshrc
   # shellcheck disable=SC1090
   source ~/.zshrc
+  mkdir -p "${HOME}"/.local/state/zsh "${HOME}"/.cache/zsh
 
 elif [ "$(uname)" = "Linux" ]; then
   # shellcheck disable=SC2016
