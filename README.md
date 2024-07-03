@@ -17,7 +17,7 @@ bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/script
 
 | App Group | App | Host/Guest | Config |
 | --- | --- | --- | :---: |
-| Shell | [zsh](https://www.zsh.org) | Host | [🔍](./config/shell/.zshrc) |
+| Shell | [zsh](https://www.zsh.org) | Host | [🔍](./config/zsh/.zshrc) |
 |  | [bash](https://www.gnu.org/software/bash/) | Guest | |
 | Package Manager | [Homebrew](https://brew.sh) | Host | [🔍](./Brewfile) |
 |  | [mise](https://mise.jdx.dev/) | Host/Guest | [🔍](./config/mise/config.toml) |
