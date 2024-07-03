@@ -23,5 +23,5 @@ mise install -y
 
 # Set up macOS
 if [ "$(uname)" = "Darwin" ]; then
-  make init-macos
+  make init_macos
 fi

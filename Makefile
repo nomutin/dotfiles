@@ -1,7 +1,7 @@
 deploy:
 	bash scripts/deploy.sh
 
-init-macos:
-	bash scripts/init-macos.sh
+init_macos:
+	bash scripts/init_macos.sh
 
-.PHONY: deploy-macos deploy
+.PHONY: init_macos deploy
