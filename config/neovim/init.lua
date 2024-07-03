@@ -30,7 +30,6 @@ vim.keymap.set("x", "<M-k>", ":move '<-2<CR>gv=gv")         -- 選択範囲を�
 vim.keymap.set("x", "<M-j>", ":move '>+1<CR>gv=gv")         -- 選択範囲を下に移動
 vim.keymap.set("n", "K", vim.lsp.buf.hover)                 -- 定義やドキュメントをホバー
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)           -- 定義にジャンプ
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float) -- diagnostic をホバー
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)       -- フォーマット
 
 -- ====== COLORS ======
@@ -41,6 +40,7 @@ vim.api.nvim_set_hl(0, "Statement", { fg = "NvimLightBlue", bold = true })
 vim.api.nvim_set_hl(0, "Special", { link = "Constant" })
 vim.api.nvim_set_hl(0, "@string.documentation", { fg = "NvimLightGreen", bold = true })
 vim.api.nvim_set_hl(0, "@variable.parameter", { fg = "NvimLightCyan", italic = true })
+vim.api.nvim_set_hl(0, "IblScope", { fg = "NvimLightBlue" })
 
 -- ====== PLUGIN ======
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -51,7 +51,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { "github/copilot.vim", event = "BufRead" },
+  { "akinsho/bufferline.nvim", version = "*",    config = true },
+  { "github/copilot.vim",      event = "BufRead" },
   {
     "folke/flash.nvim",
     keys = {
@@ -73,6 +74,7 @@ require("lazy").setup({
       require("scrollbar.handlers.gitsigns").setup()
     end,
   },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, config = true },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
