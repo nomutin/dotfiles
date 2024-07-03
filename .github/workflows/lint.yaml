@@ -41,4 +41,4 @@ jobs:
 
       - uses: ludvighz/vint-action@v1
         with:
-          path: config/vim/.vimrc
+          path: config/vim/vimrc
