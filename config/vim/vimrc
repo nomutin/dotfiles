@@ -30,7 +30,6 @@ hi CursorLineNr term=bold  cterm=NONE ctermfg=228 ctermbg=NONE "カーソルの�
 
 "===== マウス ====="
 set mouse=a  "全モードでマウスを有効化"
-set ttymouse=xterm2 "マウスの動作を設定"
 
 "===== キー入力 ====="
 inoremap <silent> jk <Esc>
