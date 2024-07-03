@@ -2,7 +2,7 @@
 
 # .dotfiles
 
-Dotfiles for my own `macOS` and non-root `Linux`.
+Dotfiles for my host `macOS` and guest `Linux`.
 
 ![platform](https://img.shields.io/badge/platform-macOS%20|%20Linux-blue)
 [![Lint](https://github.com/nomutin/dotfiles/actions/workflows/lint.yaml/badge.svg)](https://github.com/nomutin/dotfiles/actions/workflows/lint.yaml)
@@ -15,13 +15,13 @@ bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/script
 
 ## Contents
 
-| App Group | App | Platform | Config |
+| App Group | App | Host/Guest | Config |
 | --- | --- | --- | :---: |
-| Shell | [zsh](https://www.zsh.org) | ![platform](https://img.shields.io/badge/platform-macOS-blue) | [🔍](./config/shell/.zshrc) |
-|  | [bash](https://www.gnu.org/software/bash/) | ![platform](https://img.shields.io/badge/platform-Linux-blue) | |
-| Package Manager | [Homebrew](https://brew.sh) | ![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue) | [🔍](./Brewfile) |
-|  | [mise](https://mise.jdx.dev/) | ![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue) | [🔍](./config/mise/config.toml) |
-| Terminal Emulator | [iterm2](https://iterm2.com) | ![platform](https://img.shields.io/badge/platform-macOS-blue) | |
-| Terminal Multiplexer | [zellij](https://zellij.dev) | ![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue) | [🔍](./config/zellij/config.kdl) |
-| Text Editor | [neovim](https://neovim.io) | ![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue) | [🔍](./config/neovim/README.md) |
-| | [vim](https://www.vim.org) | ![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue) | [🔍](./config/vim/.vimrc) |
+| Shell | [zsh](https://www.zsh.org) | Host | [🔍](./config/shell/.zshrc) |
+|  | [bash](https://www.gnu.org/software/bash/) | Guest | |
+| Package Manager | [Homebrew](https://brew.sh) | Host | [🔍](./Brewfile) |
+|  | [mise](https://mise.jdx.dev/) | Host/Guest | [🔍](./config/mise/config.toml) |
+| Terminal Emulator | [Wezterm](https://wezfurlong.org/wezterm/index.html) | Host | [🔍](./config/wezterm/wezterm.lua) |
+| Terminal Multiplexer | [zellij](https://zellij.dev) | Host/Guest | [🔍](./config/zellij/config.kdl) |
+| Text Editor | [neovim](https://neovim.io) | Host/Guest | [🔍](./config/neovim/README.md) |
+| | [vim](https://www.vim.org) | Host/Guest | [🔍](./config/vim/.vimrc) |
