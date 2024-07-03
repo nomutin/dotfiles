@@ -22,14 +22,13 @@ export SAVEHIST=99999
 alias x86='arch -x86_64 zsh'
 alias arm='arch -arm64 zsh'
 
-# ===== Terminal Color =====
+# ===== Aliases =====
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
-
-# ===== ls aliases =====
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
 # ===== Plugins =====
 eval $(/opt/homebrew/bin/brew shellenv)
