@@ -8,9 +8,9 @@ xdg_config_dir="${HOME}"/.config
 mkdir -p "$xdg_config_dir"
 
 for item in "$source_config_dir"/*; do
-    base_item=$(basename "$item")
-    link_name="$xdg_config_dir/$base_item"
-    ln -s "$item" "$link_name"
+  base_item=$(basename "$item")
+  link_name="$xdg_config_dir/$base_item"
+  ln -s "$item" "$link_name"
 done
 
 if [ "$(uname)" = "Darwin" ]; then
