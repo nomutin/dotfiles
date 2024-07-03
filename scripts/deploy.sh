@@ -19,7 +19,7 @@ if [ "$(uname)" = "Darwin" ]; then
   fi
 
 elif [ "$(uname)" = "Linux" ]; then
-  echo 'eval "$(~/.local/bin/mise activate bash)"' >>~/.bashrc
+  echo 'source "$HOME/.dotfiles/config/.bashrc.local"' >>~/.bashrc
   echo 'source "$HOME/.rye/env"' >>~/.bashrc
   # shellcheck disable=SC1090
   source ~/.bashrc
