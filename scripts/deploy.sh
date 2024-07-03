@@ -2,14 +2,13 @@
 
 set -eu
 
-source_config_dir="${HOME}"/.dotfiles/config
-xdg_config_dir="${HOME}"/.config
+source_config_dir="${HOME}"/.dotfiles/xgd_config
+target_config_dir="${HOME}"/.config
 
-mkdir -p "$xdg_config_dir"
-
+mkdir -p "$target_config_dir"
 for item in "$source_config_dir"/*; do
   base_item=$(basename "$item")
-  link_name="$xdg_config_dir/$base_item"
+  link_name="$target_config_dir/$base_item"
   ln -s "$item" "$link_name"
 done
 
@@ -20,7 +19,7 @@ if [ "$(uname)" = "Darwin" ]; then
   fi
 
 elif [ "$(uname)" = "Linux" ]; then
-  echo 'eval "$(~/.local/bin/mise activate bash)"' >>~/.bashrc
+  echo 'source "$HOME/.dotfiles/config/.bashrc.local"' >>~/.bashrc
   echo 'source "$HOME/.rye/env"' >>~/.bashrc
   # shellcheck disable=SC1090
   source ~/.bashrc

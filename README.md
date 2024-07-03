@@ -17,11 +17,11 @@ bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/script
 
 | App Group | App | Host/Guest | Config |
 | --- | --- | --- | :---: |
-| Shell | [zsh](https://www.zsh.org) | Host | [🔍](./config/zsh/.zshrc) |
-|  | [bash](https://www.gnu.org/software/bash/) | Guest | |
-| Package Manager | [Homebrew](https://brew.sh) | Host | [🔍](./Brewfile) |
-|  | [mise](https://mise.jdx.dev/) | Host/Guest | [🔍](./config/mise/config.toml) |
-| Terminal Emulator | [Wezterm](https://wezfurlong.org/wezterm/index.html) | Host | [🔍](./config/wezterm/wezterm.lua) |
-| Terminal Multiplexer | [zellij](https://zellij.dev) | Host/Guest | [🔍](./config/zellij/config.kdl) |
-| Text Editor | [neovim](https://neovim.io) | Host/Guest | [🔍](./config/neovim/README.md) |
-| | [vim](https://www.vim.org) | Host/Guest | [🔍](./config/vim/.vimrc) |
+| Shell | [zsh](https://www.zsh.org) | Host | [🔍](./xgd_config/zsh/.zshrc) |
+|  | [bash](https://www.gnu.org/software/bash/) | Guest | [🔍](./config/.bashrc.local) |
+| Package Manager | [Homebrew](https://brew.sh) | Host | [🔍](./config/Brewfile) |
+|  | [mise](https://mise.jdx.dev/) | Host/Guest | [🔍](./xgd_config/mise/config.toml) |
+| Terminal Emulator | [Wezterm](https://wezfurlong.org/wezterm/index.html) | Host | [🔍](./xgd_config/wezterm/wezterm.lua) |
+| Terminal Multiplexer | [zellij](https://zellij.dev) | Host/Guest | [🔍](./xgd_config/zellij/config.kdl) |
+| Text Editor | [neovim](https://neovim.io) | Host/Guest | [🔍](./xgd_config/nvim/README.md) |
+| | [vim](https://www.vim.org) | Host/Guest | [🔍](./xgd_config/vim/vimrc) |

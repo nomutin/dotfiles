@@ -11,7 +11,7 @@ if ! (type 'brew' >/dev/null 2>&1); then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-brew bundle install --file="${HOME}"/.dotfiles/Brewfile
+brew bundle install --file="${HOME}"/.dotfiles/config/Brewfile
 
 # terminalの表示名を`MBA`に変更
 sudo scutil --set HostName MBA
