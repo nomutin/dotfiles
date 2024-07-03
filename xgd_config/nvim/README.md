@@ -6,6 +6,8 @@
 
 ### Appearance
 
+- [akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim): バッファ一覧
+- [lukas-reineke/indent-blankline.nvim](https://github/com/lukas-reineke/indent-blankline.nvim): インデント
 - [nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim): ステータスライン
 - [nvim-tree/nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua): ファイルツリー
 - [petertriho/nvim-scrollbar](https://gihub.com/petertriho/nvim-scrollbar): スクロールバー
