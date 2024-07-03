@@ -22,7 +22,7 @@ mkdir -p "${HOME}"/.config/wezterm
 ln -sf "${HOME}"/.dotfiles/config/wezterm/wezterm.lua "${HOME}"/.config/wezterm/wezterm.lua
 
 if [ "$(uname)" = "Darwin" ]; then
-  ln -sf "${HOME}"/.dotfiles/config/shell/.zshrc "${HOME}"/.zshrc
+  ln -sf "${HOME}"/.dotfiles/config/zsh/.zshrc "${HOME}"/.zshrc
   # shellcheck disable=SC1090
   source ~/.zshrc
   mkdir -p "${HOME}"/.local/state/zsh "${HOME}"/.cache/zsh
