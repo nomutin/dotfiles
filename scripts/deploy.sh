@@ -13,7 +13,7 @@ mkdir -p "${HOME}"/.config/git
 ln -sf "${HOME}"/.dotfiles/config/git/config "${HOME}"/.config/git/config
 
 mkdir -p "${HOME}"/.config/nvim
-ln -sf "${HOME}"/.dotfiles/config/neovim/init.lua "${HOME}"/.config/nvim/init.lua
+ln -sf "${HOME}"/.dotfiles/config/nvim/init.lua "${HOME}"/.config/nvim/init.lua
 
 mkdir -p "${HOME}"/.config/mise
 ln -sf "${HOME}"/.dotfiles/config/mise/config.toml "${HOME}"/.config/mise/config.toml
