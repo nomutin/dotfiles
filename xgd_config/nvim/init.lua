@@ -41,7 +41,6 @@ vim.api.nvim_set_hl(0, "Special", { link = "Constant" })
 vim.api.nvim_set_hl(0, "@string.documentation", { fg = "NvimLightGreen", bold = true })
 vim.api.nvim_set_hl(0, "@variable.parameter", { fg = "NvimLightCyan", italic = true })
 vim.api.nvim_set_hl(0, "IblScope", { fg = "NvimLightBlue" })
-vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
 
 -- ====== PLUGIN ======
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
