@@ -18,6 +18,9 @@ ln -sf "${HOME}"/.dotfiles/config/nvim/init.lua "${HOME}"/.config/nvim/init.lua
 mkdir -p "${HOME}"/.config/mise
 ln -sf "${HOME}"/.dotfiles/config/mise/config.toml "${HOME}"/.config/mise/config.toml
 
+mkdir -p "${HOME}"/.config/wezterm
+ln -sf "${HOME}"/.dotfiles/config/wezterm/wezterm.lua "${HOME}"/.config/wezterm/wezterm.lua
+
 if [ "$(uname)" = "Darwin" ]; then
   ln -sf "${HOME}"/.dotfiles/config/shell/.zshrc "${HOME}"/.zshrc
   # shellcheck disable=SC1090
