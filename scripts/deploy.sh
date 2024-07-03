@@ -2,27 +2,25 @@
 
 set -eu
 
-ln -sf "${HOME}"/.dotfiles/config/git/.gitconfig "${HOME}"/.gitconfig
-ln -sf "${HOME}"/.dotfiles/config/vim/.vimrc "${HOME}"/.vimrc
+source_config_dir="${HOME}"/.dotfiles/config
+xdg_config_dir="${HOME}"/.config
 
-mkdir -p "${HOME}"/.config/zellij
-ln -sf "${HOME}"/.dotfiles/config/zellij/config.kdl "${HOME}"/.config/zellij/config.kdl
+mkdir -p "$xdg_config_dir"
 
-mkdir -p "${HOME}"/.config/nvim
-ln -sf "${HOME}"/.dotfiles/config/neovim/init.lua "${HOME}"/.config/nvim/init.lua
-
-mkdir -p "${HOME}"/.config/mise
-ln -sf "${HOME}"/.dotfiles/config/mise/config.toml "${HOME}"/.config/mise/config.toml
+for item in "$source_config_dir"/*; do
+  base_item=$(basename "$item")
+  link_name="$xdg_config_dir/$base_item"
+  ln -s "$item" "$link_name"
+done
 
 if [ "$(uname)" = "Darwin" ]; then
-  ln -sf "${HOME}"/.dotfiles/config/shell/.zshrc "${HOME}"/.zshrc
-  # shellcheck disable=SC1090
-  source ~/.zshrc
+  mkdir -p "${HOME}"/.local/state/zsh "${HOME}"/.cache/zsh
+  if ! grep -q 'export ZDOTDIR="$HOME"/.config/zsh' /etc/zshenv; then
+    echo 'export ZDOTDIR="$HOME"/.config/zsh' | sudo tee -a /etc/zshenv
+  fi
 
 elif [ "$(uname)" = "Linux" ]; then
-  # shellcheck disable=SC2016
   echo 'eval "$(~/.local/bin/mise activate bash)"' >>~/.bashrc
-  # shellcheck disable=SC2016
   echo 'source "$HOME/.rye/env"' >>~/.bashrc
   # shellcheck disable=SC1090
   source ~/.bashrc

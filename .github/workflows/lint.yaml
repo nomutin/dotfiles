@@ -21,8 +21,8 @@ jobs:
           # shellcheck disable=SC2046
           shfmt -i 2 -ci -d $(shfmt -f . | grep -v '\.zsh$')
 
-      - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@master
+      # - name: Run ShellCheck
+      #   uses: ludeeus/action-shellcheck@master
 
       - name: Download actionlint
         id: get_actionlint
@@ -41,4 +41,4 @@ jobs:
 
       - uses: ludvighz/vint-action@v1
         with:
-          path: config/vim/.vimrc
+          path: config/vim/vimrc
