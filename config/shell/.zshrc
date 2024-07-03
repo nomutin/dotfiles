@@ -10,12 +10,10 @@ HISTFILE=~/.zsh_history
 HISTSIZE=99999
 export SAVEHIST=99999
 
-# Mac
-eval $(/opt/homebrew/bin/brew shellenv)
 alias x86='arch -x86_64 zsh'
 alias arm='arch -arm64 zsh'
 
-# terminal color
+# Terminal Color
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 
@@ -25,6 +23,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # Plugins
+eval $(/opt/homebrew/bin/brew shellenv)
 eval "$(~/.local/bin/mise activate zsh)"
 # shellcheck disable=SC1091
 source "$HOME/.rye/env"

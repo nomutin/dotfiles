@@ -2,11 +2,15 @@
 
 set -eu
 
-ln -sf "${HOME}"/.dotfiles/config/git/.gitconfig "${HOME}"/.gitconfig
+# vim 9.1.0327 からは XDG_CONFIG_HOME に置けるみたい -> TODO: mise でインストールする?
+# https://github.com/vim/vim/commit/c9df1fb35a1866901c32df37dd39c8b39dbdb64a
 ln -sf "${HOME}"/.dotfiles/config/vim/.vimrc "${HOME}"/.vimrc
 
 mkdir -p "${HOME}"/.config/zellij
 ln -sf "${HOME}"/.dotfiles/config/zellij/config.kdl "${HOME}"/.config/zellij/config.kdl
+
+mkdir -p "${HOME}"/.config/git
+ln -sf "${HOME}"/.dotfiles/config/git/config "${HOME}"/.config/git/config
 
 mkdir -p "${HOME}"/.config/nvim
 ln -sf "${HOME}"/.dotfiles/config/neovim/init.lua "${HOME}"/.config/nvim/init.lua
