@@ -2,7 +2,7 @@
 
 set -eu
 
-source_config_dir="${HOME}"/.dotfiles/xgd_config
+source_config_dir="${HOME}"/.dotfiles/xdg_config
 target_config_dir="${HOME}"/.config
 
 mkdir -p "$target_config_dir"
