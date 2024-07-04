@@ -21,7 +21,7 @@ bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/script
 |  | [bash](https://www.gnu.org/software/bash/) | Guest | [🔍](./config/.bashrc.local) |
 | Package Manager | [Homebrew](https://brew.sh) | Host | [🔍](./config/Brewfile) |
 |  | [mise](https://mise.jdx.dev/) | Host/Guest | [🔍](./xgd_config/mise/config.toml) |
-| Terminal Emulator | [Wezterm](https://wezfurlong.org/wezterm/index.html) | Host | [🔍](./xgd_config/wezterm/wezterm.lua) |
+| Terminal Emulator | [Alacritty](https://alacritty.org/) | Host | [🔍](./xgd_config/alacritty/alacritty.toml) |
 | Terminal Multiplexer | [zellij](https://zellij.dev) | Host/Guest | [🔍](./xgd_config/zellij/config.kdl) |
 | Text Editor | [neovim](https://neovim.io) | Host/Guest | [🔍](./xgd_config/nvim/README.md) |
 | | [vim](https://www.vim.org) | Host/Guest | [🔍](./xgd_config/vim/vimrc) |
