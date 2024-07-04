@@ -2,7 +2,7 @@
 
 set -eu
 
-source_config_dir="${HOME}"/.dotfiles/xgd_config
+source_config_dir="${HOME}"/.dotfiles/xdg_config
 target_config_dir="${HOME}"/.config
 
 mkdir -p "$target_config_dir"
@@ -21,6 +21,5 @@ if [ "$(uname)" = "Darwin" ]; then
 elif [ "$(uname)" = "Linux" ]; then
   echo 'source "$HOME/.dotfiles/config/.bashrc.local"' >>~/.bashrc
   echo 'source "$HOME/.rye/env"' >>~/.bashrc
-  # shellcheck disable=SC1090
   source ~/.bashrc
 fi
