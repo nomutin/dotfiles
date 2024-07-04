@@ -9,6 +9,8 @@ export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
 export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history
+export TERMINFO="$XDG_DATA_HOME"/terminfo
+export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo
 
 # ===== zsh settings =====
 autoload -U compinit
