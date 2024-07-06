@@ -1,36 +1,36 @@
 -- ====== OPTIONS ======
 vim.loader.enable()
 vim.g.mapleader = " "
-vim.opt.title = true                            -- ウィンドウのタイトルを現在開いているファイル名で更新
-vim.opt.termguicolors = true                    -- ターミナルの色を24ビットカラーに設定
-vim.opt.clipboard = "unnamedplus"               -- システムのクリップボードを直接使用
+vim.opt.title = true -- ウィンドウのタイトルを現在開いているファイル名で更新
+vim.opt.termguicolors = true -- ターミナルの色を24ビットカラーに設定
+vim.opt.clipboard = "unnamedplus" -- システムのクリップボードを直接使用
 vim.opt.completeopt = { "menuone", "noselect" } -- 補完メニューを表示し、自動で選択しない
-vim.opt.ignorecase = true                       -- 検索時に大文字小文字を区別しない
-vim.opt.pumheight = 10                          -- ポップアップメニューの高さを10行に設定
-vim.opt.showtabline = 2                         -- タブラインを常に表示
-vim.opt.smartcase = true                        -- 検索パターンに大文字が含まれている場合は大文字小文字を区別
-vim.opt.smartindent = true                      -- 自動インデントを有効に
-vim.opt.swapfile = false                        -- スワップファイルを作成しないように
-vim.opt.timeoutlen = 500                        -- キーマッピングの待ち時間を300ミリ秒に設定
-vim.opt.undofile = true                         -- アンドゥ情報をファイルに保存
-vim.opt.writebackup = false                     -- 書き込み時のバックアップファイルを作成しないように
-vim.opt.expandtab = true                        -- タブをスペースに展開
-vim.opt.cursorline = true                       -- カーソル行をハイライト
-vim.opt.number = true                           -- 行番号を表示
-vim.opt.wrap = false                            -- 折り返しを無効に
-vim.opt.scrolloff = 8                           -- スクロール時に画面の端から8行分余裕を持たせる
-vim.opt.sidescrolloff = 8                       -- スクロール時に画面の端から8列分余裕を持たせる
-vim.opt.laststatus = 3                          -- ステータスラインを常に表示し、現在のウィンドウだけでなく全てのウィンドウに適用
-vim.opt.list = true                             -- 制御文字を表示
+vim.opt.ignorecase = true -- 検索時に大文字小文字を区別しない
+vim.opt.pumheight = 10 -- ポップアップメニューの高さを10行に設定
+vim.opt.showtabline = 2 -- タブラインを常に表示
+vim.opt.smartcase = true -- 検索パターンに大文字が含まれている場合は大文字小文字を区別
+vim.opt.smartindent = true -- 自動インデントを有効に
+vim.opt.swapfile = false -- スワップファイルを作成しないように
+vim.opt.timeoutlen = 500 -- キーマッピングの待ち時間を300ミリ秒に設定
+vim.opt.undofile = true -- アンドゥ情報をファイルに保存
+vim.opt.writebackup = false -- 書き込み時のバックアップファイルを作成しないように
+vim.opt.expandtab = true -- タブをスペースに展開
+vim.opt.cursorline = true -- カーソル行をハイライト
+vim.opt.number = true -- 行番号を表示
+vim.opt.wrap = false -- 折り返しを無効に
+vim.opt.scrolloff = 8 -- スクロール時に画面の端から8行分余裕を持たせる
+vim.opt.sidescrolloff = 8 -- スクロール時に画面の端から8列分余裕を持たせる
+vim.opt.laststatus = 3 -- ステータスラインを常に表示し、現在のウィンドウだけでなく全てのウィンドウに適用
+vim.opt.list = true -- 制御文字を表示
 
 -- ====== KEYMAP ======
 vim.keymap.set("i", "jk", "<ESC>")
-vim.keymap.set("t", "jk", [[<C-\><C-n>]])                   -- Terminal Mode 時jkでノーマルモードに戻る
-vim.keymap.set("x", "<M-k>", ":move '<-2<CR>gv=gv")         -- 選択範囲を上に移動
-vim.keymap.set("x", "<M-j>", ":move '>+1<CR>gv=gv")         -- 選択範囲を下に移動
-vim.keymap.set("n", "K", vim.lsp.buf.hover)                 -- 定義やドキュメントをホバー
-vim.keymap.set("n", "gd", vim.lsp.buf.definition)           -- 定義にジャンプ
-vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)       -- フォーマット
+vim.keymap.set("t", "fd", [[<C-\><C-n>]]) -- Terminal Mode 時fdでノーマルモードに戻る
+vim.keymap.set("x", "<M-k>", ":move '<-2<CR>gv=gv") -- 選択範囲を上に移動
+vim.keymap.set("x", "<M-j>", ":move '>+1<CR>gv=gv") -- 選択範囲を下に移動
+vim.keymap.set("n", "K", vim.lsp.buf.hover) -- 定義やドキュメントをホバー
+vim.keymap.set("n", "gd", vim.lsp.buf.definition) -- 定義にジャンプ
+vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format) -- フォーマット
 
 -- ====== COLORS ======
 vim.api.nvim_set_hl(0, "Function", { fg = "NvimLightBlue" })
@@ -51,8 +51,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { "akinsho/bufferline.nvim", version = "*",    config = true },
-  { "github/copilot.vim",      event = "BufRead" },
+  { "akinsho/bufferline.nvim", version = "*", config = true },
+  { "github/copilot.vim", event = "BufRead" },
   {
     "folke/flash.nvim",
     keys = {
@@ -132,6 +132,13 @@ require("lazy").setup({
       { "<leader>fb", mode = "n", "<cmd>Telescope buffers<cr>" },
     },
   },
-  { "akinsho/toggleterm.nvim", keys = { { "<c-\\>", "<cmd>ToggleTerm<cr>" } }, config = true },
+  {
+    "akinsho/toggleterm.nvim",
+    keys = {
+      { "<leader>tt", "<cmd>ToggleTerm direction=float<cr>" },
+      { "<leader>tj", "<cmd>ToggleTerm direction=horizontal<cr>" },
+    },
+    config = true,
+  },
   defaults = { lazy = true },
 })
