@@ -35,5 +35,4 @@ alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 # ===== Plugins =====
 eval $(/opt/homebrew/bin/brew shellenv)
 eval "$(~/.local/bin/mise activate zsh)"
-# shellcheck disable=SC1091
 source "$HOME/.rye/env"
