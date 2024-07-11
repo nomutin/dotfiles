@@ -1,4 +1,4 @@
--- Minimalist but modern neovim configuration by @nomutin
+-- Minimalist neovim configuration by @nomutin
 
 -- ====== OPTIONS ======
 vim.loader.enable()
@@ -29,17 +29,15 @@ vim.keymap.set("x", "<M-k>", ":move '<-2<CR>gv=gv") -- 選択範囲を上に移�
 vim.keymap.set("x", "<M-j>", ":move '>+1<CR>gv=gv") -- 選択範囲を下に移動
 vim.keymap.set("n", "gd", vim.lsp.buf.definition) -- 定義ジャンプ
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format) -- フォーマット
--- Plugin Keymaps
-local flash_jump = { "s", mode = { "n", "x", "o" }, "<cmd>lua require('flash').jump()<cr>" }
-local flash_treesitter = { "S", mode = { "n", "x", "o" }, "<cmd>lua require('flash').treesitter()<cr>" }
-local git_diff = { "<leader>hd", mode = "n", "<cmd>Gitsigns diffthis<cr>" }
-local git_preview = { "<leader>hp", mode = "n", "<cmd>Gitsigns preview_hunk<cr>" }
-local ts = { "<leader>ff", mode = "n", "<cmd>Telescope find_files<cr>" }
-local ts_grep = { "<leader>fg", mode = "n", "<cmd>Telescope live_grep<cr>" }
-local ts_buf = { "<leader>fb", mode = "n", "<cmd>Telescope buffers<cr>" }
-local tree = { "<leader>n", "<cmd>NvimTreeToggle<cr>" }
-local fterm = { "<leader>tt", "<cmd>ToggleTerm direction=float<cr>" }
-local hterm = { "<leader>tj", "<cmd>ToggleTerm direction=horizontal<cr>" }
+
+-- ===== NETRW =====
+vim.g.netrw_banner = 0 -- バナーを非表示
+vim.g.netrw_liststyle = 3 -- ツリービュー形式で表示
+vim.g.netrw_showhide = 1 -- 隠しファイルを表示
+vim.g.netrw_browse_split = 4 -- ファイルを開くときに新しいウィンドウを作成
+vim.g.netrw_altv = 1 -- ファイルを開くときに垂直分割
+vim.g.netrw_winsize = -28 -- ウィンドウサイズ
+vim.g.netrw_keepdir = 0  -- ディレクトリを開いたときに元のウィンドウを閉じる
 
 -- ====== COLORS ======
 vim.api.nvim_set_hl(0, "Function", { fg = "NvimLightBlue" })
@@ -49,7 +47,6 @@ vim.api.nvim_set_hl(0, "Statement", { fg = "NvimLightBlue", bold = true })
 vim.api.nvim_set_hl(0, "Special", { link = "Constant" })
 vim.api.nvim_set_hl(0, "@string.documentation", { fg = "NvimLightGreen", bold = true })
 vim.api.nvim_set_hl(0, "@variable.parameter", { fg = "NvimLightCyan", italic = true })
-vim.api.nvim_set_hl(0, "IblScope", { fg = "NvimLightBlue" })
 
 -- ====== PLUGIN ======
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -60,41 +57,78 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { "akinsho/bufferline.nvim", event = "BufRead", opts = {} },
   { "github/copilot.vim", event = "BufRead" },
-  { "folke/flash.nvim", keys = { flash_jump, flash_treesitter } },
-  { "lewis6991/gitsigns.nvim", event = "BufRead", keys = { git_diff, git_preview }, opts = {} },
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-  { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, event = "BufRead", opts = {} },
+  {
+    "folke/flash.nvim",
+    keys = {
+      { "s", mode = { "n", "x", "o" }, "<cmd>lua require('flash').jump()<cr>" },
+      { "S", mode = { "n", "x", "o" }, "<cmd>lua require('flash').treesitter()<cr>" },
+    }
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "BufRead",
+    keys = {
+      { "<leader>hd", mode = "n", "<cmd>Gitsigns diffthis<cr>" },
+      { "<leader>hp", mode = "n", "<cmd>Gitsigns preview_hunk<cr>" },
+    },
+    opts = {}
+  },
+  { "nvim-lualine/lualine.nvim", event = "BufRead", opts = {} },
   {
     "williamboman/mason.nvim",
     event = "BufRead",
-    dependencies = { "williamboman/mason-lspconfig.nvim", "neovim/nvim-lspconfig", "hrsh7th/cmp-nvim-lsp" },
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
+      "hrsh7th/nvim-cmp",
+      "hrsh7th/cmp-nvim-lsp",
+    },
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup()
       require("mason-lspconfig").setup_handlers({
         function(server_name)
-          local capabilities = require("cmp_nvim_lsp").default_capabilities()
-          require("lspconfig")[server_name].setup({ capabilities = capabilities })
+          require("lspconfig")[server_name].setup({
+            capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          })
         end,
+      })
+      local cmp = require("cmp")
+      cmp.setup({
+        mapping = cmp.mapping.preset.insert({}),
+        sources = cmp.config.sources({ { name = "nvim_lsp" } }),
       })
     end,
   },
   {
-    "hrsht7th/nvim-cmp",
+    "nvimtools/none-ls.nvim",
+    dependencies = { "jay-babu/mason-null-ls.nvim" },
     event = "BufRead",
-    config = function()
-      require("cmp").setup({
-        mapping = require("cmp").mapping.preset.insert({}),
-        sources = require("cmp").config.sources({ { name = "nvim_lsp" } }),
-      })
-    end,
+    opts = {}
   },
-  { "nvimtools/none-ls.nvim", dependencies = { "jay-babu/mason-null-ls.nvim" }, event = "BufRead", opts = {} },
-  { "nvim-tree/nvim-tree.lua", keys = { tree }, opts = {} },
-  { "nvim-treesitter/nvim-treesitter", event = "BufRead", main = "nvim-treesitter.configs", opts = { highlight = { enable = true }, indent = { enable = true } } },
-  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" }, keys = { ts, ts_grep, ts_buf } },
-  { "akinsho/toggleterm.nvim", keys = { fterm, hterm }, opts = {} },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    event = "BufRead",
+    main = "nvim-treesitter.configs",
+    opts = { highlight = { enable = true }, indent = { enable = true } }
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>ff", mode = "n", "<cmd>Telescope find_files<cr>" },
+      { "<leader>fg", mode = "n", "<cmd>Telescope live_grep<cr>" },
+      { "<leader>fb", mode = "n", "<cmd>Telescope buffers<cr>" },
+    }
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    keys = {
+      { "<leader>tt", "<cmd>ToggleTerm direction=float<cr>" },
+      { "<leader>tj", "<cmd>ToggleTerm direction=horizontal<cr>" },
+    },
+    opts = {}
+  },
   defaults = { lazy = true },
 })
