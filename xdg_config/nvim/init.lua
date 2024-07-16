@@ -103,7 +103,7 @@ require("lazy").setup({
         mapping = cmp.mapping.preset.insert({}),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "nvim-lsp-signature-help" },
+          { name = "nvim_lsp_signature_help" },
           { name = "path" },
         }),
       })
