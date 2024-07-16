@@ -18,9 +18,9 @@ bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/script
 | App Group | App | Host/Guest | Config |
 | --- | --- | --- | :---: |
 | Shell | [zsh](https://www.zsh.org) | Host | [🔍](./xdg_config/zsh/.zshrc) |
-|  | [bash](https://www.gnu.org/software/bash/) | Guest | [🔍](./config/.bashrc.local) | | Package Manager | [Homebrew](https://brew.sh) | Host | [🔍](./config/Brewfile) |
+|  | [bash](https://www.gnu.org/software/bash/) | Guest | [🔍](./config/.bashrc.local) |
+| Package Manager | [Homebrew](https://brew.sh) | Host | [🔍](./config/Brewfile) |
 |  | [mise](https://mise.jdx.dev/) | Host/Guest | [🔍](./xdg_config/mise/config.toml) |
 | Terminal Emulator | [Alacritty](https://alacritty.org/) | Host | [🔍](./xdg_config/alacritty/alacritty.toml) |
 | Terminal Multiplexer | [zellij](https://zellij.dev) | Host/Guest | [🔍](./xdg_config/zellij/config.kdl) |
-| Text Editor | [neovim](https://neovim.io) | Host/Guest | [🔍](./xdg_config/nvim/README.md) |
-| | [vim](https://www.vim.org) | Host/Guest | [🔍](./xdg_config/vim/vimrc) |
+| Text Editor | [neovim](https://neovim.io) | Host/Guest | [🔍](./xdg_config/nvim/init.lua) |

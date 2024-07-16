@@ -28,7 +28,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: latest
           args: --check .
-
-      - uses: ludvighz/vint-action@v1
-        with:
-          path: xdg_config/vim/vimrc
