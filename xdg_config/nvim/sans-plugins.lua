@@ -27,8 +27,6 @@ vim.keymap.set("t", "fd", [[<C-\><C-n>]])
 vim.keymap.set("n", "<leader>n", ":Lexplore<CR>")
 vim.keymap.set("x", "<M-k>", ":move '<-2<CR>gv=gv")
 vim.keymap.set("x", "<M-j>", ":move '>+1<CR>gv=gv")
-vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 
 -- ====== COLORS ======
 vim.api.nvim_set_hl(0, "Function", { fg = "NvimLightBlue" })
@@ -49,6 +47,44 @@ vim.g.netrw_winsize = -28
 vim.g.netrw_keepdir = 1
 
 -- ====== LSP ======
+local servers = {
+  lua_ls = {
+    name = "lua-language-server",
+    cmd = { "lua-language-server" },
+    root_dir = vim.fs.root(0, { ".luarc.json", ".luacheckrc", ".stylua.toml", "stylua.toml", ".git" }),
+    filetypes = { "lua" },
+  },
+  pyright = {
+    name = "pyright",
+    cmd = { "pyright-langserver", "--stdio" },
+    root_dir = vim.fs.root(0, { "pyproject.toml", "setup.py", ".git" }),
+    filetypes = { "python" },
+  },
+  ruff = {
+    name = "ruff",
+    cmd = { "ruff", "server", "--preview" },
+    root_dir = vim.fs.root(0, { "pyproject.toml", "setup.py", ".git" }),
+    filetypes = { "python" },
+  },
+}
+local group = vim.api.nvim_create_augroup("UserLspStart", { clear = true })
+for name, config in pairs(servers) do
+  if vim.fn.executable(servers[name].cmd[1]) ~= 0 then
+    vim.api.nvim_create_autocmd("FileType", {
+      group = group,
+      pattern = config.filetypes,
+      callback = function(ev)
+        vim.lsp.start(servers[name], { bufnr = ev.buf })
+      end,
+    })
+  end
+end
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   group = vim.api.nvim_create_augroup("UserLspAttach", { clear = false }),
+--   callback = function(ev)
+--     vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, { autotrigger = true })
+--   end,
+-- })
 
 -- ====== COMPLETION ======
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -189,40 +225,3 @@ function Statusline()
 end
 
 vim.opt.statusline = "%!v:lua.Statusline()"
-
--- ====== PLUGIN ======
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup({
-  {
-    "williamboman/mason.nvim",
-    event = "BufRead",
-    dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-      "neovim/nvim-lspconfig",
-    },
-    config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup()
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          require("lspconfig")[server_name].setup({})
-        end,
-      })
-    end,
-  },
-  {
-    "akinsho/toggleterm.nvim",
-    keys = {
-      { "<leader>tt", "<cmd>ToggleTerm direction=float<cr>" },
-      { "<leader>tj", "<cmd>ToggleTerm direction=horizontal<cr>" },
-    },
-    opts = {},
-  },
-  defaults = { lazy = true },
-})
