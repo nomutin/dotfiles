@@ -81,6 +81,7 @@ require("lazy").setup({
       "neovim/nvim-lspconfig",
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path",
     },
     config = function()
       require("mason").setup()
@@ -99,11 +100,11 @@ require("lazy").setup({
         mapping = cmp.mapping.preset.insert({}),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
+          { name = "path" },
         }),
       })
     end,
   },
-  { "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
   {
     "nvim-treesitter/nvim-treesitter",
     event = "BufRead",
