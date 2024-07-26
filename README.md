@@ -5,7 +5,7 @@
 Dotfiles for my host `macOS` and guest `Linux`.
 
 ![platform](https://img.shields.io/badge/platform-macOS%20|%20Linux-blue)
-[![Lint](https://github.com/nomutin/dotfiles/actions/workflows/lint.yaml/badge.svg)](https://github.com/nomutin/dotfiles/actions/workflows/lint.yaml)
+[![ci](https://github.com/nomutin/dotfiles/actions/workflows/ci.yaml/badge.svg)](https://github.com/nomutin/dotfiles/actions/workflows/ci.yaml)
 
 </div>
 
