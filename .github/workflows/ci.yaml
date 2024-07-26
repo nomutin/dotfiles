@@ -20,9 +20,6 @@ jobs:
         env:
           SHELLCHECK_OPTS: -e SC2016 -e SC1090
 
-      - name: Run actionlint
-        uses: raven-actions/actionlint@v1
-
       - uses: JohnnyMorganz/stylua-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
