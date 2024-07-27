@@ -1,0 +1,33 @@
+layout {
+
+    tab name="$HOME" cwd="$HOME" {
+        pane
+        pane size=1 borderless=true {
+            plugin location="compact-bar"
+        }
+    }
+
+    tab name="$PWD" hide_floating_panes=true {
+        floating_panes {
+            pane {
+                x "6%"
+                y "3%"
+                width "88%"
+                height "88%"
+            }
+        }
+        pane split_direction="vertical" {
+            pane size="65%"
+            pane {
+                pane {
+                    command "ls"
+                    args "-la"
+                }
+            }
+        }
+        pane size=1 borderless=true {
+            plugin location="compact-bar"
+        }
+    }
+
+}

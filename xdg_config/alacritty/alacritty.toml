@@ -47,5 +47,5 @@ white = '#ECEFF4'
 
 [keyboard]
 bindings = [
-    { key = "f", mods = "Control", action = "ToggleViMode" }
+    { key = ".", mods = "Control", action = "ToggleViMode" }
 ]
