@@ -1,8 +1,16 @@
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 [user]
-	name = nomutin
-	email = nomura0508@icloud.com
+    name = nomutin
+    email = nomura0508@icloud.com
+[core]
+    editor = nvim
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
+[difftool "vimdiff"]
+    cmd = nvim -d $LOCAL $BASE -c '$wincmd w' -c 'wincmd J'

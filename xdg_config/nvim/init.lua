@@ -1,8 +1,9 @@
 -- Minimalist neovim configuration by @nomutin
 
--- ====== OPTIONS ======
+-- ====== BUILTIN ======
 vim.loader.enable()
 vim.g.mapleader = " "
+
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 4
@@ -10,6 +11,8 @@ vim.g.showhide = 1
 vim.g.netrw_altv = 1
 vim.g.netrw_winsize = -28
 vim.g.netrw_keepdir = 1
+vim.g.netrw_preview = 1
+
 vim.opt.title = true
 vim.opt.termguicolors = true
 vim.opt.clipboard = "unnamedplus"
@@ -29,15 +32,11 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.laststatus = 3
 vim.opt.list = true
-vim.api.nvim_set_hl(0, "Function", { fg = "NvimLightBlue" })
 
--- ====== KEYMAP ======
+vim.api.nvim_set_hl(0, "Function", { fg = "NvimLightBlue" })
 vim.keymap.set("i", "jk", "<ESC>", { desc = "Return to normal mode" })
-vim.keymap.set("t", "fd", [[<C-\><C-n>]], { desc = "Return to normal mode" })
+vim.keymap.set("t", "fd", [[<C-\><C-n>]])
 vim.keymap.set("n", "<leader>n", "<cmd>Lexplore<cr>", { desc = "Open file explorer" })
-vim.keymap.set("n", "<leader>e", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
-vim.keymap.set({ "n", "x", "o" }, "s", "<cmd>lua require('flash').jump()<cr>", { desc = "Jump" })
-vim.keymap.set({ "n", "x", "o" }, "S", "<cmd>lua require('flash').treesitter()<cr>", { desc = "Select" })
 
 -- ====== PLUGIN ======
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -49,7 +48,13 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   { "github/copilot.vim", event = "BufRead" },
-  { "folke/flash.nvim" },
+  {
+    "folke/flash.nvim",
+    keys = {
+      { "s", mode = { "n", "x", "o" }, "<cmd>lua require('flash').jump()<cr>", desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash Treesitter" },
+    },
+  },
   { "lewis6991/gitsigns.nvim", event = "BufRead", opts = {} },
   { "nvim-lualine/lualine.nvim", event = "BufRead", opts = {} },
   {
@@ -84,6 +89,13 @@ require("lazy").setup({
     main = "nvim-treesitter.configs",
     opts = { highlight = { enable = true }, indent = { enable = true } },
   },
-  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Find files" } },
+      { "<leader>g", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" } },
+    },
+  },
   defaults = { lazy = true },
 })
