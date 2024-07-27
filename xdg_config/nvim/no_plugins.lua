@@ -4,7 +4,7 @@ vim.g.mapleader = " "
 vim.opt.title = true
 vim.opt.termguicolors = true
 vim.opt.clipboard = "unnamedplus"
-vim.opt.completeopt = { "menuone", "noselect", "popup"}
+vim.opt.completeopt = { "menuone", "noselect", "popup" }
 vim.opt.ignorecase = true
 vim.opt.pumheight = 10
 vim.opt.showtabline = 2
@@ -40,7 +40,7 @@ vim.api.nvim_set_hl(0, "Function", { fg = "NvimLightBlue" })
 -- ====== Git Gutter ======
 local function place_signs(name, start, lines, buffer)
   for lnum = start, start + lines - 1 do
-    vim.fn.sign_place(0, '', name, buffer, { lnum = lnum })
+    vim.fn.sign_place(0, "", name, buffer, { lnum = lnum })
   end
 end
 
@@ -48,36 +48,37 @@ local function put_signs(diff)
   local _, old_lines, new_start, new_lines = unpack(diff)
   local buffer = vim.api.nvim_get_current_buf()
   if old_lines == 0 then
-    place_signs('HunkSignAdd', new_start, new_lines, buffer)
+    place_signs("HunkSignAdd", new_start, new_lines, buffer)
   elseif new_lines == 0 then
-    place_signs('HunkSignDel', new_start, old_lines, buffer)
+    place_signs("HunkSignDel", new_start, old_lines, buffer)
   else
-    place_signs('HunkSignUpd', new_start, math.min(old_lines, new_lines), buffer)
-    place_signs('HunkSignDel', new_start + new_lines, old_lines - new_lines, buffer)
-    place_signs('HunkSignAdd', new_start + old_lines, new_lines - old_lines, buffer)
+    place_signs("HunkSignUpd", new_start, math.min(old_lines, new_lines), buffer)
+    place_signs("HunkSignDel", new_start + new_lines, old_lines - new_lines, buffer)
+    place_signs("HunkSignAdd", new_start + old_lines, new_lines - old_lines, buffer)
   end
 end
 
 local function show_hunk()
-  vim.fn.sign_define('HunkSignAdd', { text = '+', texthl = 'DiffAdd' })
-  vim.fn.sign_define('HunkSignDel', { text = '-', texthl = "DiffDelete" })
-  vim.fn.sign_define('HunkSignUpd', { text = '~', texthl = "DiffChange" })
-  local cmd = 'git --no-pager diff -U0 --no-color --no-ext-diff ' .. vim.fn.expand('%')
-              .. ' | grep "^@@" '
-              .. ' | sed -r "s/[-+]([0-9]+) /\\1,1,/g" '
-              .. ' | sed -r "s/^[-@ ]*([0-9]+,[0-9]+)[ ,+]+([0-9]+,[0-9]+)[, ].*/\\1,\\2/"'
+  vim.fn.sign_define("HunkSignAdd", { text = "+", texthl = "DiffAdd" })
+  vim.fn.sign_define("HunkSignDel", { text = "-", texthl = "DiffDelete" })
+  vim.fn.sign_define("HunkSignUpd", { text = "~", texthl = "DiffChange" })
+  local cmd = "git --no-pager diff -U0 --no-color --no-ext-diff "
+    .. vim.fn.expand("%")
+    .. ' | grep "^@@" '
+    .. ' | sed -r "s/[-+]([0-9]+) /\\1,1,/g" '
+    .. ' | sed -r "s/^[-@ ]*([0-9]+,[0-9]+)[ ,+]+([0-9]+,[0-9]+)[, ].*/\\1,\\2/"'
   local output = vim.fn.systemlist(cmd)
   for _, line in ipairs(output) do
-    put_signs(vim.split(line, ','))
+    put_signs(vim.split(line, ","))
   end
 end
-vim.api.nvim_create_autocmd( {"BufReadPost", "BufWritePost"}, { callback = show_hunk })
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, { callback = show_hunk })
 
 -- ====== COMPLETION ======
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client.supports_method('textDocument/completion') then
+    if client and client.supports_method("textDocument/completion") then
       vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
     end
     local function trigger_completion_and_insert_space()
@@ -85,7 +86,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.api.nvim_feedkeys(" ", "n", true)
     end
     vim.keymap.set("i", " ", trigger_completion_and_insert_space)
-    vim.keymap.set("i", "<C-j>", vim.lsp.completion.trigger )
+    vim.keymap.set("i", "<C-j>", vim.lsp.completion.trigger)
   end,
 })
 
@@ -190,19 +191,23 @@ function Statusline()
   end
   local fileformat = { dos = "CRLF", unix = "LF", mac = "CR" }
   return table.concat({
-    "%1*", "  ", "%2*",
+    "%1*",
+    "  ",
+    "%2*",
     branch_name_display(),
     "%3*",
     pad(" " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")),
     "%4*",
     lsp_diagnostics(),
-    "%=", "%3*",
+    "%=",
+    "%3*",
     pad(lsp_name()),
     "%2*",
     pad(fileformat[vim.bo.fileformat]),
     pad(vim.o.fileencoding:upper()),
     pad(vim.bo.expandtab and string.format("Spaces: %d", vim.bo.tabstop) or "Tab"),
-    "%1*", pad("%l:%c"),
+    "%1*",
+    pad("%l:%c"),
   })
 end
 
