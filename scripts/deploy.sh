@@ -20,6 +20,5 @@ if [ "$(uname)" = "Darwin" ]; then
 
 elif [ "$(uname)" = "Linux" ]; then
   echo 'source "$HOME/.dotfiles/config/.bashrc.local"' >>~/.bashrc
-  echo 'source "$HOME/.rye/env"' >>~/.bashrc
   source ~/.bashrc
 fi
