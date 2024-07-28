@@ -1,6 +1,7 @@
 [tools]
 jq = "latest"
 lazygit = "latest"
+lua-language-server = "latest"
 neovim = "nightly"
 node = "20"
 ripgrep = "latest"

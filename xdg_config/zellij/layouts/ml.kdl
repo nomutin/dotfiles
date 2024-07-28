@@ -3,7 +3,7 @@ layout {
 
     tab name="$HOME" cwd="$HOME" hide_floating_panes=true {
         floating_panes {
-            pane x="6%" y="3%" width="88%" height="88%"
+            pane x="6%" y="3%" width="88%" height="88%" cwd="$HOME"
         }
 
         pane
@@ -16,8 +16,8 @@ layout {
         floating_panes {
             pane x="6%" y="3%" width="88%" height="88%" command="lazygit"
         }
-        pane size="65%" split_direction="vertical" {
-            pane name="EDITOR" command="bash" {
+        pane split_direction="vertical" {
+            pane size="65%" name="EDITOR" command="bash" {
                 args "-c" "bash --rcfile <(cat ~/.bashrc; echo 'source .venv/bin/activate';)"
             }
             pane split_direction="horizontal" {
