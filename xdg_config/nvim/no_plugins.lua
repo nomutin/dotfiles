@@ -20,10 +20,25 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.laststatus = 3
 vim.opt.list = true
+vim.opt.path = "**"
+
+-- ====== SEARCH ======
+function SearchWord()
+  local search_term = vim.fn.input("Search word for: ")
+  if search_term == "" then
+    return
+  end
+  local git_files = vim.fn.systemlist("git ls-files")
+  vim.cmd("noau vimgrep /" .. search_term .. "/gj " .. table.concat(git_files, " "))
+  vim.cmd("cw")
+end
 
 -- ====== KEYMAP ======
 vim.keymap.set("i", "jk", "<ESC>", { desc = "Restore from insert mode" })
+vim.keymap.set("t", "fd", [[<C-\><C-n>]], { desc = "Return to normal mode" })
 vim.keymap.set("n", "<leader>n", ":Lexplore<CR>", { desc = "Open Netrw" })
+vim.keymap.set("n", "<leader>/", SearchWord, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>f', ':find ', { noremap = true, silent = false })
 
 -- ====== NETRW ======
 vim.g.netrw_banner = 0
@@ -33,9 +48,10 @@ vim.g.netrw_browse_split = 4
 vim.g.netrw_altv = 1
 vim.g.netrw_winsize = -28
 vim.g.netrw_keepdir = 1
+vim.g.netrw_preview = 1
 
 -- ====== COLORS ======
-vim.api.nvim_set_hl(0, "Function", { fg = "NvimLightBlue" })
+vim.api.nvim_set_hl(0, "Type", { fg = "NvimLightBlue" })
 
 -- ====== Git Gutter ======
 local function place_signs(name, start, lines, buffer)

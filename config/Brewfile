@@ -4,7 +4,6 @@ tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 
 brew "mas"
-brew "wget"
 
 cask "arc"
 cask "alacritty"

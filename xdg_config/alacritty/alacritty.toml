@@ -1,4 +1,4 @@
-shell = "zsh"
+shell = "bash"
 
 [env]
 TERM = "xterm-256color"
