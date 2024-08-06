@@ -21,7 +21,9 @@ target_config_dir="${HOME}"/.config
 mkdir -p "$target_config_dir"
 for item in "$source_config_dir"/*; do
   base_item=$(basename "$item")
+  echo "Deploying $base_item"
   link_name="$target_config_dir/$base_item"
+  echo "ln -s $item $link_name"
   ln -s "$item" "$link_name"
 done
 
