@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# ===== Settings =====
+HISTSIZE=1000
+HISTFILESIZE=2000
+shopt -s checkwinsize
+
+# ===== XGD PATH =====
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+mkdir -p "${XDG_STATE_HOME}"/bash
+export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
+export HISTFILE="$XDG_STATE_HOME"/bash/history
+export KERAS_HOME="$XDG_STATE_HOME"/keras
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export LESSHISTFILE="$XDG_STATE_HOME"/less/history
+export TERMINFO="$XDG_DATA_HOME"/terminfo
+export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo
+
+# ===== Aliases =====
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias wget='wget --hsts-file="$XDG_DATA_HOME"/wget-hsts'
+
+# ===== Plugins =====
+if [ -d /opt/homebrew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+eval "$(~/.local/bin/mise activate bash)"
+source "$HOME/.rye/env"
