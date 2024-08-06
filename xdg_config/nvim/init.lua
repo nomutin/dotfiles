@@ -44,7 +44,7 @@ vim.keymap.set("t", "fd", [[<C-\><C-n>]], { desc = "Return to normal mode" })
 vim.keymap.set("n", "<leader>n", "<cmd>Lexplore<cr>", { desc = "Open file explorer" })
 
 -- ====== COMMAND ======
-vim.api.nvim_create_user_command('ConfigOpen', 'e $MYVIMRC', {})
+vim.api.nvim_create_user_command("ConfigOpen", "e $MYVIMRC", {})
 
 -- ====== PLUGIN ======
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
