@@ -33,6 +33,7 @@ if [ -f "${HOME}"/.bashrc ]; then
 else
   ln -s "${HOME}"/.dotfiles/config/bashrc "${HOME}"/.bashrc
 fi
+source "${HOME}"/.bashrc
 
 # ===== Install dependencies =====
 mise install -y
