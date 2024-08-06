@@ -15,7 +15,7 @@ if ! (type 'mise' >/dev/null 2>&1); then
 fi
 
 # ===== Deploy xdg-based configs =====
-source_config_dir="${HOME}"/.dotfiles/xgd_config
+source_config_dir="${HOME}"/.dotfiles/xdg_config
 target_config_dir="${HOME}"/.config
 
 mkdir -p "$target_config_dir"
