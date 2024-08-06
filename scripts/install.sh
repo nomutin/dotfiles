@@ -15,11 +15,14 @@ if ! (type 'mise' >/dev/null 2>&1); then
 fi
 
 # ===== Deploy xdg-based configs =====
-src="${HOME}/.dotfiles/xdg_config"
-tgt="${HOME}/.config"
-mkdir -p "$tgt"
-for item in "$src"/*; do
-  ln -s "$item" "$tgt/$(basename "$item")"
+source_config_dir="${HOME}"/.dotfiles/xgd_config
+target_config_dir="${HOME}"/.config
+
+mkdir -p "$target_config_dir"
+for item in "$source_config_dir"/*; do
+  base_item=$(basename "$item")
+  link_name="$target_config_dir/$base_item"
+  ln -s "$item" "$link_name"
 done
 
 # ===== Deploy bashrc =====
