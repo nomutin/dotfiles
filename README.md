@@ -15,10 +15,10 @@ Dotfiles for my `macOS` and `Linux`.
 bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/scripts/install.sh)"
 ```
 
-## Contents
+## Apps
 
 - Shell - [bash](https://www.gnu.org/software/bash/)
-- Package Manager - [Homebrew](https://brew.sh), [mise](https://mise.jdx.dev/)
 - Terminal Emulator - [Alacritty](https://alacritty.org/)
+- Package Manager - [Homebrew](https://brew.sh), [mise](https://mise.jdx.dev/)
 - Terminal Multiplexer - [zellij](https://zellij.dev)
 - Text Editor - [neovim](https://neovim.io)
