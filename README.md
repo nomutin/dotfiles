@@ -2,9 +2,12 @@
 
 # .dotfiles
 
-Dotfiles for my host `macOS` and guest `Linux`.
+Dotfiles for my `macOS` and `Linux`.
 
 ![platform](https://img.shields.io/badge/platform-macOS%20|%20Linux-blue)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/nomutin/dotfiles)
+![GitHub repo size](https://img.shields.io/github/repo-size/nomutin/dotfiles)
+![LOC](https://sloc.xyz/github/nomutin/dotfiles)
 [![ci](https://github.com/nomutin/dotfiles/actions/workflows/ci.yaml/badge.svg)](https://github.com/nomutin/dotfiles/actions/workflows/ci.yaml)
 
 </div>
@@ -15,12 +18,8 @@ bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/script
 
 ## Contents
 
-| App Group | App | Host/Guest | Config |
-| --- | --- | --- | :---: |
-| Shell | [zsh](https://www.zsh.org) | Host | [🔍](./xdg_config/zsh/.zshrc) |
-|  | [bash](https://www.gnu.org/software/bash/) | Guest | [🔍](./config/.bashrc.local) |
-| Package Manager | [Homebrew](https://brew.sh) | Host | [🔍](./config/Brewfile) |
-|  | [mise](https://mise.jdx.dev/) | Host/Guest | [🔍](./xdg_config/mise/config.toml) |
-| Terminal Emulator | [Alacritty](https://alacritty.org/) | Host | [🔍](./xdg_config/alacritty/alacritty.toml) |
-| Terminal Multiplexer | [zellij](https://zellij.dev) | Host/Guest | [🔍](./xdg_config/zellij/config.kdl) |
-| Text Editor | [neovim](https://neovim.io) | Host/Guest | [🔍](./xdg_config/nvim/init.lua) |
+- Shell - [bash](https://www.gnu.org/software/bash/)
+- Package Manager - [Homebrew](https://brew.sh), [mise](https://mise.jdx.dev/)
+- Terminal Emulator - [Alacritty](https://alacritty.org/)
+- Terminal Multiplexer - [zellij](https://zellij.dev)
+- Text Editor - [neovim](https://neovim.io)
