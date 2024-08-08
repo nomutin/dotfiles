@@ -7,6 +7,9 @@ cd "${HOME}"
 # ===== Install repo =====
 if [ ! -d .dotfiles ]; then
   git clone https://github.com/nomutin/dotfiles.git .dotfiles
+else
+  echo "dotfiles already exists"
+  exit 1
 fi
 
 # ===== Install mise =====
