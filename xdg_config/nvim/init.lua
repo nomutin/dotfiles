@@ -127,8 +127,8 @@ require("lazy").setup({
   {
     "folke/flash.nvim",
     keys = {
-      { "s", mode = { "n", "x", "o" }, "<cmd>lua require('flash').jump()<cr>", desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash Treesitter" },
+      { "s", mode = { "n", "x", "o" }, "<cmd>lua require('flash').jump()<cr>" },
+      { "S", mode = { "n", "x", "o" }, "<cmd>lua require('flash').treesitter()<cr>" },
     },
   },
   {
@@ -156,6 +156,9 @@ require("lazy").setup({
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    keys = { { "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Find files" } } },
+    keys = {
+      { "<leader>f", "<cmd>Telescope find_files<cr>" },
+      { "<leader>/", "<cmd>Telescope live_grep<cr>" },
+    },
   },
 })
