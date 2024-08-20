@@ -3,10 +3,10 @@ layout {
 
     tab name="$HOME" cwd="$HOME" hide_floating_panes=true {
         floating_panes {
-            pane x="6%" y="3%" width="88%" height="88%" cwd="$HOME"
+            pane x="6%" y="3%" width="88%" height="88%" cwd="$HOME" command="bash"
         }
 
-        pane
+        pane command="bash"
         pane size=1 borderless=true {
             plugin location="compact-bar"
         }
