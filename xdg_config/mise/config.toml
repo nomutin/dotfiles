@@ -9,3 +9,7 @@ rye = "latest"
 shfmt = "latest"
 stylua = "latest"
 zellij = "latest"
+# helix = "22.12"
+
+[plugins]
+# helix = 'https://github.com/CSergienko/asdf-helix'
