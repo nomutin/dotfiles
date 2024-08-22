@@ -5,7 +5,6 @@ tap "homebrew/cask-fonts"
 
 brew "mas"
 
-cask "arc"
 cask "alacritty"
 cask "deepl"
 cask "discord"
