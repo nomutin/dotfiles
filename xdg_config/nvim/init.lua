@@ -11,14 +11,12 @@ vim.opt.pumheight = 10
 vim.opt.ignorecase, vim.opt.smartcase = true, true
 vim.opt.scrolloff, vim.opt.sidescrolloff = 8, 8
 vim.opt.showtabline, vim.opt.laststatus = 2, 3
-vim.opt.smartindent = true
+vim.opt.smartindent, vim.opt.expandtab = true, true
 vim.opt.undofile = true
-vim.opt.expandtab = true
 vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.wrap = false
 vim.opt.list = true
-vim.opt.path = "**"
 vim.api.nvim_set_hl(0, "Type", { fg = "NvimLightBlue" })
 
 -- ====== NETRW ======
@@ -35,6 +33,35 @@ local function show_git_diff(_)
   vim.fn.system("git show HEAD:" .. vim.fn.expand("%") .. " > " .. diff_file)
   vim.cmd("vertical diffsplit " .. diff_file)
   vim.cmd("autocmd BufWinLeave <buffer> silent! !rm " .. diff_file)
+end
+
+-- ====== COMPLETION ======
+local methods = vim.lsp.protocol.Methods
+local function get_client(bufnr, method)
+  local clients = vim.lsp.get_clients({ bufnr = bufnr, method = method })
+  return vim.tbl_get(clients, 1)
+end
+
+local function lsp_attach(args)
+  local client = get_client(args.bufnr, methods.textDocument_completion)
+  if client then
+    vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+  end
+end
+
+local function complete_changed(args)
+  local client = get_client(args.buf, methods.completionItem_resolve)
+  if not client then
+    return
+  end
+  local item = vim.tbl_get(vim.v.completed_item, "user_data", "nvim", "lsp", "completion_item") or {}
+  item = client.request_sync(methods.completionItem_resolve, item, 100, args.buf) or {}
+  local docs = vim.tbl_get(item, "result", "documentation", "value") or ""
+  local win = vim.api.nvim__complete_set(vim.fn.complete_info().selected, { info = docs })
+  if win.winid and vim.api.nvim_win_is_valid(win.winid) then
+    vim.treesitter.start(win.bufnr, "markdown")
+    vim.wo[win.winid].conceallevel = 3
+  end
 end
 
 -- ====== STATUSLINE ======
@@ -62,15 +89,15 @@ local function update_statusline(_)
 
   vim.opt.statusline = " %f%h%w%m%r │ " .. git .. " │ %= │ " .. lsp .. " │ %l:%c │ %P "
 end
-vim.api.nvim_create_autocmd({ "VimEnter", "BufWritePost" }, { callback = update_statusline })
 
 -- ====== CLIPBOARD ======
-if os.getenv("SSH_CLIENT") ~= nil or os.getenv("SSH_TTY") ~= nil then
-  local function paste(_)
-    return function(_)
-      return vim.split(vim.fn.getreg('"'), "\n")
-    end
+local function paste(_)
+  return function(_)
+    return vim.split(vim.fn.getreg('"'), "\n")
   end
+end
+
+if os.getenv("SSH_CLIENT") ~= nil or os.getenv("SSH_TTY") ~= nil then
   local osc52 = require("vim.ui.clipboard.osc52")
   vim.g.clipboard = {
     name = "OSC 52",
@@ -79,10 +106,16 @@ if os.getenv("SSH_CLIENT") ~= nil or os.getenv("SSH_TTY") ~= nil then
   }
 end
 
+-- ====== AUTOCMD ======
+vim.api.nvim_create_autocmd("LspAttach", { callback = lsp_attach })
+vim.api.nvim_create_autocmd("CompleteChanged", { callback = complete_changed })
+vim.api.nvim_create_autocmd({ "VimEnter", "BufWritePost" }, { callback = update_statusline })
+
 -- ====== KEYMAP ======
 vim.keymap.set("i", "jk", "<ESC>")
 vim.keymap.set("n", "<leader>n", "<cmd>Lexplore<cr>")
 vim.keymap.set("n", "<leader>d", show_git_diff)
+vim.keymap.set("i", "<C-j>", vim.lsp.completion.trigger)
 
 -- ====== PLUGIN ======
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -91,32 +124,18 @@ if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 end
 vim.opt.rtp:prepend(lazypath)
-local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "rust_analyzer", "yamlls" }
 
 require("lazy").setup({
   defaults = { lazy = true },
   { "github/copilot.vim", event = "BufRead" },
   {
-    "folke/flash.nvim",
-    keys = {
-      { "s", mode = { "n", "x" }, "<cmd>lua require('flash').jump()<cr>" },
-      { "S", mode = { "n", "x" }, "<cmd>lua require('flash').treesitter()<cr>" }
-    },
-  },
-  {
     "neovim/nvim-lspconfig",
     event = "BufRead",
-    dependencies = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-nvim-lsp" },
     config = function()
+      local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "rust_analyzer", "yamlls" }
       for _, server in ipairs(servers) do
-        local capabilities = require("cmp_nvim_lsp").default_capabilities()
-        require("lspconfig")[server].setup({ capabilities = capabilities })
+        require("lspconfig")[server].setup({})
       end
-      local cmp = require("cmp")
-      cmp.setup({
-        mapping = cmp.mapping.preset.insert({}),
-        sources = cmp.config.sources({ { name = "nvim_lsp" } }),
-      })
     end,
   },
   {
