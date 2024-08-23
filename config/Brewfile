@@ -7,7 +7,6 @@ brew "mas"
 
 cask "alacritty"
 cask "deepl"
-cask "discord"
 cask "docker"
 cask "font-hack-nerd-font"
 cask "microsoft-excel"

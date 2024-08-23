@@ -42,21 +42,21 @@ local function get_client(bufnr, method)
   return vim.tbl_get(clients, 1)
 end
 
-local function lsp_attach(args)
+local function enable_completion(args)
   local client = get_client(args.bufnr, methods.textDocument_completion)
   if client then
     vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
   end
 end
 
-local function complete_changed(args)
+local function show_document(args)
   local client = get_client(args.buf, methods.completionItem_resolve)
   if not client then
     return
   end
   local item = vim.tbl_get(vim.v.completed_item, "user_data", "nvim", "lsp", "completion_item") or {}
-  item = client.request_sync(methods.completionItem_resolve, item, 100, args.buf) or {}
-  local docs = vim.tbl_get(item, "result", "documentation", "value") or ""
+  local resolved_item = client.request_sync(methods.completionItem_resolve, item, 100, args.buf) or {}
+  local docs = vim.tbl_get(resolved_item, "result", "documentation", "value") or ""
   local win = vim.api.nvim__complete_set(vim.fn.complete_info().selected, { info = docs })
   if win.winid and vim.api.nvim_win_is_valid(win.winid) then
     vim.treesitter.start(win.bufnr, "markdown")
@@ -70,14 +70,14 @@ local function show_info(tbl)
   for key, value in pairs(tbl) do
     table.insert(result, key .. value)
   end
-  return #result > 0 and " [" .. table.concat(result, " ") .. "]" or ""
+  return " [" .. table.concat(result, " ") .. "]"
 end
 
 local function update_statusline(_)
   local branch = vim.fn.system("git rev-parse --abbrev-ref HEAD 2>/dev/null")
   local diff = vim.fn.system("git diff --numstat " .. vim.fn.expand("%") .. " 2>/dev/null")
   local added, deleted = diff:match("(%d+)%s+(%d+)%s+")
-  local git = branch == "" and "NULL" or branch .. show_info({ ["+"] = added, ["-"] = deleted })
+  local git_status = branch == "" and "NULL" or branch .. show_info({ ["+"] = added, ["-"] = deleted })
 
   local clients = {}
   for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
@@ -85,13 +85,13 @@ local function update_statusline(_)
   end
   local diag = vim.diagnostic.count(0)
   local count = { ["E:"] = diag[1], ["W:"] = diag[2], ["I:"] = diag[3], ["H:"] = diag[4] }
-  local lsp = #clients > 0 and table.concat(clients, ", ") .. show_info(count) or "NULL"
+  local lsp_status = #clients > 0 and table.concat(clients, ", ") .. show_info(count) or "NULL"
 
-  vim.opt.statusline = " %f%h%w%m%r │ " .. git .. " │ %= │ " .. lsp .. " │ %l:%c │ %P "
+  vim.opt.statusline = " %f%h%w%m%r │ " .. git_status .. " │ %= │ " .. lsp_status .. " │ %l:%c │ %P "
 end
 
 -- ====== CLIPBOARD ======
-local function paste(_)
+local function my_paste(_)
   return function(_)
     return vim.split(vim.fn.getreg('"'), "\n")
   end
@@ -102,20 +102,20 @@ if os.getenv("SSH_CLIENT") ~= nil or os.getenv("SSH_TTY") ~= nil then
   vim.g.clipboard = {
     name = "OSC 52",
     copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
-    paste = { ["+"] = paste("+"), ["*"] = paste("*") },
+    paste = { ["+"] = my_paste("+"), ["*"] = my_paste("*") },
   }
 end
 
 -- ====== AUTOCMD ======
-vim.api.nvim_create_autocmd("LspAttach", { callback = lsp_attach })
-vim.api.nvim_create_autocmd("CompleteChanged", { callback = complete_changed })
-vim.api.nvim_create_autocmd({ "VimEnter", "BufWritePost" }, { callback = update_statusline })
+vim.api.nvim_create_autocmd("LspAttach", { callback = enable_completion })
+vim.api.nvim_create_autocmd("CompleteChanged", { callback = show_document })
+vim.api.nvim_create_autocmd({ "VimEnter", "LspAttach", "BufWritePost" }, { callback = update_statusline })
 
 -- ====== KEYMAP ======
-vim.keymap.set("i", "jk", "<ESC>")
-vim.keymap.set("n", "<leader>n", "<cmd>Lexplore<cr>")
-vim.keymap.set("n", "<leader>d", show_git_diff)
-vim.keymap.set("i", "<C-j>", vim.lsp.completion.trigger)
+vim.keymap.set("i", "jk", "<ESC>", { desc = "Return to Normal Mode" })
+vim.keymap.set("n", "<leader>n", "<cmd>Lexplore<cr>", { desc = "Open File Explorer" })
+vim.keymap.set("n", "<leader>d", show_git_diff, { desc = "Show Git Diff" })
+vim.keymap.set("i", "<C-j>", vim.lsp.completion.trigger, { desc = "Trigger Completion" })
 
 -- ====== PLUGIN ======
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
