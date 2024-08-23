@@ -1,15 +1,25 @@
 [tools]
-jq = "latest"
-lazygit = "latest"
-lua-language-server = "latest"
 neovim = "nightly"
-node = "20"
+node = "latest"
 ripgrep = "latest"
-rye = "latest"
-shfmt = "latest"
-stylua = "latest"
+uv = "latest"
 zellij = "latest"
-# helix = "22.12"
 
-[plugins]
-# helix = 'https://github.com/CSergienko/asdf-helix'
+# LSP
+# "npm:bash-language-server" = "latest"
+# "npm:biome" = "latest"
+# "npm:json-language-server" = "latest"
+# lua-language-server = "latest"
+# "npm:pyright" = "latest"
+# "npm:yaml-language-server" = "latest"
+
+# optional
+# lazygit = "latest"
+# rust = "latest"
+# jq = "latest"
+# shellcheck = "latest"
+# shfmt = "latest"
+# stylua = "latest"
+
+[settings]
+experimental = true

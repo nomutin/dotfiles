@@ -38,6 +38,3 @@ eval "$(~/.local/bin/mise activate bash)"
 if [ -d /opt/homebrew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
-if [ -d "$HOME/.rye" ]; then
-  source "$HOME/.rye/env"
-fi
