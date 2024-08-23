@@ -1,5 +1,0 @@
-[editor]
-true-color = true
-
-[keys.insert]
-j = { k = "normal_mode"}

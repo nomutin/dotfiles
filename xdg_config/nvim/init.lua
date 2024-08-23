@@ -36,31 +36,25 @@ local function show_git_diff(_)
 end
 
 -- ====== COMPLETION ======
-local methods = vim.lsp.protocol.Methods
-local function get_client(bufnr, method)
-  local clients = vim.lsp.get_clients({ bufnr = bufnr, method = method })
-  return vim.tbl_get(clients, 1)
-end
-
 local function enable_completion(args)
-  local client = get_client(args.bufnr, methods.textDocument_completion)
-  if client then
+  local client = vim.lsp.get_client_by_id(args.data.client_id)
+  if client and client.supports_method("textDocument/completion") then
     vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
   end
 end
 
 local function show_document(args)
-  local client = get_client(args.buf, methods.completionItem_resolve)
-  if not client then
+  local clients = vim.lsp.get_clients({ bufnr = args.buf, "completionItem/resolve" })
+  if vim.tbl_isempty(clients) then
     return
   end
   local item = vim.tbl_get(vim.v.completed_item, "user_data", "nvim", "lsp", "completion_item") or {}
-  local resolved_item = client.request_sync(methods.completionItem_resolve, item, 100, args.buf) or {}
+  local resolved_item = clients[1].request_sync("completionItem/resolve", item, 500, args.buf) or {}
   local docs = vim.tbl_get(resolved_item, "result", "documentation", "value") or ""
   local win = vim.api.nvim__complete_set(vim.fn.complete_info().selected, { info = docs })
   if win.winid and vim.api.nvim_win_is_valid(win.winid) then
     vim.treesitter.start(win.bufnr, "markdown")
-    vim.wo[win.winid].conceallevel = 3
+    vim.wo[win.winid].conceallevel = 2
   end
 end
 
@@ -70,13 +64,12 @@ local function show_info(tbl)
   for key, value in pairs(tbl) do
     table.insert(result, key .. value)
   end
-  return " [" .. table.concat(result, " ") .. "]"
+  return #result > 0 and " [" .. table.concat(result, " ") .. "]" or ""
 end
 
 local function update_statusline(_)
   local branch = vim.fn.system("git rev-parse --abbrev-ref HEAD 2>/dev/null")
-  local diff = vim.fn.system("git diff --numstat " .. vim.fn.expand("%") .. " 2>/dev/null")
-  local added, deleted = diff:match("(%d+)%s+(%d+)%s+")
+  local added, deleted = vim.fn.system("git diff --numstat " .. vim.fn.expand("%")):match("(%d+)%s+(%d+)%s+")
   local git_status = branch == "" and "NULL" or branch .. show_info({ ["+"] = added, ["-"] = deleted })
 
   local clients = {}
@@ -124,6 +117,7 @@ if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 end
 vim.opt.rtp:prepend(lazypath)
+local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "rust_analyzer", "yamlls" }
 
 require("lazy").setup({
   defaults = { lazy = true },
@@ -132,7 +126,6 @@ require("lazy").setup({
     "neovim/nvim-lspconfig",
     event = "BufRead",
     config = function()
-      local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "rust_analyzer", "yamlls" }
       for _, server in ipairs(servers) do
         require("lspconfig")[server].setup({})
       end
