@@ -19,14 +19,6 @@ vim.opt.wrap = false
 vim.opt.list = true
 vim.api.nvim_set_hl(0, "Type", { fg = "NvimLightBlue" })
 
--- ====== NETRW ======
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3
-vim.g.showhide = 1
-vim.g.netrw_altv = 1
-vim.g.netrw_winsize = -28
-vim.g.netrw_keepdir = 1
-
 -- ====== GIT DIFF ======
 local function show_git_diff(_)
   local diff_file = vim.fn.expand("%:h") .. "/__" .. vim.fn.expand("%:t")
@@ -106,7 +98,6 @@ vim.api.nvim_create_autocmd({ "VimEnter", "LspAttach", "BufWritePost" }, { callb
 
 -- ====== KEYMAP ======
 vim.keymap.set("i", "jk", "<ESC>", { desc = "Return to Normal Mode" })
-vim.keymap.set("n", "<leader>n", "<cmd>Lexplore<cr>", { desc = "Open File Explorer" })
 vim.keymap.set("n", "<leader>d", show_git_diff, { desc = "Show Git Diff" })
 vim.keymap.set("i", "<C-j>", vim.lsp.completion.trigger, { desc = "Trigger Completion" })
 
@@ -120,7 +111,6 @@ vim.opt.rtp:prepend(lazypath)
 local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "rust_analyzer", "yamlls" }
 
 require("lazy").setup({
-  defaults = { lazy = true },
   { "github/copilot.vim", event = "BufRead" },
   {
     "neovim/nvim-lspconfig",
@@ -136,6 +126,12 @@ require("lazy").setup({
     event = "BufRead",
     main = "nvim-treesitter.configs",
     opts = { highlight = { enable = true }, indent = { enable = true } },
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = { { "<leader>n", "<cmd>NvimTreeToggle<cr>" } },
+    opts = {}
   },
   {
     "nvim-telescope/telescope.nvim",
