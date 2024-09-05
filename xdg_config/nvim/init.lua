@@ -10,7 +10,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 vim.opt.pumheight = 10
 vim.opt.ignorecase, vim.opt.smartcase = true, true
 vim.opt.scrolloff, vim.opt.sidescrolloff = 8, 8
-vim.opt.showtabline, vim.opt.laststatus = 2, 3
+vim.opt.showtabline, vim.opt.laststatus = 1, 3
 vim.opt.smartindent, vim.opt.expandtab = true, true
 vim.opt.undofile = true
 vim.opt.cursorline = true
@@ -18,14 +18,6 @@ vim.opt.number = true
 vim.opt.wrap = false
 vim.opt.list = true
 vim.api.nvim_set_hl(0, "Type", { fg = "NvimLightBlue" })
-
--- ====== GIT DIFF ======
-local function show_git_diff(_)
-  local diff_file = vim.fn.expand("%:h") .. "/__" .. vim.fn.expand("%:t")
-  vim.fn.system("git show HEAD:" .. vim.fn.expand("%") .. " > " .. diff_file)
-  vim.cmd("vertical diffsplit " .. diff_file)
-  vim.cmd("autocmd BufWinLeave <buffer> silent! !rm " .. diff_file)
-end
 
 -- ====== COMPLETION ======
 local methods = vim.lsp.protocol.Methods
@@ -35,6 +27,7 @@ local function enable_completion(args)
     vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
   end
 end
+vim.api.nvim_create_autocmd("LspAttach", { callback = enable_completion })
 
 local function show_document(args)
   local clients = vim.lsp.get_clients({ bufnr = args.buf, methods.completionItem_resolve })
@@ -50,36 +43,18 @@ local function show_document(args)
     vim.wo[win.winid].conceallevel = 2
   end
 end
+vim.api.nvim_create_autocmd("CompleteChanged", { callback = show_document })
 
 -- ====== STATUSLINE ======
-local function show_info(tbl)
-  local result = {}
-  for key, value in pairs(tbl) do
-    table.insert(result, key .. value)
-  end
-  return #result > 0 and " [" .. table.concat(result, " ") .. "]" or ""
-end
-
-local function git_status(_)
-  local branch = vim.fn.system("git rev-parse --abbrev-ref HEAD 2>/dev/null")
-  local diff = vim.fn.system("git diff --numstat " .. vim.fn.expand("%"))
-  local added, deleted = diff:match("(%d+)%s+(%d+)%s+")
-  return branch == "" and "NULL" or branch .. show_info({ ["+"] = added, ["-"] = deleted })
-end
-
-local function lsp_status(_)
-  local clients = {}
-  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-    table.insert(clients, client.name)
-  end
-  local diag = vim.diagnostic.count(0)
-  local count = { ["E:"] = diag[1], ["W:"] = diag[2], ["I:"] = diag[3], ["H:"] = diag[4] }
-  return #clients > 0 and table.concat(clients, ", ") .. show_info(count) or "NULL"
-end
-
-local function update_statusline(_)
-  vim.opt.statusline = " %f%h%w%m%r │ " .. git_status() .. " │ %= │ " .. lsp_status() .. " │ %l:%c │ %P "
-end
+vim.api.nvim_create_autocmd({ "LspAttach", "BufWritePost" }, {
+  callback = function(_)
+    local head, status = vim.b.gitsigns_head or "NULL", vim.b.gitsigns_status or "No Diff"
+    local lsp = "LSP:" .. #vim.lsp.get_clients({ bufnr = 0 })
+    local diag_counts = vim.diagnostic.count(0)
+    local diag = ("E:%d W:%d"):format(diag_counts[1] or 0, diag_counts[2] or 0)
+    vim.opt.statusline = table.concat({" %f%h%w%m%r", head, status, "%=", lsp, diag, "%P "}, " │ ")
+  end,
+})
 
 -- ====== CLIPBOARD ======
 local function paste(_)
@@ -97,14 +72,8 @@ if os.getenv("SSH_CLIENT") ~= nil or os.getenv("SSH_TTY") ~= nil then
   }
 end
 
--- ====== AUTOCMD ======
-vim.api.nvim_create_autocmd("LspAttach", { callback = enable_completion })
-vim.api.nvim_create_autocmd("CompleteChanged", { callback = show_document })
-vim.api.nvim_create_autocmd({ "VimEnter", "LspAttach", "BufWritePost" }, { callback = update_statusline })
-
 -- ====== KEYMAP ======
 vim.keymap.set("i", "jk", "<ESC>", { desc = "Return to Normal Mode" })
-vim.keymap.set("n", "<leader>d", show_git_diff, { desc = "Show Git Diff" })
 vim.keymap.set("i", "<C-j>", vim.lsp.completion.trigger, { desc = "Trigger Completion" })
 
 -- ====== PLUGIN ======
@@ -124,6 +93,14 @@ require("lazy").setup({
       { "s", mode = { "n", "x", "o" }, "<cmd>lua require('flash').jump()<cr>" },
       { "S", mode = { "n", "x", "o" }, "<cmd>lua require('flash').treesitter()<cr>" },
     },
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "BufRead",
+    keys = { { "<leader>d", "<cmd>lua require('gitsigns').diffthis()<cr>" } },
+    config = function()
+      require("gitsigns").setup({})
+    end,
   },
   {
     "neovim/nvim-lspconfig",

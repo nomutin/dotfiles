@@ -1,12 +1,8 @@
 cask_args appdir: "/Applications"
 
 tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
-
-brew "mas"
 
 cask "alacritty"
-cask "deepl"
 cask "docker"
 cask "font-hack-nerd-font"
 cask "microsoft-excel"
@@ -16,4 +12,5 @@ cask "raycast"
 cask "visual-studio-code"
 cask "zoom"
 
+brew "mas"
 mas "RunCat", id: 1429033973
