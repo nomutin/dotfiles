@@ -18,16 +18,8 @@ vim.opt.number = true
 vim.opt.wrap = false
 vim.opt.list = true
 vim.api.nvim_set_hl(0, "Type", { fg = "NvimLightBlue" })
-
--- ====== STATUSLINE ======
-local function update_statusline(_)
-  local head, status = vim.b.gitsigns_head or "NULL", vim.b.gitsigns_status or "No Diff"
-  local lsp = "LSP:" .. #vim.lsp.get_clients({ bufnr = 0 })
-  local diag_counts = vim.diagnostic.count(0)
-  local diag = ("E:%d W:%d"):format(diag_counts[1] or 0, diag_counts[2] or 0)
-  vim.opt.statusline = table.concat({ " %f%h%w%m%r", head, status, "%=", lsp, diag, "%P " }, " │ ")
-end
-vim.api.nvim_create_autocmd({ "LspAttach", "BufWritePost" }, { callback = update_statusline })
+vim.api.nvim_set_hl(0, "String", { bold = true, italic = true })
+vim.keymap.set("i", "jk", "<ESC>", { desc = "Return to Normal Mode" })
 
 -- ====== CLIPBOARD ======
 local function paste(_)
@@ -46,12 +38,24 @@ if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 end
 vim.opt.rtp:prepend(lazypath)
-local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "rust_analyzer", "yamlls" }
+local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "taplo", "rust_analyzer", "yamlls" }
 
 require("lazy").setup({
   { "github/copilot.vim", event = "BufRead" },
-  { "folke/flash.nvim", lazy = true },
-  { "lewis6991/gitsigns.nvim", event = "BufRead", opts = {} },
+  {
+    "folke/flash.nvim",
+    keys = {
+      { "s", "<cmd>lua require('flash').jump()<cr>", desc = "Flash" },
+      { "S", "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash Treesitter" },
+    },
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "BufRead",
+    keys = { { "<leader>d", "<cmd>lua require('gitsigns').diffthis()<cr>", desc = "Git Diff" } },
+    opts = {},
+  },
+  { "nvim-lualine/lualine.nvim",  event = "BufRead", opts = {} },
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
@@ -68,28 +72,20 @@ require("lazy").setup({
       })
     end,
   },
-  { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = true, opts = {} },
   {
     "nvim-treesitter/nvim-treesitter",
     event = "BufRead",
     main = "nvim-treesitter.configs",
     opts = { highlight = { enable = true }, indent = { enable = true } },
   },
-  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" }, lazy = true },
   {
-    "folke/which-key.nvim",
-    opts = {
-      preset = "helix",
-      spec = {
-        { "jk", "<ESC>", mode = "i", desc = "Return to Normal Mode" },
-        { "s", mode = { "n", "x", "o" }, "<cmd>lua require('flash').jump()<cr>", desc = "Flash" },
-        { "S", mode = "n", "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash Treesitter" },
-        { "<leader>?", "<cmd>WhichKey<cr>", desc = "WhichKey" },
-        { "<leader>n", "<cmd>lua require('nvim-tree.api').tree.toggle()<cr>", desc = "Toggle NvimTree" },
-        { "<leader>d", "<cmd>lua require('gitsigns').diffthis()<cr>", desc = "Git Diff" },
-        { "<leader>f", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find Files" },
-        { "<leader>/", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Search Word" },
-      },
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim" },
+    keys = {
+      { "<leader>f", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find Files" },
+      { "<leader>/", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Search Word" },
+      { "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = "List Buffers" },
+      { "<leader>n", "<cmd>lua require('telescope').extensions.file_browser.file_browser()<cr>" },
     },
   },
 })

@@ -2,11 +2,11 @@
 
 # ===== Settings =====
 HISTSIZE=1000
-HISTFILESIZE=2000
+HISTFILESIZE=200000
 export PS1='\[\e[32m\]\u@\[\e[32m\]\h \[\e[33m\]\W\[\e[0m\] \$ '
 shopt -s checkwinsize
 
-# ===== XGD PATH =====
+# ===== XGD Based Dirs =====
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
