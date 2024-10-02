@@ -10,7 +10,6 @@ zellij = "latest"
 # "npm:biome" = "latest"
 # "npm:json-language-server" = "latest"
 # lua-language-server = "latest"
-# "npm:pyright" = "latest"
 # "npm:yaml-language-server" = "latest"
 
 # optional
