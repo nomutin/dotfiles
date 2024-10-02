@@ -21,15 +21,11 @@ layout {
                 args "-c" "bash --rcfile <(cat ~/.bashrc; echo 'source .venv/bin/activate';)"
             }
             pane split_direction="horizontal" {
-                pane name="WORK#1" size="45%" command="bash" {
-                    args "-c" "bash --rcfile <(cat ~/.bashrc; echo 'source .venv/bin/activate';)"
-                }
-                pane name="WORK#2" size="45%" command="bash" {
-                    args "-c" "bash --rcfile <(cat ~/.bashrc; echo 'source .venv/bin/activate';)"
-                }
+                pane name="WORK#1" size="45%" {}
+                pane name="WORK#2" size="45%" {}
                 pane name="SERVER" size="10%" {
-                    command "python"
-                    args "-m" "http.server" "8000"
+                    command "uv"
+                    args "run" "-m" "http.server" "8000"
                 }
             }
         }

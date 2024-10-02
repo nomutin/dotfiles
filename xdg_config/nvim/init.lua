@@ -5,21 +5,20 @@ vim.loader.enable()
 vim.g.mapleader = " "
 vim.opt.title = true
 vim.opt.termguicolors = true
-vim.opt.clipboard = "unnamedplus"
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 vim.opt.pumheight = 10
 vim.opt.ignorecase, vim.opt.smartcase = true, true
 vim.opt.scrolloff, vim.opt.sidescrolloff = 8, 8
-vim.opt.showtabline, vim.opt.laststatus = 1, 3
-vim.opt.smartindent, vim.opt.expandtab = true, true
+vim.opt.showtabline = 1
+vim.opt.laststatus = 3
+vim.opt.smartindent = true
+vim.opt.expandtab = true
 vim.opt.undofile = true
 vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.wrap = false
 vim.opt.list = true
 vim.api.nvim_set_hl(0, "Type", { fg = "NvimLightBlue" })
-vim.api.nvim_set_hl(0, "String", { bold = true, italic = true })
-vim.keymap.set("i", "jk", "<ESC>", { desc = "Return to Normal Mode" })
 
 -- ====== CLIPBOARD ======
 local function paste(_)
@@ -42,50 +41,47 @@ local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "tap
 
 require("lazy").setup({
   { "github/copilot.vim", event = "BufRead" },
-  {
-    "folke/flash.nvim",
-    keys = {
-      { "s", "<cmd>lua require('flash').jump()<cr>", desc = "Flash" },
-      { "S", "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash Treesitter" },
-    },
-  },
-  {
-    "lewis6991/gitsigns.nvim",
-    event = "BufRead",
-    keys = { { "<leader>d", "<cmd>lua require('gitsigns').diffthis()<cr>", desc = "Git Diff" } },
-    opts = {},
-  },
-  { "nvim-lualine/lualine.nvim",  event = "BufRead", opts = {} },
+  { "folke/flash.nvim", lazy = true },
+  { "lewis6991/gitsigns.nvim", event = "BufRead", opts = {} },
+  { "nvim-lualine/lualine.nvim", event = "BufRead", dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
     dependencies = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-nvim-lsp" },
     config = function()
       for _, server in ipairs(servers) do
-        local capabilities = require("cmp_nvim_lsp").default_capabilities()
-        require("lspconfig")[server].setup({ capabilities = capabilities })
+        require("lspconfig")[server].setup({})
       end
-      local cmp = require("cmp")
-      cmp.setup({
-        mapping = cmp.mapping.preset.insert({}),
-        sources = cmp.config.sources({ { name = "nvim_lsp" } }),
+      require("cmp").setup({
+        mapping = require("cmp").mapping.preset.insert({}),
+        sources = { { name = "nvim_lsp" } },
       })
     end,
   },
+  { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = true, opts = {} },
   {
     "nvim-treesitter/nvim-treesitter",
     event = "BufRead",
     main = "nvim-treesitter.configs",
     opts = { highlight = { enable = true }, indent = { enable = true } },
   },
+  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim", }, lazy = true },
   {
-    "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim" },
-    keys = {
-      { "<leader>f", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find Files" },
-      { "<leader>/", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Search Word" },
-      { "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = "List Buffers" },
-      { "<leader>n", "<cmd>lua require('telescope').extensions.file_browser.file_browser()<cr>" },
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      preset = "helix",
+      spec = {
+        { "jk", "<ESC>", mode = "i", desc = "Return to Normal Mode" },
+        { "s", "<cmd>lua require('flash').jump()<cr>", desc = "Flash" },
+        { "S", "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash Treesitter" },
+        { "<leader>?", "<cmd>lua require('which-key').show()", desc = "Keymaps"},
+        { "<leader>f", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find Files" },
+        { "<leader>/", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Search Word" },
+        { "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = "List Buffers" },
+        { "<leader>n", "<cmd>lua require('nvim-tree.api').tree.toggle()<cr>", desc = "File Explorer" },
+        { "<leader>d", "<cmd>lua require('gitsigns').diffthis()<cr>", desc = "Git Diff" },
+      }
     },
   },
 })
