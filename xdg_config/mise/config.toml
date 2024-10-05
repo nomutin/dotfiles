@@ -1,4 +1,6 @@
 [tools]
+jq = "latest"
+lazygit = "latest"
 neovim = "nightly"
 node = "latest"
 ripgrep = "latest"
@@ -12,10 +14,8 @@ zellij = "latest"
 # lua-language-server = "latest"
 # "npm:yaml-language-server" = "latest"
 
-# optional
-# lazygit = "latest"
+# Optional
 # rust = "latest"
-# jq = "latest"
 # shellcheck = "latest"
 # shfmt = "latest"
 # stylua = "latest"
