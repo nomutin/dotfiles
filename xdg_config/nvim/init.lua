@@ -4,6 +4,7 @@
 vim.loader.enable()
 vim.g.mapleader = " "
 vim.opt.title = true
+vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 vim.opt.pumheight = 10
@@ -65,7 +66,7 @@ require("lazy").setup({
     main = "nvim-treesitter.configs",
     opts = { highlight = { enable = true }, indent = { enable = true } },
   },
-  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim", }, lazy = true },
+  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" }, lazy = true },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -75,13 +76,13 @@ require("lazy").setup({
         { "jk", "<ESC>", mode = "i", desc = "Return to Normal Mode" },
         { "s", "<cmd>lua require('flash').jump()<cr>", desc = "Flash" },
         { "S", "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash Treesitter" },
-        { "<leader>?", "<cmd>lua require('which-key').show()", desc = "Keymaps"},
+        { "<leader>?", "<cmd>lua require('which-key').show()<cr>", desc = "Keymaps" },
         { "<leader>f", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find Files" },
         { "<leader>/", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Search Word" },
         { "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = "List Buffers" },
         { "<leader>n", "<cmd>lua require('nvim-tree.api').tree.toggle()<cr>", desc = "File Explorer" },
         { "<leader>d", "<cmd>lua require('gitsigns').diffthis()<cr>", desc = "Git Diff" },
-      }
+      },
     },
   },
 })
