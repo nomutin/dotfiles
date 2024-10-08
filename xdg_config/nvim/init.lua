@@ -42,9 +42,15 @@ local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "tap
 
 require("lazy").setup({
   { "github/copilot.vim", event = "BufRead" },
-  { "folke/flash.nvim", lazy = true },
+  {
+    "folke/flash.nvim",
+    keys = {
+      { "s", "<cmd>lua require('flash').jump()<cr>", desc = "Flash" },
+      { "S", "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash Treesitter" },
+    },
+  },
   { "lewis6991/gitsigns.nvim", event = "BufRead", opts = {} },
-  { "nvim-lualine/lualine.nvim", event = "BufRead", dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
+  { "nvim-lualine/lualine.nvim", event = "BufRead", opts = {} },
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
@@ -59,14 +65,26 @@ require("lazy").setup({
       })
     end,
   },
-  { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = true, opts = {} },
+  {
+    "nvim-tree/nvim-tree.lua",
+    keys = { { "<leader>n", "<cmd>NvimTreeToggle<cr>", desc = "File Explorer" } },
+    opts = {},
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     event = "BufRead",
     main = "nvim-treesitter.configs",
     opts = { highlight = { enable = true }, indent = { enable = true } },
   },
-  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" }, lazy = true },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+    keys = {
+      { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+      { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Search Word" },
+      { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "List Buffers" },
+    },
+  },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -74,13 +92,7 @@ require("lazy").setup({
       preset = "helix",
       spec = {
         { "jk", "<ESC>", mode = "i", desc = "Return to Normal Mode" },
-        { "s", "<cmd>lua require('flash').jump()<cr>", desc = "Flash" },
-        { "S", "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash Treesitter" },
-        { "<leader>?", "<cmd>lua require('which-key').show()<cr>", desc = "Keymaps" },
-        { "<leader>f", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find Files" },
-        { "<leader>/", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Search Word" },
-        { "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = "List Buffers" },
-        { "<leader>n", "<cmd>lua require('nvim-tree.api').tree.toggle()<cr>", desc = "File Explorer" },
+        { "<leader>?", "<cmd>WhichKey<cr>", desc = "Keymaps" },
         { "<leader>d", "<cmd>lua require('gitsigns').diffthis()<cr>", desc = "Git Diff" },
       },
     },
