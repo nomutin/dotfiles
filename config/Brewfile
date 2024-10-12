@@ -5,12 +5,7 @@ tap "homebrew/bundle"
 cask "alacritty"
 cask "docker"
 cask "font-hack-nerd-font"
-cask "microsoft-excel"
-cask "microsoft-word"
 cask "microsost-powerpoint"
+cask "stats"
 cask "raycast"
 cask "visual-studio-code"
-cask "zoom"
-
-brew "mas"
-mas "RunCat", id: 1429033973

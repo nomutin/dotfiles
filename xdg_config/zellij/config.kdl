@@ -1,3 +1,22 @@
 simplified_ui true
-theme "nord"
 default_layout "my-default"
+
+themes {
+    nord_xterm256 {
+        fg 253
+        bg 236
+        black 238
+        red 131
+        green 108
+        yellow 222
+        blue 110
+        magenta 139
+        cyan 109
+        white 254
+        orange 173
+    }
+}
+
+
+theme "nord_xterm256"
+
