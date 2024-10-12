@@ -1,4 +1,5 @@
 [tools]
+eza = "latest"
 jq = "latest"
 lazygit = "latest"
 neovim = "nightly"
