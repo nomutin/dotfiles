@@ -10,7 +10,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 vim.opt.pumheight = 10
 vim.opt.ignorecase, vim.opt.smartcase = true, true
 vim.opt.scrolloff, vim.opt.sidescrolloff = 8, 8
-vim.opt.showtabline = 1
+vim.opt.showtabline = 2
 vim.opt.laststatus = 3
 vim.opt.smartindent = true
 vim.opt.expandtab = true
@@ -19,6 +19,7 @@ vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.wrap = false
 vim.opt.list = true
+vim.keymap.set("i", "jk", "<ESC>", { noremap = true })
 vim.api.nvim_set_hl(0, "Type", { fg = "NvimLightBlue" })
 
 -- ====== CLIPBOARD ======
@@ -38,10 +39,22 @@ if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 end
 vim.opt.rtp:prepend(lazypath)
-local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "taplo", "rust_analyzer", "yamlls" }
 
 require("lazy").setup({
-  { "github/copilot.vim", event = "BufRead" },
+  {
+    "saghen/blink.cmp",
+    lazy = false,
+    version = "v0.*",
+    opts = {
+      trigger = { signature_help = { enabled = true } },
+      windows = { autocomplete = { selection = "auto_insert" } },
+    },
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    opts = { suggestion = { auto_trigger = true, hide_during_completion = false } },
+  },
   {
     "folke/flash.nvim",
     keys = {
@@ -49,26 +62,22 @@ require("lazy").setup({
       { "S", "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash Treesitter" },
     },
   },
-  { "lewis6991/gitsigns.nvim", event = "BufRead", opts = {} },
-  { "nvim-lualine/lualine.nvim", event = "BufRead", opts = {} },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "BufRead",
+    keys = { { "<leader>d", "<cmd>Gitsigns diffthis<cr>", desc = "Git Diff" } },
+    opts = {},
+  },
+  { "nvim-lualine/lualine.nvim", dependencies = "nvim-tree/nvim-web-devicons", event = "BufRead", opts = {} },
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
-    dependencies = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-nvim-lsp" },
     config = function()
+      local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "taplo", "rust_analyzer", "yamlls" }
       for _, server in ipairs(servers) do
         require("lspconfig")[server].setup({})
       end
-      require("cmp").setup({
-        mapping = require("cmp").mapping.preset.insert({}),
-        sources = { { name = "nvim_lsp" } },
-      })
     end,
-  },
-  {
-    "nvim-tree/nvim-tree.lua",
-    keys = { { "<leader>n", "<cmd>NvimTreeToggle<cr>", desc = "File Explorer" } },
-    opts = {},
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -78,23 +87,11 @@ require("lazy").setup({
   },
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim" },
     keys = {
       { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
       { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Search Word" },
-      { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "List Buffers" },
-    },
-  },
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      preset = "helix",
-      spec = {
-        { "jk", "<ESC>", mode = "i", desc = "Return to Normal Mode" },
-        { "<leader>?", "<cmd>WhichKey<cr>", desc = "Keymaps" },
-        { "<leader>d", "<cmd>lua require('gitsigns').diffthis()<cr>", desc = "Git Diff" },
-      },
+      { "<leader>n", "<cmd>Telescope file_browser hidden=true path=%:p:h<cr>", desc = "Open File Browser" },
     },
   },
 })
