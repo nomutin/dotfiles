@@ -48,7 +48,7 @@ require("lazy").setup({
     version = "v0.*",
     opts = {
       trigger = { signature_help = { enabled = true } },
-      windows = { autocomplete = { selection = "auto_insert" } },
+      windows = { autocomplete = { selection = "auto_insert" }, documentation = { auto_show = true } },
     },
   },
   {
@@ -73,7 +73,7 @@ require("lazy").setup({
     "nvim-lualine/lualine.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
     event = "BufRead",
-    opts = {}
+    opts = {},
   },
   {
     "neovim/nvim-lspconfig",
