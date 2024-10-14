@@ -8,7 +8,8 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 vim.opt.pumheight = 10
-vim.opt.ignorecase, vim.opt.smartcase = true, true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 vim.opt.scrolloff, vim.opt.sidescrolloff = 8, 8
 vim.opt.showtabline = 2
 vim.opt.laststatus = 3
@@ -68,12 +69,17 @@ require("lazy").setup({
     keys = { { "<leader>d", "<cmd>Gitsigns diffthis<cr>", desc = "Git Diff" } },
     opts = {},
   },
-  { "nvim-lualine/lualine.nvim", dependencies = "nvim-tree/nvim-web-devicons", event = "BufRead", opts = {} },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    event = "BufRead",
+    opts = {}
+  },
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
     config = function()
-      local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "taplo", "rust_analyzer", "yamlls" }
+      local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "rust_analyzer", "taplo", "yamlls" }
       for _, server in ipairs(servers) do
         require("lspconfig")[server].setup({})
       end
