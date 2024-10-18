@@ -11,6 +11,7 @@ vim.opt.pumheight = 10
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff, vim.opt.sidescrolloff = 8, 8
+vim.opt.splitright, vim.opt.splitbelow = true, true
 vim.opt.showtabline = 2
 vim.opt.laststatus = 3
 vim.opt.smartindent = true
@@ -20,8 +21,10 @@ vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.wrap = false
 vim.opt.list = true
-vim.keymap.set("i", "jk", "<ESC>", { noremap = true })
+
 vim.api.nvim_set_hl(0, "Type", { fg = "NvimLightBlue" })
+vim.keymap.set("i", "jk", "<ESC>", { noremap = true })
+vim.keymap.set("t", "fd", "<C-\\><C-n>", { noremap = true })
 
 -- ====== CLIPBOARD ======
 local function paste(_)
@@ -44,17 +47,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   {
     "saghen/blink.cmp",
-    lazy = false,
+    event = "InsertEnter",
     version = "v0.*",
     opts = {
       trigger = { signature_help = { enabled = true } },
       windows = { autocomplete = { selection = "auto_insert" }, documentation = { auto_show = true } },
     },
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    opts = { suggestion = { auto_trigger = true, hide_during_completion = false } },
   },
   {
     "folke/flash.nvim",
@@ -92,11 +90,17 @@ require("lazy").setup({
     opts = { highlight = { enable = true }, indent = { enable = true } },
   },
   {
+    "supermaven-inc/supermaven-nvim",
+    event = "InsertEnter",
+    opts = { keymaps = { accept_suggestion = "<C-k>" } },
+  },
+  {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim" },
     keys = {
       { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
       { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Search Word" },
+      { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "List Buffers" },
       { "<leader>n", "<cmd>Telescope file_browser hidden=true path=%:p:h<cr>", desc = "Open File Browser" },
     },
   },
