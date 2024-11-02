@@ -23,10 +23,7 @@ layout {
             pane split_direction="horizontal" {
                 pane name="WORK#1" size="45%" {}
                 pane name="WORK#2" size="45%" {}
-                pane name="SERVER" size="10%" {
-                    command "uv"
-                    args "run" "-m" "http.server" "8000"
-                }
+                pane name="SERVER" size="10%" {}
             }
         }
         pane size=1 borderless=true {

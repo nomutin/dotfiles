@@ -4,14 +4,12 @@
 vim.loader.enable()
 vim.g.mapleader = " "
 vim.opt.title = true
-vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 vim.opt.pumheight = 10
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff, vim.opt.sidescrolloff = 8, 8
-vim.opt.splitright, vim.opt.splitbelow = true, true
 vim.opt.showtabline = 2
 vim.opt.laststatus = 3
 vim.opt.smartindent = true
@@ -22,11 +20,14 @@ vim.opt.number = true
 vim.opt.wrap = false
 vim.opt.list = true
 
+-- ====== MAPPING ======
 vim.api.nvim_set_hl(0, "Type", { fg = "NvimLightBlue" })
-vim.keymap.set("i", "jk", "<ESC>", { noremap = true })
-vim.keymap.set("t", "fd", "<C-\\><C-n>", { noremap = true })
+vim.keymap.set("i", "jk", "<ESC>", { noremap = true, desc = "Return to Normal Mode" })
+vim.keymap.set("t", "fd", "<C-\\><C-n>", { noremap = true, desc = "Return to Normal Mode" })
+vim.keymap.set("n", "<leader>d", "<cmd>Gitsigns diffthis<cr>", { noremap = true, desc = "Git Diff" })
 
 -- ====== CLIPBOARD ======
+vim.opt.clipboard = "unnamedplus"
 local function paste(_)
   return vim.split(vim.fn.getreg('"'), "\n")
 end
@@ -61,25 +62,15 @@ require("lazy").setup({
       { "S", "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash Treesitter" },
     },
   },
-  {
-    "lewis6991/gitsigns.nvim",
-    event = "BufRead",
-    keys = { { "<leader>d", "<cmd>Gitsigns diffthis<cr>", desc = "Git Diff" } },
-    opts = {},
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    event = "BufRead",
-    opts = {},
-  },
+  { "lewis6991/gitsigns.nvim", event = "BufRead", opts = {} },
+  { "nvim-lualine/lualine.nvim", dependencies = "nvim-tree/nvim-web-devicons", event = "BufRead", opts = {} },
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
     config = function()
-      local servers = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "rust_analyzer", "taplo", "yamlls" }
-      for _, server in ipairs(servers) do
-        require("lspconfig")[server].setup({})
+      local lsps = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "rust_analyzer", "taplo", "yamlls" }
+      for _, lsp in ipairs(lsps) do
+        require("lspconfig")[lsp].setup({})
       end
     end,
   },
@@ -89,14 +80,10 @@ require("lazy").setup({
     main = "nvim-treesitter.configs",
     opts = { highlight = { enable = true }, indent = { enable = true } },
   },
-  {
-    "supermaven-inc/supermaven-nvim",
-    event = "InsertEnter",
-    opts = { keymaps = { accept_suggestion = "<C-k>" } },
-  },
+  { "supermaven-inc/supermaven-nvim", event = "InsertEnter", opts = {} },
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim" },
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim"},
     keys = {
       { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
       { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Search Word" },
