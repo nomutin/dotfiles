@@ -5,8 +5,24 @@ layout {
         floating_panes {
             pane x="6%" y="3%" width="88%" height="88%" cwd="$HOME" command="bash"
         }
-
         pane command="bash"
+        pane size=1 borderless=true {
+            plugin location="compact-bar"
+        }
+    }
+
+    tab name="$PWD2" hide_floating_panes=true {
+        floating_panes {
+            pane x="6%" y="3%" width="88%" height="88%" command="lazygit"
+        }
+        pane split_direction="vertical" {
+            pane size="65%" name="EDITOR" command="bash" {}
+            pane split_direction="horizontal" {
+                pane name="WORK#1" size="45%" {}
+                pane name="WORK#2" size="45%" {}
+                pane name="SERVER" size="10%" {}
+            }
+        }
         pane size=1 borderless=true {
             plugin location="compact-bar"
         }
