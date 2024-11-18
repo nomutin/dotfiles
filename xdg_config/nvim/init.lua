@@ -10,8 +10,6 @@ vim.opt.pumheight = 10
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff, vim.opt.sidescrolloff = 8, 8
-vim.opt.showtabline = 2
-vim.opt.laststatus = 3
 vim.opt.smartindent = true
 vim.opt.expandtab = true
 vim.opt.undofile = true
@@ -22,9 +20,21 @@ vim.opt.list = true
 
 -- ====== MAPPING ======
 vim.api.nvim_set_hl(0, "Type", { fg = "NvimLightBlue" })
+vim.keymap.set("n", "x", '"_x', { noremap = true, silent = true, desc = "Blackhole Delete" })
 vim.keymap.set("i", "jk", "<ESC>", { noremap = true, desc = "Return to Normal Mode" })
 vim.keymap.set("t", "fd", "<C-\\><C-n>", { noremap = true, desc = "Return to Normal Mode" })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { noremap = true, desc = "Show Diagnostic" })
 vim.keymap.set("n", "<leader>d", "<cmd>Gitsigns diffthis<cr>", { noremap = true, desc = "Git Diff" })
+
+-- ====== COMPLETION ======
+local function enable_completion(args)
+  local client = vim.lsp.get_client_by_id(args.data.client_id)
+  if client and client.supports_method("textDocument/completion") then
+    vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+  end
+end
+vim.api.nvim_create_autocmd("LspAttach", { callback = enable_completion })
+vim.api.nvim_create_autocmd("InsertCharPre", { callback = vim.lsp.completion.trigger })
 
 -- ====== CLIPBOARD ======
 vim.opt.clipboard = "unnamedplus"
@@ -47,15 +57,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
-    "saghen/blink.cmp",
-    event = "InsertEnter",
-    version = "v0.*",
-    opts = {
-      trigger = { signature_help = { enabled = true } },
-      windows = { autocomplete = { selection = "auto_insert" }, documentation = { auto_show = true } },
-    },
-  },
-  {
     "folke/flash.nvim",
     keys = {
       { "s", "<cmd>lua require('flash').jump()<cr>", desc = "Flash" },
@@ -63,7 +64,6 @@ require("lazy").setup({
     },
   },
   { "lewis6991/gitsigns.nvim", event = "BufRead", opts = {} },
-  { "nvim-lualine/lualine.nvim", dependencies = "nvim-tree/nvim-web-devicons", event = "BufRead", opts = {} },
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
@@ -83,7 +83,11 @@ require("lazy").setup({
   { "supermaven-inc/supermaven-nvim", event = "InsertEnter", opts = {} },
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim"},
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-file-browser.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
     keys = {
       { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
       { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Search Word" },
