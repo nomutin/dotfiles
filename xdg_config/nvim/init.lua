@@ -14,7 +14,6 @@ vim.opt.smartindent = true
 vim.opt.expandtab = true
 vim.opt.undofile = true
 vim.opt.cursorline = true
-vim.opt.number = true
 vim.opt.wrap = false
 vim.opt.list = true
 
@@ -23,7 +22,7 @@ vim.api.nvim_set_hl(0, "Type", { fg = "NvimLightBlue" })
 vim.keymap.set("n", "x", '"_x', { noremap = true, silent = true, desc = "Blackhole Delete" })
 vim.keymap.set("i", "jk", "<ESC>", { noremap = true, desc = "Return to Normal Mode" })
 vim.keymap.set("t", "fd", "<C-\\><C-n>", { noremap = true, desc = "Return to Normal Mode" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { noremap = true, desc = "Show Diagnostic" })
+vim.keymap.set("n", "<leader>e", vim.diagnostic.setloclist, { noremap = true, desc = "Show Diagnostic" })
 vim.keymap.set("n", "<leader>d", "<cmd>Gitsigns diffthis<cr>", { noremap = true, desc = "Git Diff" })
 
 -- ====== COMPLETION ======

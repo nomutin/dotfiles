@@ -33,9 +33,7 @@ layout {
             pane x="6%" y="3%" width="88%" height="88%" command="lazygit"
         }
         pane split_direction="vertical" {
-            pane size="65%" name="EDITOR" command="bash" {
-                args "-c" "bash --rcfile <(cat ~/.bashrc; echo 'source .venv/bin/activate';)"
-            }
+            pane size="65%" name="EDITOR" command="bash" {}
             pane split_direction="horizontal" {
                 pane name="WORK#1" size="45%" {}
                 pane name="WORK#2" size="45%" {}
