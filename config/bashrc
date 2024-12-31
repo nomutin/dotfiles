@@ -24,13 +24,10 @@ export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo
 
 # ===== Aliases =====
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
 alias ls='ls --color=auto'
-alias ll='eza --header --all --long --show-symlinks --group --git --modified --created --total-size'
-alias la='eza --all'
-alias l='eza'
+alias ll='ls -la'
+alias dd='du -sch $(ls -A)'
+alias ff='cd $(find "$HOME" -type d \( -path "*/.*" -prune \) -o -type d -print 2>/dev/null | fzf)'
 alias wget='wget --hsts-file="$XDG_DATA_HOME"/wget-hsts'
 
 # ===== Plugins =====
