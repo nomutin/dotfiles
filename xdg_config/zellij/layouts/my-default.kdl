@@ -1,25 +1,59 @@
 layout {
 
-    tab name="$HOME" cwd="$HOME" {
-        pane command="bash"
+    tab name="$PWD" hide_floating_panes=true {
+        floating_panes {
+            pane x="6%" y="3%" width="88%" height="88%" command="bash"
+        }
+        pane split_direction="vertical" {
+            pane size="65%" command="bash"
+            pane command="bash"
+        }
         pane size=1 borderless=true {
             plugin location="compact-bar"
         }
     }
 
-    tab name="$PWD" hide_floating_panes=true {
+    tab name="$PWD2" hide_floating_panes=true {
         floating_panes {
-            pane {
-                x "6%"
-                y "3%"
-                width "88%"
-                height "88%"
-                command "bash"
+            pane x="6%" y="3%" width="88%" height="88%" command="bash"
+        }
+        pane split_direction="vertical" {
+            pane size="65%" name="#0" command="bash" {}
+            pane split_direction="horizontal" {
+                pane name="#1" size="45%" {}
+                pane name="#2" size="45%" {}
+                pane name="#3" size="10%" {}
             }
+        }
+        pane size=1 borderless=true {
+            plugin location="compact-bar"
+        }
+    }
+
+    tab name="$HOME" cwd="$HOME" hide_floating_panes=true {
+        floating_panes {
+            pane x="6%" y="3%" width="88%" height="88%" command="bash"
         }
         pane split_direction="vertical" {
             pane size="65%" command="bash"
             pane command="bash"
+        }
+        pane size=1 borderless=true {
+            plugin location="compact-bar"
+        }
+    }
+
+    tab name="$HOME2" cwd="$HOME" hide_floating_panes=true {
+        floating_panes {
+            pane x="6%" y="3%" width="88%" height="88%" command="bash"
+        }
+        pane split_direction="vertical" {
+            pane size="65%" name="#0" command="bash" {}
+            pane split_direction="horizontal" {
+                pane name="#1" size="45%" {}
+                pane name="#2" size="45%" {}
+                pane name="#3" size="10%" {}
+            }
         }
         pane size=1 borderless=true {
             plugin location="compact-bar"

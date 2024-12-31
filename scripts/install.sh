@@ -18,17 +18,20 @@ if ! (type 'mise' >/dev/null 2>&1); then
 fi
 
 # ===== Deploy xdg-based configs =====
-if [ ! -d "${HOME}"/.config ]; then
-  source_config_dir="${HOME}"/.dotfiles/xdg_config
-  target_config_dir="${HOME}"/.config
-
-  mkdir -p "$target_config_dir"
-  for item in "$source_config_dir"/*; do
-    base_item=$(basename "$item")
-    link_name="$target_config_dir/$base_item"
-    ln -s "$item" "$link_name"
-  done
+xdg_config_dir="${HOME}"/.config
+if [ ! -d "${xdg_config_dir}" ]; then
+  mkdir -p "${xdg_config_dir}"
 fi
+
+for item in "${HOME}"/.dotfiles/xdg_config/*; do
+  base_item=$(basename "$item")
+  link_name="${xdg_config_dir}/$base_item"
+  if [ -f "$link_name" ]; then
+    echo "$link_name exists, skipping"
+    continue
+  fi
+  ln -s "$item" "$link_name"
+done
 
 # ===== Deploy bashrc =====
 if [ -f "${HOME}"/.bashrc ]; then
@@ -43,5 +46,5 @@ mise install -y
 
 # ===== Set up Macos =====
 if [ "$(uname)" = "Darwin" ]; then
-  bash scripts/init_macos.sh
+  bash "{HOME}"/.dotfiles/scripts/macos.sh
 fi
