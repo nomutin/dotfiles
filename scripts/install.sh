@@ -1,12 +1,10 @@
 #!/bin/bash
 
-set -eu
-
-cd "${HOME}"
+set -e
 
 # ===== Install repo =====
-if [ ! -d .dotfiles ]; then
-  git clone https://github.com/nomutin/dotfiles.git .dotfiles
+if [ ! -d "${HOME}"/.dotfiles ]; then
+  git clone https://github.com/nomutin/dotfiles.git "${HOME}"/.dotfiles
 else
   echo "dotfiles already exists"
   exit 1
@@ -45,6 +43,6 @@ source "${HOME}"/.bashrc
 mise install -y
 
 # ===== Set up Macos =====
-if [ "$(uname)" = "Darwin" ]; then
-  bash "{HOME}"/.dotfiles/scripts/macos.sh
-fi
+# if [ "$(uname)" = "Darwin" ]; then
+#   bash "{HOME}"/.dotfiles/scripts/macos.sh
+# fi
