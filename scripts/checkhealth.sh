@@ -17,7 +17,7 @@ check_alias() {
     echo "Error: $alias_name alias not found or not executable. bashrc may not be sourced."
     exit 1
   fi
-  echo "$alias_name alias is available (bashrc sourced)."
+  echo "Alias: $alias_name is available."
 }
 
 check_alias "ll"
