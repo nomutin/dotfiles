@@ -15,6 +15,7 @@ vim.opt.undofile = true
 vim.opt.cursorline = true
 vim.opt.wrap = false
 vim.opt.list = true
+vim.opt.number = true
 
 -- ====== NETRW ======
 vim.g.netrw_banner = 0
@@ -28,29 +29,11 @@ vim.g.netrw_preview = 1
 
 -- ====== CLIPBOARD ======
 vim.opt.clipboard = "unnamedplus"
-local function paste(_)
-  return vim.split(vim.fn.getreg('"'), "\n")
-end
 local osc52 = require("vim.ui.clipboard.osc52")
 vim.g.clipboard = {
   copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
-  paste = { ["+"] = paste, ["*"] = paste },
+  paste = { ["+"] = osc52.paste("+"), ["*"] = osc52.paste("*") },
 }
-
--- ====== LSP ======
-vim.lsp.config.bashls = { cmd = { "bash-language-server", "start" }, filetypes = { "sh" } }
-vim.lsp.config.biome = {
-  cmd = { "biome", "lsp-proxy" },
-  filetypes = { "css", "javascript", "javascriptreact", "json", "typescript", "typescript.tsx" },
-}
-vim.lsp.config.jsonls = { cmd = { "vscode-json-languageserver", "--stdio" }, filetypes = { "json" } }
-vim.lsp.config.lua_ls =
-  { cmd = { "lua-language-server" }, filetypes = { "lua" }, root_markers = { ".luarc.json", "stylua.toml" } }
-vim.lsp.config.pyright = { cmd = { "pyright-langserver", "--stdio" }, filetypes = { "python" } }
-vim.lsp.config.ruff = { cmd = { "ruff", "server" }, filetypes = { "python" } }
-vim.lsp.config.taplo = { cmd = { "taplo", "lsp", "stdio" }, filetypes = { "toml" } }
-vim.lsp.config.yamls = { cmd = { "yaml-language-server", "--stdio" }, filetypes = { "yaml" } }
-vim.lsp.enable({ "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "taplo", "yamls" })
 
 -- ====== COMPLETION ======
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
@@ -60,16 +43,19 @@ local function lsp_attach(args)
     return
   end
   vim.lsp.completion.enable(true, args.data.client_id, args.buf, { autotrigger = true })
-  vim.keymap.set("i", "<C-k>", vim.lsp.completion.trigger, { desc = "Trigger LSP" })
+  vim.api.nvim_create_autocmd("TextChangedI", { callback = vim.lsp.completion.trigger })
 
   local function complete_changed(_)
     client:request(
       "completionItem/resolve",
       vim.tbl_get(vim.v.completed_item, "user_data", "nvim", "lsp", "completion_item"),
       function(err, result)
-        if not err then
-          local docs = vim.tbl_get(result, "documentation", "value")
-          local win = vim.api.nvim__complete_set(vim.fn.complete_info().selected, { info = docs })
+        if err then
+          return
+        end
+        local docs = vim.tbl_get(result, "documentation", "value")
+        local win = vim.api.nvim__complete_set(vim.fn.complete_info().selected, { info = docs })
+        if win.winid and vim.api.nvim_win_is_valid(win.winid) then
           vim.treesitter.start(win.bufnr, "markdown")
           vim.wo[win.winid].conceallevel = 3
         end
@@ -116,6 +102,16 @@ require("lazy").setup({
         keymaps = { node_incremental = "<CR>", node_decremental = "<Space>" },
       },
     },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    event = "BufRead",
+    config = function()
+      local lsps = { "bashls", "biome", "jsonls", "lua_ls", "pyright", "ruff", "taplo", "yamlls" }
+      for _, lsp in ipairs(lsps) do
+        require("lspconfig")[lsp].setup({})
+      end
+    end,
   },
   { "supermaven-inc/supermaven-nvim", event = "InsertEnter", opts = {} },
 })
