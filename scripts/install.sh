@@ -45,6 +45,6 @@ source "${HOME}"/.bashrc
 mise install -y
 
 # ===== Set up Macos =====
-if [ "$(uname)" = "Darwin" ]; then
-  bash "{HOME}"/.dotfiles/scripts/macos.sh
-fi
+# if [ "$(uname)" = "Darwin" ]; then
+#   bash "{HOME}"/.dotfiles/scripts/macos.sh
+# fi
