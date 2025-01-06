@@ -1,18 +1,18 @@
 [tools]
 fzf = "0.50"
-neovim = "nightly"
+"asdf:richin13/asdf-neovim" = "nightly"
 ripgrep = "latest"
 zellij = "latest"
 
 # LSP
-# node = "latest"
 # "npm:bash-language-server" = "latest"
 # "npm:biome" = "latest"
 # "npm:json-language-server" = "latest"
+# "ubi:latex-lsp/texlab" = "latest"
 # lua-language-server = "latest"
-# "npm:yaml-language-server" = "latest"
-# "npm:vim-language-server" = "latest"
 # "ubi:tamasfe/taplo" = "latest"
+# "npm:vim-language-server" = "latest"
+# "npm:yaml-language-server" = "latest"
 
 # Linter/Formatter
 # "npm:markdownlint-cli2" = "latest"
@@ -21,7 +21,9 @@ zellij = "latest"
 # stylua = "0.19.0"
 
 # Other
-# uv = "latest"
-# lazygit = "latest"
 # ffmpeg = "latest"
 # jq = "latest"
+# lazygit = "latest"
+# node = "latest"
+# tree-sitter = "latest"
+# uv = "latest"
