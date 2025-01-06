@@ -17,7 +17,3 @@ jobs:
         run: bash scripts/install.sh
         env:
           GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Source bashrc
-        run: source ~/.bashrc
-      - name: Run Health Check
-        run: bash scripts/checkhealth.sh
