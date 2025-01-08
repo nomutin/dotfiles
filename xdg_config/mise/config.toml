@@ -22,7 +22,7 @@ zellij = "latest"
 # Other
 # ffmpeg = "latest"
 # jq = "latest"
-lazygit = "latest"
+# lazygit = "latest"
 # node = "latest"
 # tree-sitter = "latest"
 # uv = "latest"
