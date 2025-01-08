@@ -82,13 +82,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {
-    "ibhagwan/fzf-lua",
-    keys = {
-      { "<leader>f", "<cmd>FzfLua files<cr>", desc = "Find Files" },
-      { "<leader>/", "<cmd>FzfLua live_grep_native<cr>", desc = "Search Word" },
-    },
-  },
   { "lewis6991/gitsigns.nvim", event = "BufRead", opts = {} },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -112,6 +105,14 @@ require("lazy").setup({
         require("lspconfig")[lsp].setup({})
       end
     end,
+  },
+  {
+    "echasnovski/mini.pick",
+    keys = {
+      { "<leader>f", "<cmd>Pick files<cr>", desc = "File Files" },
+      { "<leader>/", "<cmd>Pick grep_live<cr>", desc = "Grep" },
+    },
+    opts = {},
   },
   { "supermaven-inc/supermaven-nvim", event = "InsertEnter", opts = {} },
 })

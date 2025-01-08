@@ -9,7 +9,16 @@ layout {
             pane command="bash"
         }
         pane size=1 borderless=true {
-            plugin location="compact-bar"
+            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+                format_left  "#[bg=108,fg=black][{session}]  {tabs}"
+                format_right "#[bg=108,fg=black]{datetime} "
+                format_space  "#[bg=108]"
+                tab_normal   "{name}  "
+                tab_active   "{name}* "
+                datetime          "{format}"
+                datetime_format   "%Y-%m-%d %H:%M"
+                datetime_timezone "Asia/Tokyo"
+            }
         }
     }
 
@@ -26,7 +35,16 @@ layout {
             }
         }
         pane size=1 borderless=true {
-            plugin location="compact-bar"
+            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+                format_left  "#[bg=108,fg=black][{session}]  {tabs}"
+                format_right "#[bg=108,fg=black]{datetime} "
+                format_space  "#[bg=108]"
+                tab_normal   "{name}  "
+                tab_active   "{name}* "
+                datetime          "{format}"
+                datetime_format   "%Y-%m-%d %H:%M"
+                datetime_timezone "Asia/Tokyo"
+            }
         }
     }
 
@@ -39,7 +57,16 @@ layout {
             pane command="bash"
         }
         pane size=1 borderless=true {
-            plugin location="compact-bar"
+            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+                format_left  "#[bg=108,fg=black][{session}]  {tabs}"
+                format_right "#[bg=108,fg=black]{datetime} "
+                format_space  "#[bg=108]"
+                tab_normal   "{name}  "
+                tab_active   "{name}* "
+                datetime          "{format}"
+                datetime_format   "%Y-%m-%d %H:%M"
+                datetime_timezone "Asia/Tokyo"
+            }
         }
     }
 
@@ -56,7 +83,16 @@ layout {
             }
         }
         pane size=1 borderless=true {
-            plugin location="compact-bar"
+            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+                format_left  "#[bg=108,fg=black][{session}]  {tabs}"
+                format_right "#[bg=108,fg=black]{datetime} "
+                format_space  "#[bg=108]"
+                tab_normal   "{name}  "
+                tab_active   "{name}* "
+                datetime          "{format}"
+                datetime_format   "%Y-%m-%d %H:%M"
+                datetime_timezone "Asia/Tokyo"
+            }
         }
     }
 
