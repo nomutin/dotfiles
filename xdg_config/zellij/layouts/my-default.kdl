@@ -8,16 +8,7 @@ layout {
             pane command="bash"
         }
         pane size=1 borderless=true {
-            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
-                format_left "#[bg=108,fg=black][{session}]  {tabs}"
-                format_right "#[bg=108,fg=black]{datetime} "
-                format_space "#[bg=108]"
-                tab_normal "{name}  "
-                tab_active "{name}* "
-                datetime "{format}"
-                datetime_format "%Y-%m-%d %H:%M"
-                datetime_timezone "Asia/Tokyo"
-            }
+            plugin location="compact-bar"
         }
     }
     tab name="$PWD2" hide_floating_panes=true {
@@ -33,16 +24,7 @@ layout {
             }
         }
         pane size=1 borderless=true {
-            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
-                format_left "#[bg=108,fg=black][{session}]  {tabs}"
-                format_right "#[bg=108,fg=black]{datetime} "
-                format_space "#[bg=108]"
-                tab_normal "{name}  "
-                tab_active "{name}* "
-                datetime "{format}"
-                datetime_format "%Y-%m-%d %H:%M"
-                datetime_timezone "Asia/Tokyo"
-            }
+            plugin location="compact-bar"
         }
     }
     tab name="$HOME" cwd="$HOME" hide_floating_panes=true {
@@ -54,16 +36,7 @@ layout {
             pane command="bash"
         }
         pane size=1 borderless=true {
-            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
-                format_left "#[bg=108,fg=black][{session}]  {tabs}"
-                format_right "#[bg=108,fg=black]{datetime} "
-                format_space "#[bg=108]"
-                tab_normal "{name}  "
-                tab_active "{name}* "
-                datetime "{format}"
-                datetime_format "%Y-%m-%d %H:%M"
-                datetime_timezone "Asia/Tokyo"
-            }
+            plugin location="compact-bar"
         }
     }
     tab name="$HOME2" cwd="$HOME" hide_floating_panes=true {
@@ -79,16 +52,7 @@ layout {
             }
         }
         pane size=1 borderless=true {
-            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
-                format_left "#[bg=108,fg=black][{session}]  {tabs}"
-                format_right "#[bg=108,fg=black]{datetime} "
-                format_space "#[bg=108]"
-                tab_normal "{name}  "
-                tab_active "{name}* "
-                datetime "{format}"
-                datetime_format "%Y-%m-%d %H:%M"
-                datetime_timezone "Asia/Tokyo"
-            }
+            plugin location="compact-bar"
         }
     }
 }

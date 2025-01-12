@@ -5,8 +5,8 @@ zellij = "latest"
 
 # LSP
 # "npm:bash-language-server" = "latest"
-# "npm:biome" = "latest"
-# "npm:json-language-server" = "latest"
+# "ubi:biomejs/biome" = "latest"
+# "npm:vscode-langservers-extracted" = "latest"
 # "ubi:latex-lsp/texlab" = "latest"
 # lua-language-server = "latest"
 # "ubi:tamasfe/taplo" = "latest"
