@@ -2,9 +2,9 @@
 
 -- ====== OPTIONS ======
 vim.loader.enable()
+vim.cmd("colorscheme habamax")
 vim.g.mapleader = " "
 vim.opt.title = true
-vim.opt.termguicolors = true
 vim.opt.pumheight = 10
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -30,9 +30,12 @@ vim.g.netrw_preview = 1
 -- ====== CLIPBOARD ======
 vim.opt.clipboard = "unnamedplus"
 local osc52 = require("vim.ui.clipboard.osc52")
+local function paste(_)
+  return vim.split(vim.fn.getreg('"'), "\n")
+end
 vim.g.clipboard = {
   copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
-  paste = { ["+"] = osc52.paste("+"), ["*"] = osc52.paste("*") },
+  paste = { ["+"] = paste, ["*"] = paste },
 }
 
 -- ====== COMPLETION ======
@@ -66,12 +69,26 @@ local function lsp_attach(args)
 end
 vim.api.nvim_create_autocmd("LspAttach", { callback = lsp_attach })
 
+-- ====== STATUSLINE ======
+local function update_statusline()
+  local g = (vim.fn.system("git diff --name-only " .. vim.fn.expand("%:p")) ~= "" and "[x]") or ""
+  vim.opt.statusline = "%f%h%w%m%r" .. g .. "%=%l:%c  %P"
+end
+vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost" }, { callback = update_statusline })
+
+-- ====== GIT DIFF ======
+local function show_git_diff(_)
+  local diff_file = vim.fn.expand("%:h") .. "/__" .. vim.fn.expand("%:t")
+  vim.fn.system("git show HEAD:" .. vim.fn.expand("%") .. " > " .. diff_file)
+  vim.cmd("vertical diffsplit " .. diff_file)
+  vim.cmd("autocmd BufWinLeave <buffer> silent! !rm " .. diff_file)
+end
+
 -- ====== MAPPING ======
-vim.api.nvim_set_hl(0, "Type", { fg = "NvimLightBlue" })
 vim.keymap.set("i", "jk", "<ESC>", { noremap = true, desc = "Return to Normal Mode" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.setloclist, { noremap = true, desc = "Show Diagnostic" })
 vim.keymap.set("n", "<leader>n", "<cmd>Lexplore<CR>", { desc = "Open Netrw" })
-vim.keymap.set("n", "<leader>d", "<cmd>Gitsigns diffthis<cr>", { noremap = true, desc = "Git Diff" })
+vim.keymap.set("n", "<leader>d", show_git_diff, { desc = "Show Git Diff" })
 
 -- ====== PLUGIN ======
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -82,20 +99,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { "lewis6991/gitsigns.nvim", event = "BufRead", opts = {} },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    event = "BufRead",
-    main = "nvim-treesitter.configs",
-    opts = {
-      highlight = { enable = true },
-      indent = { enable = true },
-      incremental_selection = {
-        enable = true,
-        keymaps = { node_incremental = "<CR>", node_decremental = "<Space>" },
-      },
-    },
-  },
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
