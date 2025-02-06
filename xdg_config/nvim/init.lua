@@ -2,12 +2,9 @@
 
 -- ====== OPTIONS ======
 vim.loader.enable()
-vim.cmd("colorscheme habamax")
 vim.g.mapleader = " "
 vim.opt.title = true
-vim.opt.pumheight = 10
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+vim.opt.ignorecase, vim.opt.smartcase = true, true
 vim.opt.scrolloff, vim.opt.sidescrolloff = 8, 8
 vim.opt.smartindent = true
 vim.opt.expandtab = true
@@ -16,16 +13,8 @@ vim.opt.cursorline = true
 vim.opt.wrap = false
 vim.opt.list = true
 vim.opt.number = true
-
--- ====== NETRW ======
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3
-vim.g.netrw_showhide = 1
-vim.g.netrw_browse_split = 4
-vim.g.netrw_altv = 1
-vim.g.netrw_winsize = -28
-vim.g.netrw_keepdir = 1
-vim.g.netrw_preview = 1
+vim.cmd("colorscheme habamax")
+vim.keymap.set("i", "jk", "<ESC>")
 
 -- ====== CLIPBOARD ======
 vim.opt.clipboard = "unnamedplus"
@@ -40,6 +29,7 @@ vim.g.clipboard = {
 
 -- ====== COMPLETION ======
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
+vim.opt.pumheight = 10
 local function lsp_attach(args)
   local client = vim.lsp.get_client_by_id(args.data.client_id)
   if not client or not client:supports_method("textDocument/completion") then
@@ -69,27 +59,6 @@ local function lsp_attach(args)
 end
 vim.api.nvim_create_autocmd("LspAttach", { callback = lsp_attach })
 
--- ====== STATUSLINE ======
-local function update_statusline()
-  local g = (vim.fn.system("git diff --name-only " .. vim.fn.expand("%:p")) ~= "" and "[x]") or ""
-  vim.opt.statusline = "%f%h%w%m%r" .. g .. "%=%l:%c  %P"
-end
-vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost" }, { callback = update_statusline })
-
--- ====== GIT DIFF ======
-local function show_git_diff(_)
-  local diff_file = vim.fn.expand("%:h") .. "/__" .. vim.fn.expand("%:t")
-  vim.fn.system("git show HEAD:" .. vim.fn.expand("%") .. " > " .. diff_file)
-  vim.cmd("vertical diffsplit " .. diff_file)
-  vim.cmd("autocmd BufWinLeave <buffer> silent! !rm " .. diff_file)
-end
-
--- ====== MAPPING ======
-vim.keymap.set("i", "jk", "<ESC>", { noremap = true, desc = "Return to Normal Mode" })
-vim.keymap.set("n", "<leader>e", vim.diagnostic.setloclist, { noremap = true, desc = "Show Diagnostic" })
-vim.keymap.set("n", "<leader>n", "<cmd>Lexplore<CR>", { desc = "Open Netrw" })
-vim.keymap.set("n", "<leader>d", show_git_diff, { desc = "Show Git Diff" })
-
 -- ====== PLUGIN ======
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -99,6 +68,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  { "lewis6991/gitsigns.nvim", event = "BufRead", opts = {} },
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
@@ -110,12 +80,20 @@ require("lazy").setup({
     end,
   },
   {
-    "echasnovski/mini.pick",
+    "folke/snacks.nvim",
+    lazy = false,
     keys = {
-      { "<leader>f", "<cmd>Pick files<cr>", desc = "File Files" },
-      { "<leader>/", "<cmd>Pick grep_live<cr>", desc = "Grep" },
+      { "<leader>f", "<cmd>lua require('snacks').picker.files()<cr>", desc = "Find Files" },
+      { "<leader>/", "<cmd>lua require('snacks').picker.grep()<cr>", desc = "Live Grep" },
+      { "<leader>e", "<cmd>lua require('snacks').picker.diagnostics()<cr>", desc = "Diagnostics" },
+      { "<leader>n", "<cmd>lua require('snacks').explorer()<cr>", desc = "Explorer" },
+      { "<leader>t", "<cmd>lua require('snacks').terminal()<cr>", desc = "Terminal" },
+      { "<leader>d", "<cmd>lua require('gitsigns').diffthis()<cr>", desc = "Git Diff" },
     },
-    opts = {},
+    opts = {
+      dashboard = { enabled = true },
+      terminal = { win = { position = "float" } },
+    },
   },
   { "supermaven-inc/supermaven-nvim", event = "InsertEnter", opts = {} },
 })
