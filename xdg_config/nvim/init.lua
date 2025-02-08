@@ -3,6 +3,7 @@
 -- ====== OPTIONS ======
 vim.loader.enable()
 vim.g.mapleader = " "
+vim.opt.termguicolors = true
 vim.opt.title = true
 vim.opt.ignorecase, vim.opt.smartcase = true, true
 vim.opt.scrolloff, vim.opt.sidescrolloff = 8, 8
@@ -13,8 +14,6 @@ vim.opt.cursorline = true
 vim.opt.wrap = false
 vim.opt.list = true
 vim.opt.number = true
-vim.cmd("colorscheme habamax")
-vim.keymap.set("i", "jk", "<ESC>")
 
 -- ====== CLIPBOARD ======
 vim.opt.clipboard = "unnamedplus"
@@ -59,6 +58,18 @@ local function lsp_attach(args)
 end
 vim.api.nvim_create_autocmd("LspAttach", { callback = lsp_attach })
 
+-- ====== KEYMAP ======
+vim.keymap.set("i", "jk", "<ESC>")
+vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")
+vim.keymap.set("n", "<leader>e", vim.diagnostic.setqflist, { noremap = true, desc = "Show Diagnostic" })
+vim.keymap.set("n", "<leader>E", vim.diagnostic.setloclist, { noremap = true, desc = "Show Buf Diagnostic" })
+
+-- ====== COLOR ======
+vim.api.nvim_set_hl(0, "PreProc", { bold = true })
+vim.api.nvim_set_hl(0, "Statement", { fg = "NvimLightBlue", bold = true })
+vim.api.nvim_set_hl(0, "Operator", { link = "Statement" })
+vim.api.nvim_set_hl(0, "Number", { fg = "NvimLightBlue" })
+
 -- ====== PLUGIN ======
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -82,18 +93,14 @@ require("lazy").setup({
   {
     "folke/snacks.nvim",
     lazy = false,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       { "<leader>f", "<cmd>lua require('snacks').picker.files()<cr>", desc = "Find Files" },
       { "<leader>/", "<cmd>lua require('snacks').picker.grep()<cr>", desc = "Live Grep" },
-      { "<leader>e", "<cmd>lua require('snacks').picker.diagnostics()<cr>", desc = "Diagnostics" },
       { "<leader>n", "<cmd>lua require('snacks').explorer()<cr>", desc = "Explorer" },
-      { "<leader>t", "<cmd>lua require('snacks').terminal()<cr>", desc = "Terminal" },
-      { "<leader>d", "<cmd>lua require('gitsigns').diffthis()<cr>", desc = "Git Diff" },
+      { "<leader>d", "<cmd>lua require('gitsigns').diffthis()<cr>", desc = "Git Diff" }
     },
-    opts = {
-      dashboard = { enabled = true },
-      terminal = { win = { position = "float" } },
-    },
+    opts = { dashboard = { enabled = true } },
   },
   { "supermaven-inc/supermaven-nvim", event = "InsertEnter", opts = {} },
 })
