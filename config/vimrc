@@ -1,7 +1,6 @@
 " Minimalist .vimrc by @nomutin
 " >>> curl -s https://gist.githubusercontent.com/nomutin/2778c315a34e703e68659028465566bf/raw -o ~/.vimrc
 " Requirements: vim>=9.0.0185 or neovim >= 0.5, git, rg
-" TODO: .local/state share に作られるファイル
 
 " ===== Core Settings =====
 set encoding=utf-8
@@ -31,8 +30,6 @@ tnoremap <Esc> <C-\><C-n>
 nnoremap <C-l> <CMD>nohls<Bar>dif<Bar>normal! <C-L><CR>
 nnoremap <Leader>d <CMD>new<Bar>setf gitcommit<Bar>setl bt=nofile<Bar>r !git diff #<CR>
 nnoremap <silent> <leader>n <CMD>Lex<CR>
-nnoremap ]q <CMD>cnext<CR>
-nnoremap [q <CMD>cprevious<CR>
 
 " ===== Files =====
 if empty(glob('~/.vim/autoload/plug.vim'))
