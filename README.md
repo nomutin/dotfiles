@@ -18,8 +18,21 @@ bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/script
 ## Apps
 
 - Shell - [bash](https://www.gnu.org/software/bash/)
+  - [bashrc](./config/bashrc)
+  - Built-in to most platforms
+- CLI Tool Manager - [mise](https://mise.jdx.dev/)
+  - [config](./xdg_config/mise/config.toml)
+  - Nothing is installed by default. Editing [config](./xdg_config/mise/config.toml) is required
+- App Manager - [Homebrew](https://brew.sh)
+  - [Brewfile](./config/Brewfile)
+  - For macOS apps (not CLI tools)
 - Terminal Emulator - [Alacritty](https://alacritty.org/)
-- CLI Manager - [mise](https://mise.jdx.dev/)
-- App Manager (Mac) - [Homebrew](https://brew.sh)
+  - [config](./xdg_config/alacritty/alacritty.toml)
+  - Installed via Homebrew
 - Terminal Multiplexer - [zellij](https://zellij.dev)
-- Text Editor - [neovim](https://neovim.io)
+  - [config](./xdg_config/zellij/config.kdl)
+  - Installed via mise
+- Text Editor - [vim](https://www.vim.org) / [neovim](https://neovim.io)
+  - [vimrc](./config/vimrc)
+  - Shared settings
+  - Manual install required

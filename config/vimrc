@@ -1,0 +1,91 @@
+" Minimalist .vimrc by @nomutin
+" >>> curl -s https://gist.githubusercontent.com/nomutin/2778c315a34e703e68659028465566bf/raw -o ~/.vimrc
+" Requirements: vim>=9.0.0185 or neovim >= 0.5, git, rg
+
+" ===== Core Settings =====
+set encoding=utf-8
+scriptencoding utf-8
+colorscheme habamax
+set hidden
+set wildmenu
+set clipboard=unnamed
+set hlsearch incsearch
+set ignorecase smartcase
+setlocal shortmess-=S
+set cursorline
+set nowrap
+set ruler
+set list listchars=tab:»-,trail:-,extends:»
+set expandtab tabstop=4 shiftwidth=4
+set pumheight=10
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_altv = 1
+
+" ===== KeyMappings =====
+let g:mapleader = "\<space>"
+inoremap <silent> jk <Esc>
+tnoremap <Esc> <C-\><C-n>
+nnoremap <C-l> <CMD>nohls<Bar>dif<Bar>normal! <C-L><CR>
+nnoremap <Leader>d <CMD>new<Bar>setf gitcommit<Bar>setl bt=nofile<Bar>r !git diff #<CR>
+nnoremap <silent> <leader>n <CMD>Lex<CR>
+
+" ===== Files =====
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent execute '!mkdir -p ~/.vim/undo'
+    silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs '.
+        \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+endif
+set noswapfile undofile undodir=~/.vim/undo viminfo=
+
+" ===== Plugins =====
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'Exafunction/codeium.vim'
+call plug#end()
+
+" ===== FZF =====
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+endif
+nnoremap <Leader>f <CMD>Files<CR>
+nnoremap <Leader>/ <CMD>RG<CR>
+
+" ===== LSP =====
+let g:lsp_diagnostics_highlights_enabled = 0
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_float_delay = 100
+let g:lsp_settings_enable_suggestions = 0
+let g:lsp_settings_filetype_python = ['pyright-langserver', 'ruff']
+
+function! OnLspBufferEnabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    nnoremap gd <plug>(lsp-definition)
+    nnoremap grn <plug>(lsp-rename)
+    nnoremap grr <plug>(lsp-references)
+    nnoremap K <plug>(lsp-hover)
+    nnoremap <Leader>e <plug>(lsp-document-diagnostics)
+    nnoremap <buffer> [d <plug>(lsp-previous-diagnostic)
+    nnoremap <buffer> ]d <plug>(lsp-next-diagnostic)
+    nnoremap <buffer> <expr><c-j> lsp#scroll(+4)
+    nnoremap <buffer> <expr><c-k> lsp#scroll(-4)
+
+    let l:capabilities = lsp#get_server_capabilities('ruff')
+    if !empty(l:capabilities)
+      let l:capabilities.hoverProvider = v:false
+    endif
+endfunction
+
+augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call OnLspBufferEnabled()
+augroup END

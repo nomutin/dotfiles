@@ -3,7 +3,7 @@
 # ===== Settings =====
 HISTSIZE=1000
 HISTFILESIZE=200000
-export PS1='\[\e[32m\]\u@\[\e[32m\]\h \[\e[33m\]\W\[\e[0m\] \$ '
+export PS1='\u@\h \W \$ '
 shopt -s checkwinsize
 
 # ===== XGD Based Dirs =====
@@ -13,11 +13,8 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 mkdir -p "${XDG_STATE_HOME}"/bash
-export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
-export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
 export HISTFILE="$XDG_STATE_HOME"/bash/history
-export KERAS_HOME="$XDG_STATE_HOME"/keras
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history
 export TERMINFO="$XDG_DATA_HOME"/terminfo
@@ -27,7 +24,6 @@ export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo
 alias ls='ls --color=auto'
 alias ll='ls -la'
 alias dd='du -sch $(ls -A)'
-alias wget='wget --hsts-file="$XDG_DATA_HOME"/wget-hsts'
 
 # ===== Plugins =====
 eval "$(~/.local/bin/mise activate bash)"
