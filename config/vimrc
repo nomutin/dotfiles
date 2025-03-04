@@ -36,7 +36,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     silent execute '!mkdir -p ~/.vim/undo'
     silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs '.
         \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 set noswapfile undofile undodir=~/.vim/undo viminfo=
 
@@ -70,7 +69,7 @@ let g:lsp_settings_filetype_python = ['pyright-langserver', 'ruff']
 function! OnLspBufferEnabled() abort
     setlocal omnifunc=lsp#complete
     setlocal signcolumn=yes
-    nnoremap <c-]> <plug>(lsp-definition)
+    nnoremap gd <plug>(lsp-definition)
     nnoremap grn <plug>(lsp-rename)
     nnoremap grr <plug>(lsp-references)
     nnoremap K <plug>(lsp-hover)
