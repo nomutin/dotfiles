@@ -1,48 +1,119 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
-# ===== Install repo =====
-if [ ! -d "${HOME}"/.dotfiles ]; then
-  git clone https://github.com/nomutin/dotfiles.git "${HOME}"/.dotfiles
-else
-  echo "dotfiles already exists"
-  exit 1
-fi
+DOTFILES_DIR="${HOME}/.dotfiles"
+XDG_CONFIG_DIR="${HOME}/.config"
 
-# ===== Install mise =====
-if ! (type 'mise' >/dev/null 2>&1); then
-  curl https://mise.run | sh
-fi
+RESET="\033[0m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
 
-# ===== Deploy xdg-based configs =====
-xdg_config_dir="${HOME}"/.config
-if [ ! -d "${xdg_config_dir}" ]; then
-  mkdir -p "${xdg_config_dir}"
-fi
+# Log info message with green color
+log_info() {
+  echo "${GREEN}[INFO]${RESET} $1"
+}
 
-for item in "${HOME}"/.dotfiles/xdg_config/*; do
-  base_item=$(basename "$item")
-  link_name="${xdg_config_dir}/$base_item"
-  if [ -f "$link_name" ]; then
-    echo "$link_name exists, skipping"
-    continue
+# Log skip message with yellow color
+log_skip() {
+  echo "${YELLOW}[SKIP]${RESET} $1"
+}
+
+# Create symbolic link if target does not exist
+create_symlink() {
+  local source="$1"
+  local target="$2"
+  if [ -e "${target}" ] || [ -L "${target}" ]; then
+    log_skip "Target exists, skipping: ${target}"
+  else
+    log_info "Creating symlink: ${target} -> ${source}"
+    ln -s "${source}" "${target}"
   fi
-  ln -s "$item" "$link_name"
-done
+}
 
-# ===== Deploy bashrc =====
-if [ -f "${HOME}"/.bashrc ]; then
-  echo 'source "$HOME/.dotfiles/config/bashrc"' >>~/.bashrc
-else
-  ln -s "${HOME}"/.dotfiles/config/bashrc "${HOME}"/.bashrc
-fi
-source "${HOME}"/.bashrc
+# Clone repository if it doesn't exist
+clone_repo() {
+  if [ ! -d "${DOTFILES_DIR}" ]; then
+    log_info "Cloning dotfiles into ${DOTFILES_DIR}..."
+    git clone https://github.com/nomutin/dotfiles.git "${DOTFILES_DIR}"
+  else
+    log_skip "Dotfiles repository already exists at ${DOTFILES_DIR}."
+  fi
+}
 
-# ===== Install dependencies =====
-mise install -y
+# Install mise if not already installed
+install_mise() {
+  if ! command -v mise >/dev/null 2>&1; then
+    log_info "Installing mise..."
+    curl https://mise.run | sh
+  else
+    log_skip "Mise is already installed."
+  fi
+  log_info "Installing dependencies with mise..."
+  mise install -yq
+}
 
-# ===== Set up Macos =====
-# if [ "$(uname)" = "Darwin" ]; then
-#   bash "{HOME}"/.dotfiles/scripts/macos.sh
-# fi
+# Deploy all XDG config files
+deploy_xdg_configs() {
+  mkdir -p "${XDG_CONFIG_DIR}"
+  for item in "${DOTFILES_DIR}/xdg_config/"*; do
+    base_item=$(basename "${item}")
+    create_symlink "${item}" "${XDG_CONFIG_DIR}/${base_item}"
+  done
+}
+
+# Deploy Vim configurations
+deploy_vimrc() {
+  local vimrc_source="${DOTFILES_DIR}/config/vimrc"
+  create_symlink "${vimrc_source}" "${HOME}/.vimrc"
+  mkdir -p "${XDG_CONFIG_DIR}/nvim"
+  create_symlink "${vimrc_source}" "${XDG_CONFIG_DIR}/nvim/init.vim"
+}
+
+# Deploy Bash configuration
+deploy_bashrc() {
+  local bashrc_file="${HOME}/.bashrc"
+  local bashrc_source="source \"\$HOME/.dotfiles/config/bashrc\""
+  if [ -L "${bashrc_file}" ]; then
+    current_link=$(readlink "${bashrc_file}")
+    if [ "${current_link}" = "${DOTFILES_DIR}/config/bashrc" ]; then
+      log_skip ".bashrc is already a symlink to dotfiles config, skipping."
+    else
+      log_info ".bashrc is a different symlink, updating to point to dotfiles config."
+      ln -sf "${DOTFILES_DIR}/config/bashrc" "${bashrc_file}"
+    fi
+  elif [ -e "${bashrc_file}" ]; then
+    if ! grep -Fxq "${bashrc_source}" "${bashrc_file}"; then
+      log_info "Appending source command to existing .bashrc"
+      echo "${bashrc_source}" >>"${bashrc_file}"
+    else
+      log_skip ".bashrc already sources the dotfiles bashrc."
+    fi
+  else
+    create_symlink "${DOTFILES_DIR}/config/bashrc" "${bashrc_file}"
+  fi
+  log_info "Sourcing .bashrc..."
+  # shellcheck source=/dev/null
+  source "${bashrc_file}"
+}
+
+# Setup for MacOS
+setup_macos() {
+  if [[ "$(uname)" == "Darwin" ]]; then
+    local macos_script="${DOTFILES_DIR}/scripts/init_macos.sh"
+    log_info "Running MacOS setup script..."
+    bash "${macos_script}"
+  fi
+}
+
+main() {
+  clone_repo
+  deploy_xdg_configs
+  deploy_vimrc
+  install_mise
+  deploy_bashrc
+  # setup_macos
+  log_info "Dotfiles setup completed successfully."
+}
+
+main "$@"
