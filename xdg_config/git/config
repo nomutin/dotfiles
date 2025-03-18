@@ -32,3 +32,6 @@
     autoSquash = true
     autoStash = true
     updateRefs = true
+[user]
+	email = nomura0508@icloud.com
+	name = nomutin

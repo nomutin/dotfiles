@@ -1,0 +1,21 @@
+# terminal
+shell-integration = bash
+term = xterm-256color
+
+# appearance
+background-opacity = 0.8
+window-theme = ghostty
+cursor-style-blink = false
+
+# feat
+confirm-close-surface = false
+maximize = true
+
+# font
+font-size = 13
+font-family = Hack Nerd Font
+font-thicken = true
+adjust-cell-width = -5%
+
+# keybinds
+keybind = "global:shift+space=toggle_visibility"
