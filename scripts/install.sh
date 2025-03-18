@@ -62,14 +62,6 @@ deploy_xdg_configs() {
   done
 }
 
-# Deploy Vim configurations
-deploy_vimrc() {
-  local vimrc_source="${DOTFILES_DIR}/config/vimrc"
-  create_symlink "${vimrc_source}" "${HOME}/.vimrc"
-  mkdir -p "${XDG_CONFIG_DIR}/nvim"
-  create_symlink "${vimrc_source}" "${XDG_CONFIG_DIR}/nvim/init.vim"
-}
-
 # Deploy Bash configuration
 deploy_bashrc() {
   local bashrc_file="${HOME}/.bashrc"
@@ -111,6 +103,15 @@ deploy_profile() {
   fi
 }
 
+# Deploy Vim configurations
+deploy_vimrc() {
+  local vimrc_source="${DOTFILES_DIR}/config/vimrc"
+  mkdir -p "${XDG_CONFIG_DIR}/vim"
+  create_symlink "${vimrc_source}" "${XDG_CONFIG_DIR}/vim/vimrc"
+  mkdir -p "${XDG_CONFIG_DIR}/nvim"
+  create_symlink "${vimrc_source}" "${XDG_CONFIG_DIR}/nvim/init.vim"
+}
+
 # Setup for MacOS
 setup_macos() {
   if [[ "$(uname)" == "Darwin" ]]; then
@@ -123,10 +124,10 @@ setup_macos() {
 main() {
   clone_repo
   deploy_xdg_configs
-  deploy_vimrc
   install_mise
   deploy_bashrc
   deploy_profile
+  deploy_vimrc
   # setup_macos
   log_info "Dotfiles setup completed successfully."
 }
