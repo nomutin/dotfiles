@@ -97,6 +97,20 @@ deploy_bashrc() {
   source "${bashrc_file}"
 }
 
+# Deploy .profile
+deploy_profile() {
+  local profile_file="${HOME}/.profile"
+  local profile_source="${HOME}/.dotfiles/config/profile"
+  if [ -L "${profile_file}" ]; then
+    log_skip ".profile is a symlink, skipping."
+  elif [ -e "${profile_file}" ]; then
+    cat "${profile_source}" >>"${profile_file}"
+    log_info "Appended source command to existing .profile"
+  else
+    create_symlink "${profile_source}" "${profile_file}"
+  fi
+}
+
 # Setup for MacOS
 setup_macos() {
   if [[ "$(uname)" == "Darwin" ]]; then
@@ -112,6 +126,7 @@ main() {
   deploy_vimrc
   install_mise
   deploy_bashrc
+  deploy_profile
   # setup_macos
   log_info "Dotfiles setup completed successfully."
 }
