@@ -1,4 +1,6 @@
 [tools]
+# "ubi:sigoden/aichat" = "latest"
+# "ubi:fastfetch-cli/fastfetch" = "latest"
 # ffmpeg = "latest"
 # lazygit = "latest"
 # neovim = "latest"
@@ -7,16 +9,17 @@
 # uv = "latest"
 # vim = "latest"
 # ripgrep = "latest"
+# yazi = "latest"
 # zellij = "latest"
 
 # LSP
 # "npm:bash-language-server" = "latest"
 # "ubi:biomejs/biome" = "latest"
-# "npm:vscode-langservers-extracted" = "latest"
-# "ubi:latex-lsp/texlab" = "latest"
 # lua-language-server = "latest"
 # "ubi:tamasfe/taplo" = "latest"
+# "ubi:latex-lsp/texlab" = "latest"
 # "npm:vim-language-server" = "latest"
+# "npm:vscode-langservers-extracted" = "latest"
 # "npm:yaml-language-server" = "latest"
 
 # Linter/Formatter
