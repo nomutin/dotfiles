@@ -1,6 +1,6 @@
 " Minimalist .vimrc by @nomutin
 " >>> curl -s https://gist.githubusercontent.com/nomutin/2778c315a34e703e68659028465566bf/raw -o ~/.vimrc
-" Requirements: vim>=9.0.0185 or neovim >= 0.5, git, rg
+" Requirements: vim>=9.0.0185 or neovim >= 0.6, git, rg
 
 " ===== Core Settings =====
 set encoding=utf-8
@@ -19,6 +19,9 @@ set list listchars=tab:»-,trail:-,extends:»
 set expandtab tabstop=4 shiftwidth=4
 set pumheight=10
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
+packadd! comment
+packadd! editorconfig
+packadd nohlsearch
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_altv = 1
@@ -27,7 +30,6 @@ let g:netrw_altv = 1
 let g:mapleader = "\<space>"
 inoremap <silent> jk <Esc>
 tnoremap <Esc> <C-\><C-n>
-nnoremap <C-l> <CMD>nohls<Bar>dif<Bar>normal! <C-L><CR>
 nnoremap <Leader>d <CMD>new<Bar>setf gitcommit<Bar>setl bt=nofile<Bar>r !git diff #<CR>
 nnoremap <silent> <leader>n <CMD>Lex<CR>
 
