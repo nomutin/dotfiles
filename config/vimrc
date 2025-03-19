@@ -1,5 +1,5 @@
 " Minimalist .vimrc by @nomutin
-" >>> curl -s https://gist.githubusercontent.com/nomutin/2778c315a34e703e68659028465566bf/raw -o ~/.vimrc
+" >>> curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/config/vimrc -o ~/.vimrc
 " Requirements: vim>=9.0.0185 or neovim >= 0.6, git, rg
 
 " ===== Core Settings =====
