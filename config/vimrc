@@ -17,7 +17,6 @@ set autoread " 18
 set noswapfile " 19
 set wildmenu " 20
 set viminfo= " 25
-colorscheme habamax
 let g:netrw_banner = 0 | let g:netrw_liststyle = 3 | let g:netrw_altv = 1
 aug qf_wrap | au! | autocmd FileType qf setl wrap | aug END
 
@@ -30,7 +29,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-commentary'
-Plug 'habamax/vim-habamax'
+Plug 'nomutin/vim-habamax'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'prabirshrestha/vim-lsp'
@@ -52,6 +51,7 @@ if executable('rg')
     let $FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
     nnoremap <Leader>/ <CMD>RG<CR>
 endif
+colorscheme habamax
 
  " ===== LSP =====
 let g:lsp_use_native_client = 1
