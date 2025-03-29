@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -eu
 
 DOTFILES_DIR="${HOME}/.dotfiles"
 XDG_CONFIG_DIR="${HOME}/.config"

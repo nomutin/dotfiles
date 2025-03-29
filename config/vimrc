@@ -1,77 +1,71 @@
 " Minimalist .vimrc by @nomutin
 " >>> curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/config/vimrc -o ~/.vimrc
-" Requirements: vim>=9.0.0185 or neovim >= 0.6, git, rg
 
-" ===== Core Settings =====
-set encoding=utf-8
+" ===== Builtin =====
+set encoding=utf-8 " options: 24
 scriptencoding utf-8
+set runtimepath^=~/.vim runtimepath+=~/.vim/after " 1
+set incsearch ignorecase smartcase " 2
+set nowrap list listchars=tab:»-,trail:-,extends:» scrolloff=4 number relativenumber " 4
+set hlsearch cursorline " 5
+set hidden " 6
+set shortmess=filnxtToO ruler " 11
+set clipboard=unnamed "12
+set undofile undodir=~/.vim/undo completeopt=menuone,noinsert,noselect pumheight=10 " 13
+set tabstop=4 shiftwidth=4 expandtab " 14
+set autoread " 18
+set noswapfile " 19
+set wildmenu " 20
+set viminfo= " 25
 colorscheme habamax
-set hidden
-set wildmenu
-set clipboard=unnamed
-set hlsearch incsearch
-set ignorecase smartcase
-setlocal shortmess-=S
-set cursorline
-set nowrap
-set ruler
-set list listchars=tab:»-,trail:-,extends:»
-set expandtab tabstop=4 shiftwidth=4
-set pumheight=10
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-packadd! comment
-packadd! editorconfig
-packadd nohlsearch
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_altv = 1
+let g:netrw_banner = 0 | let g:netrw_liststyle = 3 | let g:netrw_altv = 1
+aug qf_wrap | au! | autocmd FileType qf setl wrap | aug END
 
-" ===== KeyMappings =====
-let g:mapleader = "\<space>"
-inoremap <silent> jk <Esc>
-tnoremap <Esc> <C-\><C-n>
-nnoremap <Leader>d <CMD>new<Bar>setf gitcommit<Bar>setl bt=nofile<Bar>r !git diff #<CR>
-nnoremap <silent> <leader>n <CMD>Lex<CR>
-
-" ===== Files =====
+" ===== Plugin =====
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent execute '!mkdir -p ~/.vim/undo'
     silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs '.
         \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
-set noswapfile undofile undodir=~/.vim/undo viminfo=
 
-" ===== Plugins =====
 call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-commentary'
+Plug 'habamax/vim-habamax'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'Exafunction/codeium.vim'
 call plug#end()
 
-" ===== FZF =====
-let $FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-nnoremap <Leader>f <CMD>Files<CR>
-nnoremap <Leader>/ <CMD>RG<CR>
+" ===== KeyMappings =====
+let g:mapleader = "\<space>"
+inoremap <silent> jk <Esc>
+nnoremap <silent> <leader>n <CMD>Lex<CR>
+nnoremap <C-L> <CMD>nohlsearch<CR>
+nnoremap ]q <CMD>cnext<CR>
+nnoremap [q <CMD>cprevious<CR>
+nnoremap <Leader>d <CMD>new<Bar>setf gitcommit<Bar>setl bt=nofile<Bar>r !git diff #<CR>
+nnoremap <Leader>f <CMD>FZF<CR>
+if executable('rg')
+    let $FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+    nnoremap <Leader>/ <CMD>RG<CR>
+endif
 
-" ===== LSP =====
+ " ===== LSP =====
 let g:lsp_use_native_client = 1
-let g:lsp_diagnostics_highlights_enabled = 0
-let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
-let g:lsp_diagnostics_float_cursor = 1
-let g:lsp_diagnostics_float_delay = 80
-let g:lsp_diagnostics_float_insert_mode_enabled = 0
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_echo_delay = 100
 let g:lsp_settings_enable_suggestions = 0
-let g:lsp_settings_filetype_python = ['pyright-langserver', 'ruff']
 
-function! OnLspBufferEnabled() abort
+function! LSPEnabled() abort
     setlocal omnifunc=lsp#complete
     setlocal signcolumn=yes
-    nnoremap gd <plug>(lsp-definition)
+    nnoremap <C-]> <plug>(lsp-definition)
+    nnoremap <C-W>] <CMD>leftabove LspDefinition<CR>
     nnoremap grn <plug>(lsp-rename)
     nnoremap grr <plug>(lsp-references)
     nnoremap K <plug>(lsp-hover)
@@ -80,13 +74,5 @@ function! OnLspBufferEnabled() abort
     nnoremap <buffer> ]d <plug>(lsp-next-diagnostic)
     nnoremap <buffer> <expr><c-j> lsp#scroll(+4)
     nnoremap <buffer> <expr><c-k> lsp#scroll(-4)
-    let l:capabilities = lsp#get_server_capabilities('ruff')
-    if !empty(l:capabilities)
-      let l:capabilities.hoverProvider = v:false
-    endif
 endfunction
-
-augroup lsp_install
-    au!
-    autocmd User lsp_buffer_enabled call OnLspBufferEnabled()
-augroup END
+aug lsp_install | au! | au User lsp_buffer_enabled cal LSPEnabled() | aug END

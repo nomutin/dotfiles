@@ -1,5 +1,6 @@
 [tools]
 # "ubi:sigoden/aichat" = "latest"
+# "pipx:aider-chat" = "latest"
 # "ubi:fastfetch-cli/fastfetch" = "latest"
 # ffmpeg = "latest"
 # lazygit = "latest"
@@ -13,17 +14,21 @@
 # zellij = "latest"
 
 # LSP
+# "npm:@astrojs/language-server" = "latest"
 # "npm:bash-language-server" = "latest"
-# "ubi:biomejs/biome" = "latest"
 # lua-language-server = "latest"
 # "ubi:tamasfe/taplo" = "latest"
 # "ubi:latex-lsp/texlab" = "latest"
+# "pipx:pyright" = "latest"
+# "npm:typescript-language-server" = "latest"
 # "npm:vim-language-server" = "latest"
 # "npm:vscode-langservers-extracted" = "latest"
 # "npm:yaml-language-server" = "latest"
 
 # Linter/Formatter
+# "ubi:biomejs/biome" = "latest"
 # "npm:markdownlint-cli2" = "latest"
+# "pipx:pydoclint" = "latest"
 # shellcheck = "latest"
 # shfmt = "latest"
 # stylua = "0.19.0"
