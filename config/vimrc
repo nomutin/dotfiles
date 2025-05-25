@@ -1,35 +1,40 @@
-" Minimalist .vimrc by @nomutin
 " >>> curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/config/vimrc -o ~/.vimrc
 
 " ===== Builtin =====
 set encoding=utf-8 " options: 24
 scriptencoding utf-8
-set runtimepath^=~/.vim runtimepath+=~/.vim/after " 1
 set incsearch ignorecase smartcase " 2
-set nowrap list listchars=tab:»-,trail:-,extends:» scrolloff=4 number relativenumber " 4
+set nowrap list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+ scrolloff=4 number relativenumber " 4
 set hlsearch cursorline " 5
 set hidden " 6
 set shortmess=filnxtToO ruler " 11
 set clipboard=unnamed "12
-set undofile undodir=~/.vim/undo completeopt=menuone,noinsert,noselect pumheight=10 " 13
+set undofile completeopt=menuone,noinsert,noselect pumheight=10 " 13
 set tabstop=4 shiftwidth=4 expandtab " 14
 set autoread " 18
 set noswapfile " 19
 set wildmenu " 20
-set viminfo= " 25
-let g:netrw_banner = 0 | let g:netrw_liststyle = 3 | let g:netrw_altv = 1
+let g:netrw_banner = 0 | let g:netrw_liststyle = 3 | let g:netrw_altv = 1 | let g:netrw_winsize = 30
 aug qf_wrap | au! | autocmd FileType qf setl wrap nonu nornu | aug END
 
+" ===== XDG Based Directory =====
+set runtimepath+=$XDG_DATA_HOME/vim
+set undodir=$XDG_CACHE_HOME/vim/undo | call mkdir(&undodir, 'p')
+set viminfofile=$XDG_CACHE_HOME/vim/viminfo
+let g:netrw_home = $XDG_DATA_HOME.'/vim'
+let vimplugpath = $XDG_DATA_HOME.'/vim'.'/autoload'.'/plug.vim'
+let plugdir = $XDG_DATA_HOME.'/vim'.'/plugged'
+
 " ===== Plugin =====
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent execute '!mkdir -p ~/.vim/undo'
-    silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs '.
-        \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+if empty(glob(vimplugpath))
+    let plug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    silent execute '!curl -fLo '.vimplugpath.' --create-dirs '.plug_url
 endif
 
-call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-commentary'
+call plug#begin(plugdir)
 Plug 'nomutin/vim-habamax'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'prabirshrestha/vim-lsp'
