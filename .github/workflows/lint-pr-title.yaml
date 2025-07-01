@@ -1,0 +1,33 @@
+# ref: https://zenn.dev/wakamsha/articles/conventional-commits-in-squash-merge
+name: Check Pull Request Title
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Based on the Angular convention
+          # cf. https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+          validateSingleCommit: true
+          validateSingleCommitMatchesPrTitle: true

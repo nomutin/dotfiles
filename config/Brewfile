@@ -3,8 +3,5 @@ cask_args appdir: "/Applications"
 tap "homebrew/bundle"
 
 cask "docker"
-cask "font-hack-nerd-font"
-cask "ghostty"
 cask "stats"
-cask "raycast"
 cask "visual-studio-code"
