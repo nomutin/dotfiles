@@ -14,16 +14,17 @@ set tabstop=4 shiftwidth=4 expandtab " 14
 set autoread " 18
 set noswapfile " 19
 set wildmenu " 20
-let g:netrw_banner = 0 | let g:netrw_liststyle = 3 | let g:netrw_altv = 1 | let g:netrw_winsize = 30
+if has('termguicolors') | set termguicolors | endif
 aug qf_wrap | au! | autocmd FileType qf setl wrap nonu nornu | aug END
 
 " ===== XDG Based Directory =====
-set runtimepath+=$XDG_DATA_HOME/vim
-set undodir=$XDG_CACHE_HOME/vim/undo | call mkdir(&undodir, 'p')
-set viminfofile=$XDG_CACHE_HOME/vim/viminfo
-let g:netrw_home = $XDG_DATA_HOME.'/vim'
-let vimplugpath = $XDG_DATA_HOME.'/vim'.'/autoload'.'/plug.vim'
-let plugdir = $XDG_DATA_HOME.'/vim'.'/plugged'
+let xdg_cache_home = $HOME.'/.cache' | call mkdir(xdg_cache_home, 'p')
+let xdg_data_home = $HOME.'/.local/share' | call mkdir(xdg_data_home, 'p')
+execute 'set runtimepath+='.xdg_data_home.'/vim'
+execute 'set undodir='.xdg_cache_home.'/vim'.'/undo' | call mkdir(&undodir, 'p')
+execute 'set viminfofile='.xdg_cache_home.'/vim'.'/viminfo'
+let vimplugpath = xdg_data_home.'/vim'.'/autoload'.'/plug.vim'
+let plugdir = xdg_data_home.'/vim'.'/plugged'
 
 " ===== Plugin =====
 if empty(glob(vimplugpath))
@@ -32,35 +33,52 @@ if empty(glob(vimplugpath))
 endif
 
 call plug#begin(plugdir)
-Plug 'nomutin/vim-habamax'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
+    " UI
+    Plug 'cocopon/iceberg.vim'
+    Plug 'vim-airline/vim-airline'
+    " Utilities
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-surround'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'preservim/nerdtree'
+    " LSP
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    " AI
+    Plug 'Exafunction/windsurf.vim'
 call plug#end()
-colorscheme habamax
+
+colorscheme iceberg
+let g:airline#extensions#tabline#enabled = 1
 
 " ===== KeyMappings =====
 let g:mapleader = "\<space>"
 inoremap <silent> jk <Esc>
-nnoremap <silent> <leader>n <CMD>Lex<CR>
 nnoremap <ESC><ESC> <CMD>nohlsearch<CR>
-nnoremap ]q <CMD>cnext<CR>
-nnoremap [q <CMD>cprevious<CR>
+nnoremap <C-h> <CMD>bprevious<CR>
+nnoremap <C-l> <CMD>bnext<CR>
 nnoremap <leader>d <CMD>new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
 nnoremap <Leader>f <CMD>Files<CR>
+
 if executable('rg')
     let $FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
     nnoremap <Leader>/ <CMD>RG<CR>
+endif
+if empty(glob(plugdir.'/nerdtree'))
+    let g:netrw_home = xdg_data_home.'/vim'
+    let g:netrw_banner = 0 | let g:netrw_liststyle = 3 | let g:netrw_altv = 1 | let g:netrw_winsize = -28
+    nnoremap <silent> <Leader>n <CMD>Lex<CR>
+else
+    nnoremap <silent> <Leader>n <CMD>NERDTreeToggle<CR>
 endif
 
  " ===== LSP =====
 let g:lsp_use_native_client = 1
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_diagnostics_virtual_text_enabled = 0
-let g:lsp_diagnostics_highlights_insert_mode_enabled = 0
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_diagnostics_echo_delay = 100
 let g:lsp_settings_enable_suggestions = 0
@@ -79,7 +97,18 @@ function! LSPSetup() abort
     nnoremap <buffer> ]d <plug>(lsp-next-diagnostic)
     nnoremap <buffer> <expr><c-j> lsp#scroll(+4)
     nnoremap <buffer> <expr><c-k> lsp#scroll(-4)
-    au InsertCharPre <buffer> if !pumvisible() && len(matchstr(getline('.'), '\k\{2,}$')) >= 2
-       \ | call feedkeys("\<c-x>\<c-o>", 'n') | endif
+    let l:capabilities = lsp#get_server_capabilities('ruff')
+    if !empty(l:capabilities)
+      let l:capabilities.hoverProvider = v:false
+    endif
 endfunction
 aug lsp_install | au! | au User lsp_buffer_enabled cal LSPSetup() | aug END
+
+if executable('ruff')
+    au user lsp_setup call lsp#register_server({
+        \ 'name': 'ruff',
+        \ 'cmd': {server_info->['ruff', 'server']},
+        \ 'allowlist': ['python'],
+        \ 'workspace_config': {},
+        \ } )
+endif

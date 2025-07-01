@@ -11,12 +11,12 @@ YELLOW="\033[33m"
 
 # Log info message with green color
 log_info() {
-  echo "${GREEN}[INFO]${RESET} $1"
+  echo -e "${GREEN}[INFO]${RESET} $1"
 }
 
 # Log skip message with yellow color
 log_skip() {
-  echo "${YELLOW}[SKIP]${RESET} $1"
+  echo -e "${YELLOW}[SKIP]${RESET} $1"
 }
 
 # Create symbolic link if target does not exist
