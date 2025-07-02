@@ -36,12 +36,13 @@ call plug#begin(plugdir)
     " UI
     Plug 'cocopon/iceberg.vim'
     Plug 'vim-airline/vim-airline'
-    " Utilities
+    " Utils
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'preservim/nerdtree'
+    Plug 'voldikss/vim-floaterm'
     " LSP
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
@@ -50,9 +51,9 @@ call plug#begin(plugdir)
     " AI
     Plug 'Exafunction/windsurf.vim'
 call plug#end()
-
-colorscheme iceberg
+set background=dark | colorscheme iceberg
 let g:airline#extensions#tabline#enabled = 1
+let g:floaterm_height = 0.9 | let g:floaterm_width = 0.9
 
 " ===== KeyMappings =====
 let g:mapleader = "\<space>"
@@ -62,7 +63,6 @@ nnoremap <C-h> <CMD>bprevious<CR>
 nnoremap <C-l> <CMD>bnext<CR>
 nnoremap <leader>d <CMD>new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
 nnoremap <Leader>f <CMD>Files<CR>
-
 if executable('rg')
     let $FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
     nnoremap <Leader>/ <CMD>RG<CR>
@@ -74,6 +74,9 @@ if empty(glob(plugdir.'/nerdtree'))
 else
     nnoremap <silent> <Leader>n <CMD>NERDTreeToggle<CR>
 endif
+nnoremap <silent> <C-j> <CMD>FloatermToggle<CR>
+tnoremap <silent> <C-j> <C-\><C-n><CMD>FloatermToggle<CR>
+aug vimrc_floaterm | au! | au QuitPre * FloatermKill! | aug END
 
  " ===== LSP =====
 let g:lsp_use_native_client = 1
@@ -95,8 +98,6 @@ function! LSPSetup() abort
     nnoremap <Leader>e <plug>(lsp-document-diagnostics)
     nnoremap <buffer> [d <plug>(lsp-previous-diagnostic)
     nnoremap <buffer> ]d <plug>(lsp-next-diagnostic)
-    nnoremap <buffer> <expr><c-j> lsp#scroll(+4)
-    nnoremap <buffer> <expr><c-k> lsp#scroll(-4)
     let l:capabilities = lsp#get_server_capabilities('ruff')
     if !empty(l:capabilities)
       let l:capabilities.hoverProvider = v:false
