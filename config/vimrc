@@ -3,113 +3,88 @@
 " ===== Builtin =====
 set encoding=utf-8 " options: 24
 scriptencoding utf-8
+set runtimepath^=~/.vim runtimepath+=~/.vim/after " 1
 set incsearch ignorecase smartcase " 2
-set nowrap list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+ scrolloff=4 number relativenumber " 4
+set nowrap list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+ scrolloff=4 number" 4
 set hlsearch cursorline " 5
 set hidden " 6
 set shortmess=filnxtToO ruler " 11
 set clipboard=unnamed "12
-set undofile completeopt=menuone,noinsert,noselect pumheight=10 " 13
+set undofile undodir=~/.vim/undo completeopt=menuone,noinsert,noselect pumheight=10 | call mkdir($HOME.'/.vim/undo', 'p') " 13
 set tabstop=4 shiftwidth=4 expandtab " 14
 set autoread " 18
 set noswapfile " 19
 set wildmenu " 20
-if has('termguicolors') | set termguicolors | endif
+set viminfo= " 25
 aug qf_wrap | au! | autocmd FileType qf setl wrap nonu nornu | aug END
-
-" ===== XDG Based Directory =====
-let xdg_cache_home = $HOME.'/.cache' | call mkdir(xdg_cache_home, 'p')
-let xdg_data_home = $HOME.'/.local/share' | call mkdir(xdg_data_home, 'p')
-execute 'set runtimepath+='.xdg_data_home.'/vim'
-execute 'set undodir='.xdg_cache_home.'/vim'.'/undo' | call mkdir(&undodir, 'p')
-execute 'set viminfofile='.xdg_cache_home.'/vim'.'/viminfo'
-let vimplugpath = xdg_data_home.'/vim'.'/autoload'.'/plug.vim'
-let plugdir = xdg_data_home.'/vim'.'/plugged'
-
-" ===== Plugin =====
-if empty(glob(vimplugpath))
-    let plug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    silent execute '!curl -fLo '.vimplugpath.' --create-dirs '.plug_url
-endif
-
-call plug#begin(plugdir)
-    " UI
-    Plug 'cocopon/iceberg.vim'
-    Plug 'vim-airline/vim-airline'
-    " Utils
-    Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-surround'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
-    Plug 'preservim/nerdtree'
-    Plug 'voldikss/vim-floaterm'
-    " LSP
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'mattn/vim-lsp-settings'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    " AI
-    Plug 'Exafunction/windsurf.vim'
-call plug#end()
-set background=dark | colorscheme iceberg
-let g:airline#extensions#tabline#enabled = 1
-let g:floaterm_height = 0.9 | let g:floaterm_width = 0.9
+if has('vim_starting') | let &t_SI .= "\e[6 q" | let &t_EI .= "\e[2 q" | let &t_SR .= "\e[4 q" | endif
+let g:netrw_banner = 0 | let g:netrw_liststyle = 3 | let g:netrw_altv = 1 | let g:netrw_winsize = -28
 
 " ===== KeyMappings =====
 let g:mapleader = "\<space>"
 inoremap <silent> jk <Esc>
 nnoremap <ESC><ESC> <CMD>nohlsearch<CR>
-nnoremap <C-h> <CMD>bprevious<CR>
-nnoremap <C-l> <CMD>bnext<CR>
-nnoremap <leader>d <CMD>new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
-nnoremap <Leader>f <CMD>Files<CR>
-if executable('rg')
-    let $FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-    nnoremap <Leader>/ <CMD>RG<CR>
-endif
-if empty(glob(plugdir.'/nerdtree'))
-    let g:netrw_home = xdg_data_home.'/vim'
-    let g:netrw_banner = 0 | let g:netrw_liststyle = 3 | let g:netrw_altv = 1 | let g:netrw_winsize = -28
-    nnoremap <silent> <Leader>n <CMD>Lex<CR>
-else
-    nnoremap <silent> <Leader>n <CMD>NERDTreeToggle<CR>
-endif
-nnoremap <silent> <C-j> <CMD>FloatermToggle<CR>
-tnoremap <silent> <C-j> <C-\><C-n><CMD>FloatermToggle<CR>
-aug vimrc_floaterm | au! | au QuitPre * FloatermKill! | aug END
-
- " ===== LSP =====
-let g:lsp_use_native_client = 1
-let g:lsp_document_code_action_signs_enabled = 0
-let g:lsp_diagnostics_virtual_text_enabled = 0
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_diagnostics_echo_delay = 100
-let g:lsp_settings_enable_suggestions = 0
-let g:lsp_async_completion = 1
-
-function! LSPSetup() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
-    nnoremap <C-]> <plug>(lsp-definition)
-    nnoremap <C-W>] <CMD>leftabove LspDefinition<CR>
-    nnoremap grn <plug>(lsp-rename)
-    nnoremap grr <plug>(lsp-references)
-    nnoremap K <plug>(lsp-hover)
-    nnoremap <Leader>e <plug>(lsp-document-diagnostics)
-    nnoremap <buffer> [d <plug>(lsp-previous-diagnostic)
-    nnoremap <buffer> ]d <plug>(lsp-next-diagnostic)
-    let l:capabilities = lsp#get_server_capabilities('ruff')
-    if !empty(l:capabilities)
-      let l:capabilities.hoverProvider = v:false
-    endif
+nnoremap <Leader>d <CMD>new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
+nnoremap <Leader>n <CMD>Lex<CR>
+function! OpenTerm()
+    if len(term_list()) | exec "bo sb" term_list()[0] | exec 'normal i' | else | exec "bo term" | endif
 endfunction
-aug lsp_install | au! | au User lsp_buffer_enabled cal LSPSetup() | aug END
+nnoremap <silent> <C-j> <CMD>call OpenTerm()<CR>
+tnoremap <silent> <C-j> <C-\><C-n><CMD>b#<BAR>close<CR>
 
-if executable('ruff')
-    au user lsp_setup call lsp#register_server({
-        \ 'name': 'ruff',
-        \ 'cmd': {server_info->['ruff', 'server']},
-        \ 'allowlist': ['python'],
-        \ 'workspace_config': {},
-        \ } )
+" ===== ColorScheme =====
+hi LineNr ctermfg=gray
+hi CursorLineNr ctermfg=cyan cterm=bold gui=NONE
+hi CursorLine cterm=none ctermbg=237
+hi Pmenu ctermfg=white ctermbg=black
+
+" ===== Plugin =====
+if empty(glob('~/.vim/plugged'))
+    let plug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs '.plug_url
 endif
+
+call plug#begin('~/.vim/plugged')
+    Plug 'tpope/vim-commentary'
+    Plug 'preservim/nerdtree'
+        nnoremap <Leader>n <CMD>NERDTreeToggle<CR>
+    Plug 'ctrlpvim/ctrlp.vim'
+        let g:ctrlp_map = '<Leader>f'
+    Plug 'ap/vim-buftabline'
+        hi BufTabLineFill ctermfg=gray ctermbg=black
+        hi BufTabLineHidden ctermfg=gray ctermbg=black
+        nnoremap <silent> <C-h> <CMD>bprev<CR>
+        nnoremap <silent> <C-l> <CMD>bnext<CR>
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+        let g:lsp_use_native_client = 1
+        let g:lsp_document_code_action_signs_enabled = 0
+        let g:lsp_diagnostics_virtual_text_enabled = 0
+        let g:lsp_diagnostics_echo_cursor = 1
+        let g:lsp_diagnostics_echo_delay = 100
+        let g:lsp_settings_enable_suggestions = 0
+        let g:lsp_async_completion = 1
+        function! LSPSetup() abort
+            setlocal omnifunc=lsp#complete
+            setlocal signcolumn=yes
+            nnoremap <C-]> <plug>(lsp-definition)
+            nnoremap <C-W>] <CMD>leftabove LspDefinition<CR>
+            nnoremap grn <plug>(lsp-rename)
+            nnoremap grr <plug>(lsp-references)
+            nnoremap K <plug>(lsp-hover)
+            nnoremap <Leader>e <plug>(lsp-document-diagnostics)
+            nnoremap <buffer> [d <plug>(lsp-previous-diagnostic)
+            nnoremap <buffer> ]d <plug>(lsp-next-diagnostic)
+            let l:capabilities = lsp#get_server_capabilities('ruff')
+            if !empty(l:capabilities)
+              let l:capabilities.hoverProvider = v:false
+            endif
+        endfunction
+        aug lsp_install | au! | au User lsp_buffer_enabled cal LSPSetup() | aug END
+        if executable('ruff')
+            au user lsp_setup call lsp#register_server({'name': 'ruff', 'cmd': {server_info->['ruff', 'server']}, 'allowlist': ['python']} )
+        endif
+    Plug 'github/copilot.vim'
+call plug#end()
