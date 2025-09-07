@@ -27,7 +27,7 @@ nnoremap <ESC><ESC> <CMD>nohlsearch<CR>
 nnoremap <Leader>d <CMD>new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
 nnoremap <Leader>n <CMD>Lex<CR>
 function! OpenTerm()
-    if len(term_list()) | exec "bo sb" term_list()[0] | exec 'normal i' | else | exec 'bo term' | endif
+    if len(term_list()) | exec 'bo sb' term_list()[0] | exec 'normal i' | else | exec 'bo term' | endif
 endfunction
 nnoremap <silent> <C-j> <CMD>call OpenTerm()<CR>
 tnoremap <silent> <C-j> <C-\><C-n><CMD>b#<BAR>close<CR>
