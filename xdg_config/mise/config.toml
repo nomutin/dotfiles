@@ -1,14 +1,12 @@
 [tools]
-# "ubi:sigoden/aichat" = "latest"
+# bun = "latest"
 # "ubi:fastfetch-cli/fastfetch" = "latest"
-# ffmpeg = "latest"
+# "npm:@google/gemini-cli" = "latest"
 # lazygit = "latest"
-# neovim = "latest"
 # node = "latest"
 # uv = "latest"
 # vim = "latest"
 # ripgrep = "latest"
-# yazi = "latest"
 # zellij = "latest"
 
 # LSP
