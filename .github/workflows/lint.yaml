@@ -1,9 +1,6 @@
 name: lint
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
@@ -14,12 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@master
+        uses: reviewdog/action-shellcheck@5ebd09ddbe2ebb471646ce234c6c8dd18663ca7c # v1.30.0
         with:
-          scandir: '.'
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          pattern: |
+            *.sh
+            config/bashrc
+            config/profile
+          exclude: "./.git/*"
+          check_all_files_with_shebangs: "false"
       - name: Run Vint
-        uses: ludvighz/vint-action@v1
+        uses: ludvighz/vint-action@31fa19d060969bb48fcfd9044773d665bf03e8c3 # v1
         with:
           path: config/vimrc
