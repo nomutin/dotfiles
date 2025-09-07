@@ -17,11 +17,10 @@ jobs:
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
-          path: "."
           pattern: |
-            "*.sh"
-            "bashrc"
-            "profile"
+            *.sh
+            config/bashrc
+            config/profile
           exclude: "./.git/*"
           check_all_files_with_shebangs: "false"
       - name: Run Vint
