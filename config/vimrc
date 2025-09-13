@@ -1,42 +1,31 @@
 " >>> curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/config/vimrc -o ~/.vimrc
 
 " ===== Builtin =====
-set encoding=utf-8 " options: 24
-scriptencoding utf-8
-set runtimepath^=~/.vim runtimepath+=~/.vim/after " 1
-set incsearch ignorecase smartcase " 2
-set nowrap list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+ scrolloff=4 number" 4
-set hlsearch cursorline " 5
-set hidden " 6
-set shortmess=filnxtToO ruler " 11
-set clipboard=unnamed "12
-set undofile undodir=~/.vim/undo completeopt=menuone,noinsert,noselect pumheight=10 | call mkdir($HOME.'/.vim/undo', 'p') " 13
-set tabstop=4 shiftwidth=4 expandtab " 14
-set autoread " 18
-set noswapfile " 19
-set wildmenu " 20
-set viminfo= " 25
-aug qf_wrap | au! | autocmd FileType qf setl wrap nonu nornu | aug END
-if has('vim_starting') | let &t_SI .= "\e[6 q" | let &t_EI .= "\e[2 q" | let &t_SR .= "\e[4 q" | endif
-let g:netrw_banner = 0 | let g:netrw_liststyle = 3 | let g:netrw_altv = 1 | let g:netrw_winsize = -28
+set encoding=utf-8
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
 
-" ===== KeyMappings =====
-let g:mapleader = "\<space>"
+set autoread
+set background=dark
+set clipboard=unnamed
+set completeopt=menuone,noinsert,noselect pumheight=10
+set cursorline
+set expandtab tabstop=4 shiftwidth=4
+set hidden
+set incsearch ignorecase smartcase hlsearch
+set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+set runtimepath^=~/.vim
+set undofile undodir=~/.vim/undo | call mkdir($HOME.'/.vim/undo', 'p')
+set viminfo=
+
+highlight LineNr ctermfg=darkgray
+highlight Comment ctermfg=darkgray
+highlight CursorLineNr ctermfg=cyan cterm=bold gui=NONE
+highlight Pmenu ctermfg=white ctermbg=black
+
 inoremap <silent> jk <Esc>
-nnoremap <ESC><ESC> <CMD>nohlsearch<CR>
-nnoremap <Leader>d <CMD>new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
-nnoremap <Leader>n <CMD>Lex<CR>
-function! OpenTerm()
-    if len(term_list()) | exec 'bo sb' term_list()[0] | exec 'normal i' | else | exec 'bo term' | endif
-endfunction
-nnoremap <silent> <C-j> <CMD>call OpenTerm()<CR>
-tnoremap <silent> <C-j> <C-\><C-n><CMD>b#<BAR>close<CR>
-
-" ===== ColorScheme =====
-hi LineNr ctermfg=gray
-hi CursorLineNr ctermfg=cyan cterm=bold gui=NONE
-hi CursorLine cterm=none ctermbg=237
-hi Pmenu ctermfg=white ctermbg=black
+nnoremap <C-l> <CMD>nohlsearch<CR><Esc>
+nnoremap <space>d <CMD>new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
 
 " ===== Plugin =====
 if empty(glob('~/.vim/plugged'))
@@ -47,44 +36,29 @@ endif
 call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-commentary'
     Plug 'preservim/nerdtree'
-        nnoremap <Leader>n <CMD>NERDTreeToggle<CR>
-    Plug 'ctrlpvim/ctrlp.vim'
-        let g:ctrlp_map = '<Leader>f'
-    Plug 'ap/vim-buftabline'
-        hi BufTabLineFill ctermfg=gray ctermbg=black
-        hi BufTabLineHidden ctermfg=gray ctermbg=black
-        nnoremap <silent> <C-h> <CMD>bprev<CR>
-        nnoremap <silent> <C-l> <CMD>bnext<CR>
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'mattn/vim-lsp-settings'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-        let g:lsp_use_native_client = 1
-        let g:lsp_document_code_action_signs_enabled = 0
-        let g:lsp_diagnostics_virtual_text_enabled = 0
-        let g:lsp_diagnostics_echo_cursor = 1
-        let g:lsp_diagnostics_echo_delay = 100
-        let g:lsp_settings_enable_suggestions = 0
-        let g:lsp_async_completion = 1
-        function! LSPSetup() abort
-            setlocal omnifunc=lsp#complete
-            setlocal signcolumn=yes
-            nnoremap <C-]> <plug>(lsp-definition)
-            nnoremap <C-W>] <CMD>leftabove LspDefinition<CR>
-            nnoremap grn <plug>(lsp-rename)
-            nnoremap grr <plug>(lsp-references)
-            nnoremap K <plug>(lsp-hover)
-            nnoremap <Leader>e <plug>(lsp-document-diagnostics)
-            nnoremap <buffer> [d <plug>(lsp-previous-diagnostic)
-            nnoremap <buffer> ]d <plug>(lsp-next-diagnostic)
-            let l:capabilities = lsp#get_server_capabilities('ruff')
-            if !empty(l:capabilities)
-              let l:capabilities.hoverProvider = v:false
-            endif
-        endfunction
-        aug lsp_install | au! | au User lsp_buffer_enabled cal LSPSetup() | aug END
-        if executable('ruff')
-            au user lsp_setup call lsp#register_server({'name': 'ruff', 'cmd': {server_info->['ruff', 'server']}, 'allowlist': ['python']} )
-        endif
+        nnoremap <space>n <CMD>NERDTreeToggle<CR>
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+        let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+        nnoremap <space>f <CMD>Files<CR>
+        nnoremap <space>/ <CMD>Rg<CR>
+    Plug 'natebosch/vim-lsc'
+        nnoremap <space>e <CMD>LSClientAllDiagnostics<CR>
+        inoremap <C-S> <CMD>LSClientSignatureHelp<CR>
+        let g:lsc_auto_map = {'defaults': v:true, 'FindReferences': 'grr', 'Rename': 'grn'}
+        let g:lsc_server_commands = {
+            \ 'css': 'vscode-css-language-server --stdio',
+            \ 'html': 'vscode-html-language-serve --stdio',
+            \ 'javascript': 'typescript-language-server --stdio',
+            \ 'json': 'vscode-json-language-server --stdio',
+            \ 'python': 'pyright-langserver --stdio',
+            \ 'sh': 'bash-language-server start',
+            \ 'toml': 'taplo lsp stdio',
+            \ 'typescript': 'typescript-language-server --stdio',
+            \ 'typescriptreact': 'typescript-language-server --stdio',
+            \ 'vim': 'vim-language-server --stdio',
+            \ 'yaml': 'yaml-language-server --stdio',
+        \}
     Plug 'github/copilot.vim'
+        highlight link CopilotSuggestion Comment
 call plug#end()
