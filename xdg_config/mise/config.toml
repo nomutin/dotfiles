@@ -1,4 +1,5 @@
 [tools]
+# bat = "latest"
 # bun = "latest"
 # "ubi:fastfetch-cli/fastfetch" = "latest"
 # "npm:@google/gemini-cli" = "latest"
@@ -7,10 +8,8 @@
 # uv = "latest"
 # vim = "latest"
 # ripgrep = "latest"
-# zellij = "latest"
 
 # LSP
-# "npm:@astrojs/language-server" = "latest"
 # "npm:bash-language-server" = "latest"
 # lua-language-server = "latest"
 # "ubi:tamasfe/taplo" = "latest"

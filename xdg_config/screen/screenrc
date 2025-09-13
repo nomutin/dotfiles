@@ -1,0 +1,16 @@
+defutf8 on
+defencoding utf8
+encoding utf8 utf8
+
+startup_message off
+vbell off
+
+term xterm-256color
+
+defscrollback 10000
+hardstatus alwayslastline "%{= cd} %-w%{= wk} %n %t* %{-}%+w"
+altscreen on
+
+escape ^Bb
+bind s split
+# bind v split -v
