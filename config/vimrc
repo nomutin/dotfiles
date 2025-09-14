@@ -1,27 +1,20 @@
-" >>> curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/config/vimrc -o ~/.vimrc
+" >>> `curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/config/vimrc -o ~/.vimrc`
 
 " ===== Builtin =====
 set encoding=utf-8
 unlet! skip_defaults_vim
 source $VIMRUNTIME/defaults.vim
-
-set autoread
+set autoread hidden
 set background=dark
 set clipboard=unnamed
 set completeopt=menuone,noinsert,noselect pumheight=10
 set cursorline
 set expandtab tabstop=4 shiftwidth=4
-set hidden
-set incsearch ignorecase smartcase hlsearch
+set hlsearch incsearch ignorecase smartcase
 set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 set runtimepath^=~/.vim
 set undofile undodir=~/.vim/undo | call mkdir($HOME.'/.vim/undo', 'p')
 set viminfo=
-
-highlight LineNr ctermfg=darkgray
-highlight Comment ctermfg=darkgray
-highlight CursorLineNr ctermfg=cyan cterm=bold gui=NONE
-highlight Pmenu ctermfg=white ctermbg=black
 
 inoremap <silent> jk <Esc>
 nnoremap <C-l> <CMD>nohlsearch<CR><Esc>
@@ -34,6 +27,7 @@ if empty(glob('~/.vim/plugged'))
 endif
 
 call plug#begin('~/.vim/plugged')
+    Plug 'noahfrederick/vim-noctu'
     Plug 'tpope/vim-commentary'
     Plug 'preservim/nerdtree'
         nnoremap <space>n <CMD>NERDTreeToggle<CR>
@@ -49,7 +43,6 @@ call plug#begin('~/.vim/plugged')
         let g:lsc_server_commands = {
             \ 'css': 'vscode-css-language-server --stdio',
             \ 'html': 'vscode-html-language-serve --stdio',
-            \ 'javascript': 'typescript-language-server --stdio',
             \ 'json': 'vscode-json-language-server --stdio',
             \ 'python': 'pyright-langserver --stdio',
             \ 'sh': 'bash-language-server start',
@@ -60,5 +53,5 @@ call plug#begin('~/.vim/plugged')
             \ 'yaml': 'yaml-language-server --stdio',
         \}
     Plug 'github/copilot.vim'
-        highlight link CopilotSuggestion Comment
 call plug#end()
+colorscheme noctu
