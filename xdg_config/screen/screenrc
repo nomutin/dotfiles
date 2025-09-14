@@ -2,15 +2,19 @@ defutf8 on
 defencoding utf8
 encoding utf8 utf8
 
+shell $SHELL
 startup_message off
 vbell off
 
+defbce on
 term xterm-256color
 
 defscrollback 10000
-hardstatus alwayslastline "%{= cd} %-w%{= wk} %n %t* %{-}%+w"
+termcapinfo xterm* ti@:te@
+# hardstatus alwayslastline "%{= kw}%-w%{= wg}%n %t%{-}%+w"
+hardstatus alwayslastline "%{= 07}%-w%{= 02}%n %t%{-}%+w"
 altscreen on
 
-escape ^Bb
 bind s split
-# bind v split -v
+bind v split -v
+
