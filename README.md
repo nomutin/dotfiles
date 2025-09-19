@@ -18,7 +18,7 @@ bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/script
 ## Main Apps
 
 | #                    | App                                                | Config                                                           |
-| :------------------: | :------------------------------------------------: | :--------------------------------------------------------------: |
+| -------------------- | -------------------------------------------------- | ---------------------------------------------------------------- |
 | Shell                | [bash](https://www.gnu.org/software/bash/)         | [./config/bashrc](./config/bashrc)                               |
 | CLI Manager          | [mise](https://mise.jdx.dev/)                      | [./xdg_config/mise/config.toml](./xdg_config/mise/config.toml)   |
 | GUI Manager          | [Homebrew-cask](https://brew.sh)                   | [./config/Brewfile](./config/Brewfile)                           |

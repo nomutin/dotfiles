@@ -3,6 +3,7 @@
 # bun = "latest"
 # "ubi:fastfetch-cli/fastfetch" = "latest"
 # "npm:@google/gemini-cli" = "latest"
+# jq = "latest"
 # lazygit = "latest"
 # node = "latest"
 # uv = "latest"
@@ -12,8 +13,8 @@
 # LSP
 # "npm:bash-language-server" = "latest"
 # lua-language-server = "latest"
-# "ubi:tamasfe/taplo" = "latest"
 # "pipx:pyright" = "latest"
+# "ubi:tombi-toml/tombi" = "latest"
 # "npm:typescript-language-server" = "latest"
 # "npm:vim-language-server" = "latest"
 # "npm:vscode-langservers-extracted" = "latest"
@@ -21,7 +22,6 @@
 
 # Linter/Formatter
 # "ubi:biomejs/biome" = "latest"
-# "npm:markdownlint-cli2" = "latest"
 # shellcheck = "latest"
 # shfmt = "latest"
 # stylua = "0.19.0"

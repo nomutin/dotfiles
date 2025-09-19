@@ -15,6 +15,7 @@ termcapinfo xterm* ti@:te@
 hardstatus alwayslastline "%{= 07}%-w%{= 02}%n %t%{-}%+w"
 altscreen on
 
+escape ^Bb
 bind s split
 bind v split -v
 

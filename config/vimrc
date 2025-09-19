@@ -13,6 +13,7 @@ set expandtab tabstop=4 shiftwidth=4
 set hlsearch incsearch ignorecase smartcase
 set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 set runtimepath^=~/.vim
+set noswapfile
 set undofile undodir=~/.vim/undo | call mkdir($HOME.'/.vim/undo', 'p')
 set viminfo=
 
@@ -46,7 +47,7 @@ call plug#begin('~/.vim/plugged')
             \ 'json': 'vscode-json-language-server --stdio',
             \ 'python': 'pyright-langserver --stdio',
             \ 'sh': 'bash-language-server start',
-            \ 'toml': 'taplo lsp stdio',
+            \ 'toml': 'tombi lsp --offline --quiet',
             \ 'typescript': 'typescript-language-server --stdio',
             \ 'typescriptreact': 'typescript-language-server --stdio',
             \ 'vim': 'vim-language-server --stdio',
