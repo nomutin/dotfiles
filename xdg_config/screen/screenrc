@@ -1,6 +1,7 @@
 defutf8 on
 defencoding utf8
 encoding utf8 utf8
+cjkwidth off
 
 shell $SHELL
 startup_message off
@@ -15,6 +16,7 @@ termcapinfo xterm* ti@:te@
 hardstatus alwayslastline "%{= 07}%-w%{= 02}%n %t%{-}%+w"
 altscreen on
 
+escape ^Bb
 bind s split
 bind v split -v
 
