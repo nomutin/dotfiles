@@ -5,13 +5,13 @@ set encoding=utf-8
 set autoread hidden
 set background=dark
 set clipboard=unnamed
-set completeopt=menuone,noinsert,noselect pumheight=10
+set completeopt=menuone,noinsert,noselect pumheight=10 shortmess+=c
 set cursorline ruler
 set expandtab tabstop=4 shiftwidth=4
 set hlsearch incsearch ignorecase smartcase
 set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 set regexpengine=2
-set runtimepath^=~/.vim
+set splitright splitbelow
 set scrolloff=8
 set noswapfile viminfo=
 set undofile undodir=~/.vim/undo | call mkdir($HOME.'/.vim/undo', 'p')
@@ -19,9 +19,9 @@ set wildmenu
 
 inoremap <silent> jk <Esc>
 nnoremap <C-l> <CMD>nohlsearch<CR><Esc>
-nnoremap <space>d <CMD>new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
+nnoremap <space>d <CMD>vert new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
 nnoremap <silent> <space>n <CMD>Lex<CR>
-    let g:netrw_banner = 0 | let g:netrw_liststyle = 3 | let g:netrw_altv = 1 | let g:netrw_winsize = -28
+    let g:netrw_banner = 0 | let g:netrw_liststyle = 3 | let g:netrw_altv = 1 | let g:netrw_winsize = 30
 
 " ===== Plugin =====
 if empty(glob('~/.vim/plugged'))
@@ -30,8 +30,10 @@ if empty(glob('~/.vim/plugged'))
 endif
 
 call plug#begin('~/.vim/plugged')
-    Plug 'noahfrederick/vim-noctu'
+    Plug 'sainnhe/gruvbox-material'
     Plug 'tpope/vim-commentary'
+    Plug 'preservim/nerdtree'
+        nnoremap <space>n <CMD>NERDTreeToggle<CR>
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
         let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
@@ -39,25 +41,21 @@ call plug#begin('~/.vim/plugged')
         nnoremap <space>/ <CMD>Rg<CR>
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-        let g:lsp_diagnostics_virtual_text_enabled = 0
-        let g:lsp_diagnostics_echo_cursor = 1
-        let g:lsp_diagnostics_echo_delay = 100
-        let g:lsp_settings_enable_suggestions = 0
-        let g:lsp_settings = { 'copilot-language-server': {'disabled': v:false} }
+        let g:lsp_async_completion = 1
+        let g:lsp_semantic_enabled = 1
         function! LSPSetup() abort
-            setlocal omnifunc=lsp#complete
             setlocal signcolumn=yes
+            setlocal omnifunc=lsp#complete
             nnoremap <C-]> <plug>(lsp-definition)
-            nnoremap <C-W>] <CMD>leftabove LspDefinition<CR>
+            nnoremap <C-W>] <CMD>vertical LspDefinition<CR>
             nnoremap grn <plug>(lsp-rename)
             nnoremap grr <plug>(lsp-references)
             nnoremap K <plug>(lsp-hover)
             nnoremap <space>e <plug>(lsp-document-diagnostics)
-            nnoremap <buffer> [d <plug>(lsp-previous-diagnostic)
-            nnoremap <buffer> ]d <plug>(lsp-next-diagnostic)
+            au InsertCharPre <buffer> if !pumvisible() && len(matchstr(getline('.'), '\k\{2,}$')) >= 2
+                \ | call feedkeys("\<c-x>\<c-o>", 'n') | endif
         endfunction
         aug lsp_install | au! | au User lsp_buffer_enabled cal LSPSetup() | aug END
+    Plug 'github/copilot.vim'
 call plug#end()
-colorscheme noctu | hi CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+colorscheme gruvbox-material

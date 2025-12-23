@@ -13,17 +13,15 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 mkdir -p "${XDG_STATE_HOME}"/bash
-export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
 export HISTFILE="$XDG_STATE_HOME"/bash/history
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo
-export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
-export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
-export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
-export SCREENDIR=/tmp/screen-$USER
 
 # ===== Aliases =====
 alias ls='ls --color=auto'
