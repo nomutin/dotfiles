@@ -13,11 +13,11 @@ set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 set regexpengine=2
 set splitright splitbelow
 set scrolloff=8
-set noswapfile viminfo=
-set undofile undodir=~/.vim/undo | call mkdir($HOME.'/.vim/undo', 'p')
+set noswapfile viminfo= undofile undodir=~/.vim/undo | call mkdir($HOME.'/.vim/undo', 'p')
 set wildmenu
 
 inoremap <silent> jk <Esc>
+tnoremap jk <C-\><C-n>
 nnoremap <C-l> <CMD>nohlsearch<CR><Esc>
 nnoremap <space>d <CMD>vert new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
 nnoremap <silent> <space>n <CMD>Lex<CR>
@@ -41,6 +41,7 @@ call plug#begin('~/.vim/plugged')
         nnoremap <space>/ <CMD>Rg<CR>
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
+        let g:lsp_diagnostics_virtual_text_enabled = 0
         let g:lsp_async_completion = 1
         let g:lsp_semantic_enabled = 1
         function! LSPSetup() abort
@@ -52,7 +53,7 @@ call plug#begin('~/.vim/plugged')
             nnoremap grr <plug>(lsp-references)
             nnoremap K <plug>(lsp-hover)
             nnoremap <space>e <plug>(lsp-document-diagnostics)
-            aug cmpl | au! | au InsertCharPre <buffer> if !pumvisible() | call feedkeys("\<c-x>\<c-o>", 'n') | endif | aug END
+            aug cmpl | au! | au InsertCharPre <buffer> if !pumvisible() | cal feedkeys("\<c-x>\<c-o>", 'n') | en | aug END
         endfunction
         aug lsp_install | au! | au User lsp_buffer_enabled cal LSPSetup() | aug END
     Plug 'github/copilot.vim'

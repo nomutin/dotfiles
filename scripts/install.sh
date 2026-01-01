@@ -107,8 +107,6 @@ deploy_profile() {
 deploy_vimrc() {
   local vimrc_source="${DOTFILES_DIR}/config/vimrc"
   create_symlink "${vimrc_source}" "${HOME}/.vimrc"
-  mkdir -p "${XDG_CONFIG_DIR}/nvim"
-  create_symlink "${vimrc_source}" "${XDG_CONFIG_DIR}/nvim/init.vim"
 }
 
 # Setup for MacOS
