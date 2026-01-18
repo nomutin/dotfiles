@@ -17,7 +17,6 @@ set noswapfile viminfo= undofile undodir=~/.vim/undo | call mkdir($HOME.'/.vim/u
 set wildmenu
 
 inoremap <silent> jk <Esc>
-tnoremap jk <C-\><C-n>
 nnoremap <C-l> <CMD>nohlsearch<CR><Esc>
 nnoremap <space>d <CMD>vert new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
 nnoremap <silent> <space>n <CMD>Lex<CR>

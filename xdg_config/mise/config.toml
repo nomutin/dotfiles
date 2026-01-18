@@ -1,10 +1,11 @@
 [tools]
 bun = "latest"
+"npm:@github/copilot" = "latest"
 fastfetch = "latest"
-gemini-cli = "latest"
 go = "latest"
 jq = "latest"
 tmux = "latest"
+lazydocker = "latest"
 lazygit = "latest"
 node = "latest"
 uv = "latest"
@@ -24,7 +25,12 @@ tombi = "latest"
 shellcheck = "latest"
 shfmt = "latest"
 stylua = "latest"
-"go:github.com/tursodatabase/turso-cli/cmd/turso" = "latest"
+
+# Mac
+"github:machlit/cutler" = "latest"
+colima = "latest"
+docker-cli = "latest"
+lima = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = []
