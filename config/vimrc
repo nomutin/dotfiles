@@ -31,7 +31,11 @@ endif
 call plug#begin('~/.vim/plugged')
     Plug 'sainnhe/gruvbox-material'
     Plug 'tpope/vim-commentary'
+    Plug 'ap/vim-buftabline'
+        nnoremap <space>h <CMD>bnext<CR>
+        nnoremap <space>l <CMD>bprevious<CR>
     Plug 'preservim/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
         nnoremap <space>n <CMD>NERDTreeToggle<CR>
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
