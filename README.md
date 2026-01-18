@@ -22,7 +22,7 @@ bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/script
 | Shell       | [bash](https://www.gnu.org/software/bash/)     | [config/bashrc](./config/bashrc)                               |
 | CLI Manager | [mise](https://mise.jdx.dev/)                  | [xdg_config/mise/config.toml](./xdg_config/mise/config.toml)   |
 | GUI Manager | [Homebrew](https://brew.sh)                    | [config/Brewfile](./config/Brewfile)                           |
-| Multiplexer | [tmux](https://github.com/tmux/tmux/wiki)      | N/A                                                            |
+| Multiplexer | [tmux](https://github.com/tmux/tmux/wiki)      | [xdg_config/tmux/tmux.conf](./xdg_config/tmux/tmux.conf)       |
 | Text Editor | [vim](https://www.vim.org)                     | [config/vimrc](./config/vimrc)                                 |
 
 ## Previous Configs
