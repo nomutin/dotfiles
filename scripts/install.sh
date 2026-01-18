@@ -112,9 +112,13 @@ deploy_vimrc() {
 # Setup for MacOS
 setup_macos() {
   if [[ "$(uname)" == "Darwin" ]]; then
-    local macos_script="${DOTFILES_DIR}/scripts/init_macos.sh"
-    log_info "Running MacOS setup script..."
-    bash "${macos_script}"
+    if ! (xcode-select -p &>/dev/null); then
+      xcode-select --install
+    fi
+    if ! (type 'brew' >/dev/null 2>&1); then
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+    cutler apply --brew
   fi
 }
 
@@ -125,7 +129,7 @@ main() {
   deploy_bashrc
   deploy_profile
   deploy_vimrc
-  # setup_macos
+  setup_macos
   log_info "Dotfiles setup completed successfully."
 }
 
