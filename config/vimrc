@@ -9,12 +9,13 @@ set completeopt=menuone,noinsert,noselect pumheight=10 shortmess+=c
 set cursorline ruler
 set expandtab tabstop=4 shiftwidth=4
 set hlsearch incsearch ignorecase smartcase
-set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+ nowrap
 set regexpengine=2
 set splitright splitbelow
 set scrolloff=8
 set noswapfile viminfo= undofile undodir=~/.vim/undo | call mkdir($HOME.'/.vim/undo', 'p')
 set wildmenu
+let &t_SI = "\e[5 q" | let &t_SR = "\e[4 q" | let &t_EI = "\e[2 q" 
 
 inoremap <silent> jk <Esc>
 nnoremap <C-l> <CMD>nohlsearch<CR><Esc>
@@ -31,9 +32,6 @@ endif
 call plug#begin('~/.vim/plugged')
     Plug 'sainnhe/gruvbox-material'
     Plug 'tpope/vim-commentary'
-    Plug 'ap/vim-buftabline'
-        nnoremap <space>h <CMD>bnext<CR>
-        nnoremap <space>l <CMD>bprevious<CR>
     Plug 'preservim/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
         nnoremap <space>n <CMD>NERDTreeToggle<CR>

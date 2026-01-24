@@ -1,36 +1,33 @@
 [tools]
 bun = "latest"
-"npm:@github/copilot" = "latest"
-fastfetch = "latest"
-go = "latest"
+# "npm:@github/copilot" = "latest"
 jq = "latest"
 tmux = "latest"
 lazydocker = "latest"
 lazygit = "latest"
-node = "latest"
-uv = "latest"
+# node = "latest"
 ripgrep = "latest"
+uv = "latest"
 
 # LSP
-"npm:bash-language-server" = "latest"
-"go:golang.org/x/tools/gopls" = "latest"
-lua-language-server = "latest"
-tombi = "latest"
-"npm:vscode-langservers-extracted" = "latest"
-"npm:@vtsls/language-server" = "latest"
-"npm:yaml-language-server" = "latest"
+# "npm:bash-language-server" = "latest"
+# lua-language-server = "latest"
+# tombi = "latest"
+# "npm:vscode-langservers-extracted" = "latest"
+# "npm:@vtsls/language-server" = "latest"
+# "npm:yaml-language-server" = "latest"
 
 # Linter/Formatter
-"npm:markuplint" = "latest"
-shellcheck = "latest"
-shfmt = "latest"
-stylua = "latest"
+# "npm:markuplint" = "latest"
+# shellcheck = "latest"
+# shfmt = "latest"
+# stylua = "latest"
 
-# Mac
-"github:machlit/cutler" = "latest"
-colima = "latest"
-docker-cli = "latest"
-lima = "latest"
+# MacOS
+"github:machlit/cutler" = { version = "latest", os = ["macos"] }
+colima = { version = "latest", os = ["macos"] }
+docker-cli = { version = "latest", os = ["macos"] }
+lima = { version = "latest", os = ["macos"] }
 
 [settings]
 idiomatic_version_file_enable_tools = []

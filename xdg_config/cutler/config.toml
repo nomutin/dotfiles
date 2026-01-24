@@ -23,7 +23,7 @@ FXDefaultSearchScope = "SCcf"
 
 [set.AppleMultitouchTrackpad]
 FirstClickThreshold = 0
-TrackpadThreeFingerDrag = true
+TrackpadThreeFingerDrag = false
 Clicking = true
 
 [set.dock]
