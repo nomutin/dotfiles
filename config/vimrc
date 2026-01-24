@@ -9,13 +9,13 @@ set completeopt=menuone,noinsert,noselect pumheight=10 shortmess+=c
 set cursorline ruler
 set expandtab tabstop=4 shiftwidth=4
 set hlsearch incsearch ignorecase smartcase
-set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+ nowrap
 set regexpengine=2
 set splitright splitbelow
 set scrolloff=8
-set noswapfile viminfo=
-set undofile undodir=~/.vim/undo | call mkdir($HOME.'/.vim/undo', 'p')
+set noswapfile viminfo= undofile undodir=~/.vim/undo | call mkdir($HOME.'/.vim/undo', 'p')
 set wildmenu
+let &t_SI = "\e[5 q" | let &t_SR = "\e[4 q" | let &t_EI = "\e[2 q" 
 
 inoremap <silent> jk <Esc>
 nnoremap <C-l> <CMD>nohlsearch<CR><Esc>
@@ -33,6 +33,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'sainnhe/gruvbox-material'
     Plug 'tpope/vim-commentary'
     Plug 'preservim/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
         nnoremap <space>n <CMD>NERDTreeToggle<CR>
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -41,6 +42,7 @@ call plug#begin('~/.vim/plugged')
         nnoremap <space>/ <CMD>Rg<CR>
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
+        let g:lsp_diagnostics_virtual_text_enabled = 0
         let g:lsp_async_completion = 1
         let g:lsp_semantic_enabled = 1
         function! LSPSetup() abort
@@ -52,7 +54,7 @@ call plug#begin('~/.vim/plugged')
             nnoremap grr <plug>(lsp-references)
             nnoremap K <plug>(lsp-hover)
             nnoremap <space>e <plug>(lsp-document-diagnostics)
-            aug cmpl | au! | au InsertCharPre <buffer> if !pumvisible() | call feedkeys("\<c-x>\<c-o>", 'n') | endif | aug END
+            aug cmpl | au! | au InsertCharPre <buffer> if !pumvisible() | cal feedkeys("\<c-x>\<c-o>", 'n') | en | aug END
         endfunction
         aug lsp_install | au! | au User lsp_buffer_enabled cal LSPSetup() | aug END
     Plug 'github/copilot.vim'

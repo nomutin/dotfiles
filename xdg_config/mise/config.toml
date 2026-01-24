@@ -1,31 +1,33 @@
 [tools]
 bun = "latest"
-"ubi:fastfetch-cli/fastfetch" = "latest"
-"npm:@google/gemini-cli" = "latest"
-go = "latest"
+# "npm:@github/copilot" = "latest"
 jq = "latest"
 tmux = "latest"
+lazydocker = "latest"
 lazygit = "latest"
-node = "latest"
-uv = "latest"
+# node = "latest"
 ripgrep = "latest"
+uv = "latest"
 
 # LSP
-"npm:bash-language-server" = "latest"
-"npm:@github/copilot-language-server" = "1.270.0"
-"go:golang.org/x/tools/gopls" = "latest"
-lua-language-server = "latest"
-"ubi:tombi-toml/tombi" = "latest"
-"npm:vscode-langservers-extracted" = "latest"
-"npm:@vtsls/language-server" = "latest"
-"npm:yaml-language-server" = "latest"
+# "npm:bash-language-server" = "latest"
+# lua-language-server = "latest"
+# tombi = "latest"
+# "npm:vscode-langservers-extracted" = "latest"
+# "npm:@vtsls/language-server" = "latest"
+# "npm:yaml-language-server" = "latest"
 
 # Linter/Formatter
-"npm:markuplint" = "latest"
-shellcheck = "latest"
-shfmt = "latest"
-stylua = "0.19.0"
-"go:github.com/tursodatabase/turso-cli/cmd/turso" = "latest"
+# "npm:markuplint" = "latest"
+# shellcheck = "latest"
+# shfmt = "latest"
+# stylua = "latest"
+
+# MacOS
+"github:machlit/cutler" = { version = "latest", os = ["macos"] }
+colima = { version = "latest", os = ["macos"] }
+docker-cli = { version = "latest", os = ["macos"] }
+lima = { version = "latest", os = ["macos"] }
 
 [settings]
 idiomatic_version_file_enable_tools = []

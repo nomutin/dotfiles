@@ -1,0 +1,74 @@
+template = true
+
+[set.menuextra.clock]
+FlashDateSeparators = false
+Show24Hour = true
+ShowAMPM = true
+ShowDate = true
+ShowDayOfWeek = true
+ShowSeconds = true
+
+[set.finder]
+AppleShowAllFiles = true
+AppleShowAllExtensions = true
+ShowPathbar = true
+ShowExternalHardDrivesOnDesktop = false
+ShowMountedServersOnDesktop = false
+SidebarTagsSctionDisclosedState = true
+ShowRecentTags = false
+FXEnableExtensionChangeWarning = false
+NewWindowTarget = "PfHm"
+NewWindowTargetPath = "file://${HOME}"
+FXDefaultSearchScope = "SCcf"
+
+[set.AppleMultitouchTrackpad]
+FirstClickThreshold = 0
+TrackpadThreeFingerDrag = false
+Clicking = true
+
+[set.dock]
+tilesize = 128
+autohide = true
+static-only = false
+show-recents = false
+autohide-delay = 0
+autohide-time-modifier = 0.0
+expose-group-apps = false
+
+[set.desktopservices]
+DSDontWriteNetworkStores = true
+
+[set.screencapture]
+type = "jpg"
+
+[set.NSGlobalDomain]
+KeyRepeat = 1
+InitialKeyRepeat = 10
+trackpad.scaling = 3
+mouse.scaling = 1.5
+mouse.tapBehavior = 1
+
+[set.TextEdit]
+RichText = false
+
+[vars]
+hostname = "MBA"
+
+[command.hostname]
+run = """
+scutil --set ComputerName $hostname
+scutil --set HostName $hostname
+scutil --set LocalHostName $hostname
+"""
+ensure_first = true
+sudo = true
+
+[brew]
+formulae = [
+    "make",
+    "mole",
+]
+casks = [
+    "visual-studio-code",
+]
+no_deps = true

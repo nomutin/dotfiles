@@ -33,5 +33,12 @@
     autoStash = true
     updateRefs = true
 [user]
-	email = nomura0508@icloud.com
-	name = nomutin
+    email = nomura0508@icloud.com
+    name = nomutin
+[alias]
+    tree = "log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#a0a0a0 reverse)%h%Creset %C(cyan)%ad%Creset %C(#dd4814)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n'"
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

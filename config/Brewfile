@@ -1,9 +1,0 @@
-cask_args appdir: "/Applications"
-
-tap "homebrew/bundle"
-
-brew "docker"
-brew "colima"
-
-cask "stats"
-cask "visual-studio-code"
