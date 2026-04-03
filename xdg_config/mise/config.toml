@@ -1,13 +1,16 @@
 [tools]
-bun = "latest"
-# "npm:@github/copilot" = "latest"
 jq = "latest"
-tmux = "latest"
-lazydocker = "latest"
 lazygit = "latest"
-# node = "latest"
 ripgrep = "latest"
-uv = "latest"
+
+# Optional
+# bun = "latest"
+# "npm:@github/copilot" = "latest"
+# fzf = "latest"
+# tmux = "latest"
+# lazydocker = "latest"
+# node = "latest"
+# uv = "latest"
 
 # LSP
 # "npm:bash-language-server" = "latest"
