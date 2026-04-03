@@ -69,6 +69,7 @@ formulae = [
     "mole",
 ]
 casks = [
+    "stats",
     "visual-studio-code",
 ]
 no_deps = true

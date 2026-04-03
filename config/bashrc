@@ -20,8 +20,6 @@ export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
 export HISTFILE="$XDG_STATE_HOME"/bash/history
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history
-export TERMINFO="$XDG_DATA_HOME"/terminfo
-export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo
 
 # ===== Aliases =====
 alias ls='ls --color=auto'
@@ -30,3 +28,5 @@ alias dd='du -sch $(ls -A)'
 
 # ===== Plugins =====
 eval "$(~/.local/bin/mise activate bash)"
+eval "$(fzf --bash)"
+

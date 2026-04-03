@@ -9,19 +9,17 @@ set completeopt=menuone,noinsert,noselect pumheight=10 shortmess+=c
 set cursorline ruler
 set expandtab tabstop=4 shiftwidth=4
 set hlsearch incsearch ignorecase smartcase
+set laststatus=2 number
 set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+ nowrap
 set regexpengine=2
 set splitright splitbelow
 set scrolloff=8
 set noswapfile viminfo= undofile undodir=~/.vim/undo | call mkdir($HOME.'/.vim/undo', 'p')
 set wildmenu
-let &t_SI = "\e[5 q" | let &t_SR = "\e[4 q" | let &t_EI = "\e[2 q" 
-
+let &t_SI = "\e[5 q" | let &t_SR = "\e[4 q" | let &t_EI = "\e[2 q"
 inoremap <silent> jk <Esc>
 nnoremap <C-l> <CMD>nohlsearch<CR><Esc>
 nnoremap <space>d <CMD>vert new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
-nnoremap <silent> <space>n <CMD>Lex<CR>
-    let g:netrw_banner = 0 | let g:netrw_liststyle = 3 | let g:netrw_altv = 1 | let g:netrw_winsize = 30
 
 " ===== Plugin =====
 if empty(glob('~/.vim/plugged'))
@@ -35,14 +33,16 @@ call plug#begin('~/.vim/plugged')
     Plug 'preservim/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
         nnoremap <space>n <CMD>NERDTreeToggle<CR>
+    Plug 'airblade/vim-gitgutter'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
         let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
         nnoremap <space>f <CMD>Files<CR>
         nnoremap <space>/ <CMD>Rg<CR>
+    Plug 'vim-airline/vim-airline'
     Plug 'prabirshrestha/vim-lsp'
+        let g:airline#extensions#lsp#enabled = 1
     Plug 'mattn/vim-lsp-settings'
-        let g:lsp_diagnostics_virtual_text_enabled = 0
         let g:lsp_async_completion = 1
         let g:lsp_semantic_enabled = 1
         function! LSPSetup() abort
