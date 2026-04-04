@@ -20,6 +20,7 @@ FXEnableExtensionChangeWarning = false
 NewWindowTarget = "PfHm"
 NewWindowTargetPath = "file://${HOME}"
 FXDefaultSearchScope = "SCcf"
+CalculateAllSizes = true
 
 [set.AppleMultitouchTrackpad]
 FirstClickThreshold = 0
@@ -35,21 +36,17 @@ autohide-delay = 0
 autohide-time-modifier = 0.0
 expose-group-apps = false
 
-[set.desktopservices]
-DSDontWriteNetworkStores = true
-
 [set.screencapture]
 type = "jpg"
 
 [set.NSGlobalDomain]
 KeyRepeat = 1
 InitialKeyRepeat = 10
-trackpad.scaling = 3
-mouse.scaling = 1.5
+trackpad.scaling = 3.0
+AppleMultitouchTrackpad.TrackpadTrackingSpeed = 3
+mouse.scaling = 3.0
 mouse.tapBehavior = 1
-
-[set.TextEdit]
-RichText = false
+AppleInterfaceStyle = "Dark"
 
 [vars]
 hostname = "MBA"

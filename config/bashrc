@@ -20,6 +20,7 @@ export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
 export HISTFILE="$XDG_STATE_HOME"/bash/history
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history
+export VIMINIT="let \$MYVIMRC=\"$XDG_CONFIG_HOME/vim/vimrc\" | source \$MYVIMRC"
 
 # ===== Aliases =====
 alias ls='ls --color=auto'

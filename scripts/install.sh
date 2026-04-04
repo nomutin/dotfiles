@@ -103,14 +103,9 @@ deploy_profile() {
   fi
 }
 
-# Deploy Vim configurations
-deploy_vimrc() {
-  local vimrc_source="${DOTFILES_DIR}/config/vimrc"
-  create_symlink "${vimrc_source}" "${HOME}/.vimrc"
-}
-
 # Setup for MacOS
-setup_macos() {
+setup_macos_pre() {
+  log_info "Setting up MacOS prerequisites..."
   if [[ "$(uname)" == "Darwin" ]]; then
     if ! (xcode-select -p &>/dev/null); then
       xcode-select --install
@@ -118,18 +113,24 @@ setup_macos() {
     if ! (type 'brew' >/dev/null 2>&1); then
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
+  fi
+}
+
+setup_macos_post() {
+  log_info "Applying settings with cutler..."
+  if [[ "$(uname)" == "Darwin" ]]; then
     cutler apply --brew
   fi
 }
 
 main() {
+  setup_macos_pre
   clone_repo
   deploy_xdg_configs
-  install_mise
   deploy_bashrc
   deploy_profile
-  deploy_vimrc
-  setup_macos
+  install_mise
+  setup_macos_post
   log_info "Dotfiles setup completed successfully."
 }
 
