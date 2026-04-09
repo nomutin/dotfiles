@@ -62,3 +62,4 @@ call plug#begin('~/.local/share/vim/plugged')
         let g:lsp_settings = {'copilot-language-server': {'disabled': v:false}}
 call plug#end()
 colorscheme gruvbox-material
+highlight! link NonText Comment
