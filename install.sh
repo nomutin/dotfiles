@@ -65,14 +65,24 @@ deploy_xdg_configs() {
 # Deploy Bash configuration
 deploy_bashrc() {
   local bashrc_file="${HOME}/.bashrc"
-  local bashrc_source="${HOME}/.dotfiles/config/bashrc"
+  local bashrc_source="source \"\$HOME/.dotfiles/dot_config/bashrc\""
   if [ -L "${bashrc_file}" ]; then
-    log_skip ".bashrc is a symlink, skipping."
+    current_link=$(readlink "${bashrc_file}")
+    if [ "${current_link}" = "${DOTFILES_DIR}/config/bashrc" ]; then
+      log_skip ".bashrc is already a symlink to dotfiles config, skipping."
+    else
+      log_info ".bashrc is a different symlink, updating to point to dotfiles config."
+      ln -sf "${DOTFILES_DIR}/config/bashrc" "${bashrc_file}"
+    fi
   elif [ -e "${bashrc_file}" ]; then
-    cat "${bashrc_source}" >>"${bashrc_file}"
-    log_info "Appended source command to existing .bashrc"
+    if ! grep -Fxq "${bashrc_source}" "${bashrc_file}"; then
+      log_info "Appending source command to existing .bashrc"
+      echo "${bashrc_source}" >>"${bashrc_file}"
+    else
+      log_skip ".bashrc already sources the dotfiles bashrc."
+    fi
   else
-    create_symlink "${bashrc_source}" "${bashrc_file}"
+    create_symlink "${DOTFILES_DIR}/config/bashrc" "${bashrc_file}"
   fi
   log_info "Sourcing .bashrc..."
   # shellcheck source=/dev/null
@@ -82,7 +92,7 @@ deploy_bashrc() {
 # Deploy .profile
 deploy_profile() {
   local profile_file="${HOME}/.profile"
-  local profile_source="${HOME}/.dotfiles/config/profile"
+  local profile_source="${HOME}/.dotfiles/dot_config/profile"
   if [ -L "${profile_file}" ]; then
     log_skip ".profile is a symlink, skipping."
   elif [ -e "${profile_file}" ]; then
@@ -103,7 +113,8 @@ setup_macos() {
   if ! (xcode-select -p &>/dev/null); then
     xcode-select --install
   fi
-  if ! (mole -p &>/dev/null); then
+  if ! (mo -p &>/dev/null); then
+    log_info "mole not found, installing..."
     curl -fsSL https://raw.githubusercontent.com/tw93/mole/main/install.sh | bash
   fi
 }

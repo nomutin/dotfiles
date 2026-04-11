@@ -19,8 +19,8 @@ jobs:
           reporter: github-pr-review
           pattern: |
             *.sh
-            config/bashrc
-            config/profile
+            dot_config/bashrc
+            dot_config/profile
           exclude: "./.git/*"
           check_all_files_with_shebangs: "false"
       - name: Run Vint
