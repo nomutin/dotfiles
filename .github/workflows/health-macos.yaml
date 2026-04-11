@@ -14,3 +14,7 @@ jobs:
         run: bash install.sh
         env:
           GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify ll command
+        run: bash -lc 'source ~/.bashrc && ll >/dev/null'
+      - name: Verify jq command
+        run: bash -lc 'source ~/.bashrc && jq --version >/dev/null'

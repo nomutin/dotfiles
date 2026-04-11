@@ -1,6 +1,7 @@
 # .dotfiles
 
-[![ci](https://github.com/nomutin/dotfiles/actions/workflows/ci.yaml/badge.svg)](https://github.com/nomutin/dotfiles/actions/workflows/ci.yaml)
+[![macOS](https://github.com/nomutin/dotfiles/actions/workflows/health-macos.yaml/badge.svg)](https://github.com/nomutin/dotfiles/actions/workflows/health-macos.yaml)
+[![Ubuntu](https://github.com/nomutin/dotfiles/actions/workflows/health-ubuntu.yaml/badge.svg)](https://github.com/nomutin/dotfiles/actions/workflows/health-ubuntu.yaml)
 
 ```shell
 curl -fsSL https://nomutin.github.io/dotfiles/install.sh | bash
