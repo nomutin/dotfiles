@@ -14,6 +14,7 @@ ripgrep = "latest"
 
 # LSP
 # "npm:bash-language-server" = "latest"
+# "npm:@github/copilot-language-server" = "latest"
 # lua-language-server = "latest"
 # tombi = "latest"
 # "npm:vscode-langservers-extracted" = "latest"

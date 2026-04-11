@@ -9,11 +9,11 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-22.04, ubuntu-latest]
+        os: [ubuntu-22.04, ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: Install
-        run: bash scripts/install.sh
+        run: bash install.sh
         env:
           GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}

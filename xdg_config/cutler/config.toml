@@ -13,30 +13,39 @@ AppleShowAllFiles = true
 AppleShowAllExtensions = true
 ShowPathbar = true
 ShowExternalHardDrivesOnDesktop = false
+ShowHardDrivesOnDesktop = false
 ShowMountedServersOnDesktop = false
 SidebarTagsSctionDisclosedState = true
 ShowRecentTags = false
 FXEnableExtensionChangeWarning = false
+FXPreferredViewStyle = "Nlsv"
 NewWindowTarget = "PfHm"
 NewWindowTargetPath = "file://${HOME}"
 FXDefaultSearchScope = "SCcf"
+FXCalculateAllSizes = true
 
 [set.AppleMultitouchTrackpad]
 FirstClickThreshold = 0
 TrackpadThreeFingerDrag = false
 Clicking = true
+TrackpadTrackingSpeed = 3.0
+
+[set.WindowManager]
+EnableStandardClickToShowDesktop = false
 
 [set.dock]
 tilesize = 128
 autohide = true
 static-only = false
 show-recents = false
-autohide-delay = 0
+autohide-delay = 0.0
 autohide-time-modifier = 0.0
 expose-group-apps = false
+wvous-bl-corner = 10
+wvous-br-corner = 5
 
-[set.desktopservices]
-DSDontWriteNetworkStores = true
+[set.controlcenter]
+"NSStatusItem VisibleCC Bluetooth" = 1
 
 [set.screencapture]
 type = "jpg"
@@ -44,12 +53,11 @@ type = "jpg"
 [set.NSGlobalDomain]
 KeyRepeat = 1
 InitialKeyRepeat = 10
-trackpad.scaling = 3
-mouse.scaling = 1.5
+trackpad.scaling = 3.0
+mouse.scaling = 3.0
 mouse.tapBehavior = 1
-
-[set.TextEdit]
-RichText = false
+AppleInterfaceStyle = "Dark"
+"com.apple.trackpad.scaling" = 3.0
 
 [vars]
 hostname = "MBA"
@@ -63,13 +71,19 @@ scutil --set LocalHostName $hostname
 ensure_first = true
 sudo = true
 
-[brew]
-formulae = [
-    "make",
-    "mole",
-]
-casks = [
-    "stats",
-    "visual-studio-code",
-]
-no_deps = true
+[command.keymap]
+run = """
+hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc": 0x700000039, "HIDKeyboardModifierMappingDst": 0x7000000E0}]}'
+"""
+
+[command.other]
+run = """
+defaults write com.apple.TextEdit RichText -bool false
+defaults -currentHost write com.apple.controlcenter Bluetooth -int 2
+defaults write com.apple.sidebarlists systemitems -dict-add "ShowApplications" -bool true
+"""
+
+[command.thirdparty]
+run = """
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+"""

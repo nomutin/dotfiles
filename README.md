@@ -11,24 +11,35 @@ Minimal dotfiles for my `macOS` and `Linux`.
 </div>
 
 ```shell
-bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/scripts/install.sh)"
+bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/install.sh)"
 ```
 
-## Apps
+Settings for:
 
-| #           | App                                            | Config                                                         |
-| ----------- | ---------------------------------------------- | -------------------------------------------------------------- |
-| Shell       | [bash](https://www.gnu.org/software/bash/)     | [config/bashrc](./config/bashrc)                               |
-| CLI Manager | [mise](https://mise.jdx.dev/)                  | [xdg_config/mise/config.toml](./xdg_config/mise/config.toml)   |
-| GUI Manager | [Homebrew](https://brew.sh)                    | [config/Brewfile](./config/Brewfile)                           |
-| Multiplexer | [tmux](https://github.com/tmux/tmux/wiki)      | [xdg_config/tmux/tmux.conf](./xdg_config/tmux/tmux.conf)       |
-| Text Editor | [vim](https://www.vim.org)                     | [config/vimrc](./config/vimrc)                                 |
+- [bash](./dot_config/bashrc) (shell)
+- [vim](./xdg_config/vim/vimrc) (text editor)
+- [tmux](./xdg_config/tmux/tmux.conf) (multiplexer)
+- [mise](./xdg_config/mise/config.toml) (CLI manager)
+- [cutler](./xdg_config/cutler/config.toml) (macOS systems)
 
-## Previous Configs
 
-| App       | Config                                                                                                                               |
-| :-------: | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Neovim    | [https://gist.github.com/nomutin/512f27a7b8bf8969a43d9ff0483938da](https://gist.github.com/nomutin/512f27a7b8bf8969a43d9ff0483938da) |
-| Alacritty | [https://gist.github.com/nomutin/6f7640e77576ef585c9fb7dc15ff9f13](https://gist.github.com/nomutin/6f7640e77576ef585c9fb7dc15ff9f13) |
-| Ghostty   | [https://gist.github.com/nomutin/b626b919d8dcabdff6da39e342a8f16a](https://gist.github.com/nomutin/b626b919d8dcabdff6da39e342a8f16a) |
-| Zellij    | [https://gist.github.com/nomutin/ddf64ec5602727f43d81357648adb189](https://gist.github.com/nomutin/ddf64ec5602727f43d81357648adb189) |
+## App-Specific
+
+- bash
+
+    ```bash
+    curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/dot_config/bashrc -o ~/.bashrc
+    ```
+
+- vim
+
+    ```bash
+    curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/xdg_config/vim/vimrc -o ~/.vimrc
+    ```
+
+- tmux
+
+    ```bash
+    curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/xdg_config/tmux/tmux.conf -o ~/.tmux.conf
+    ```
+

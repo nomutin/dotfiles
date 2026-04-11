@@ -1,5 +1,3 @@
-" >>> `curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/config/vimrc -o ~/.vimrc`
-
 " ===== Builtin =====
 set encoding=utf-8
 set autoread hidden
@@ -9,12 +7,13 @@ set completeopt=menuone,noinsert,noselect pumheight=10 shortmess+=c
 set cursorline ruler
 set expandtab tabstop=4 shiftwidth=4
 set hlsearch incsearch ignorecase smartcase
-set laststatus=2 number
+set laststatus=2
 set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+ nowrap
 set regexpengine=2
+set runtimepath+=$HOME/.local/share/vim | call mkdir($HOME.'/.local/share/vim', 'p')
 set splitright splitbelow
 set scrolloff=8
-set noswapfile viminfo= undofile undodir=~/.vim/undo | call mkdir($HOME.'/.vim/undo', 'p')
+set noswapfile viminfo= undofile undodir=~/.cache/vim/undo | call mkdir($HOME.'/.cache/vim/undo', 'p')
 set wildmenu
 let &t_SI = "\e[5 q" | let &t_SR = "\e[4 q" | let &t_EI = "\e[2 q"
 inoremap <silent> jk <Esc>
@@ -22,12 +21,12 @@ nnoremap <C-l> <CMD>nohlsearch<CR><Esc>
 nnoremap <space>d <CMD>vert new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
 
 " ===== Plugin =====
-if empty(glob('~/.vim/plugged'))
+if empty(glob('~/.local/share/vim/autoload/plug.vim'))
     let plug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs '.plug_url
+    silent execute '!curl -fLo ~/.local/share/vim/autoload/plug.vim --create-dirs '.plug_url
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/vim/plugged')
     Plug 'sainnhe/gruvbox-material'
     Plug 'tpope/vim-commentary'
     Plug 'preservim/nerdtree'
@@ -54,9 +53,11 @@ call plug#begin('~/.vim/plugged')
             nnoremap grr <plug>(lsp-references)
             nnoremap K <plug>(lsp-hover)
             nnoremap <space>e <plug>(lsp-document-diagnostics)
-            aug cmpl | au! | au InsertCharPre <buffer> if !pumvisible() | cal feedkeys("\<c-x>\<c-o>", 'n') | en | aug END
         endfunction
         aug lsp_install | au! | au User lsp_buffer_enabled cal LSPSetup() | aug END
-    Plug 'github/copilot.vim'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+        let g:lsp_settings = {'copilot-language-server': {'disabled': v:false}}
 call plug#end()
 colorscheme gruvbox-material
+highlight! link NonText Comment
