@@ -2,6 +2,7 @@
 
 [![macOS](https://github.com/nomutin/dotfiles/actions/workflows/health-macos.yaml/badge.svg)](https://github.com/nomutin/dotfiles/actions/workflows/health-macos.yaml)
 [![Ubuntu](https://github.com/nomutin/dotfiles/actions/workflows/health-ubuntu.yaml/badge.svg)](https://github.com/nomutin/dotfiles/actions/workflows/health-ubuntu.yaml)
+[![Distribution Links](https://github.com/nomutin/dotfiles/actions/workflows/deploy-distribution-links.yaml/badge.svg)](https://github.com/nomutin/dotfiles/actions/workflows/deploy-distribution-links.yaml)
 
 ```shell
 curl -fsSL https://nomutin.github.io/dotfiles/install.sh | bash
@@ -42,11 +43,20 @@ curl -fsSL https://nomutin.github.io/dotfiles/xdg_config/tmux/tmux.conf -o ~/.tm
 
 <summary>Unused Settings</summary>
 
-| App       | Config                                                                                                                               |
-| :-------: | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Neovim    | [https://gist.github.com/nomutin/512f27a7b8bf8969a43d9ff0483938da](https://gist.github.com/nomutin/512f27a7b8bf8969a43d9ff0483938da) |
-| Alacritty | [https://gist.github.com/nomutin/6f7640e77576ef585c9fb7dc15ff9f13](https://gist.github.com/nomutin/6f7640e77576ef585c9fb7dc15ff9f13) |
-| Ghostty   | [https://gist.github.com/nomutin/b626b919d8dcabdff6da39e342a8f16a](https://gist.github.com/nomutin/b626b919d8dcabdff6da39e342a8f16a) |
-| Zellij    | [https://gist.github.com/nomutin/ddf64ec5602727f43d81357648adb189](https://gist.github.com/nomutin/ddf64ec5602727f43d81357648adb189) |
+### Neovim
+
+[https://gist.github.com/nomutin/512f27a7b8bf8969a43d9ff0483938da](https://gist.github.com/nomutin/512f27a7b8bf8969a43d9ff0483938da)
+
+### Alacritty 
+
+[https://gist.github.com/nomutin/6f7640e77576ef585c9fb7dc15ff9f13](https://gist.github.com/nomutin/6f7640e77576ef585c9fb7dc15ff9f13)
+
+### Ghostty
+
+[https://gist.github.com/nomutin/b626b919d8dcabdff6da39e342a8f16a](https://gist.github.com/nomutin/b626b919d8dcabdff6da39e342a8f16a)
+
+### Zellij
+
+[https://gist.github.com/nomutin/ddf64ec5602727f43d81357648adb189](https://gist.github.com/nomutin/ddf64ec5602727f43d81357648adb189)
 
 </details>
