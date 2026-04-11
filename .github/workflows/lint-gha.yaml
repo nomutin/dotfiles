@@ -1,0 +1,18 @@
+name: lint-gha
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/**"
+
+jobs:
+  gha-lint:
+    name: Lint GitHub Actions Workflows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - name: Run actionlint
+        uses: rhysd/actionlint@03d0035246f3e81f36aed592ffb4bebf33a03106 # v1.7.7
