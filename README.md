@@ -14,17 +14,15 @@ Minimal dotfiles for my `macOS` and `Linux`.
 bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/scripts/install.sh)"
 ```
 
-## Apps
+Settings for:
 
-| #           | App                                            | Config                                                         |
-| ----------- | ---------------------------------------------- | -------------------------------------------------------------- |
-| Shell       | [bash](https://www.gnu.org/software/bash/)     | [config/bashrc](./config/bashrc)                               |
-| CLI Manager | [mise](https://mise.jdx.dev/)                  | [xdg_config/mise/config.toml](./xdg_config/mise/config.toml)   |
-| GUI Manager | [Homebrew](https://brew.sh)                    | [config/Brewfile](./config/Brewfile)                           |
-| Multiplexer | [tmux](https://github.com/tmux/tmux/wiki)      | [xdg_config/tmux/tmux.conf](./xdg_config/tmux/tmux.conf)       |
-| Text Editor | [vim](https://www.vim.org)                     | [config/vimrc](./config/vimrc)                                 |
+- [bash](./config/bashrc) (shell)
+- [vim](./xdg_config/vim/vimrc) (text editor)
+- [tmux](./xdg_config/tmux/tmux.conf) (multiplexer)
+- [mise](./xdg_config/mise/config.toml) (CLI manager)
+- [cutler](./xdg_config/cutler/config.toml) (MacOS systems)
 
-## Previous Configs
+## Previous Settings
 
 | App       | Config                                                                                                                               |
 | :-------: | ------------------------------------------------------------------------------------------------------------------------------------ |

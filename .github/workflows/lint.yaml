@@ -26,4 +26,4 @@ jobs:
       - name: Run Vint
         uses: ludvighz/vint-action@31fa19d060969bb48fcfd9044773d665bf03e8c3 # v1
         with:
-          path: config/vimrc
+          path: xdg_config/vim/vimrc

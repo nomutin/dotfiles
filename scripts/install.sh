@@ -65,24 +65,14 @@ deploy_xdg_configs() {
 # Deploy Bash configuration
 deploy_bashrc() {
   local bashrc_file="${HOME}/.bashrc"
-  local bashrc_source="source \"\$HOME/.dotfiles/config/bashrc\""
+  local bashrc_source="${HOME}/.dotfiles/config/bashrc"
   if [ -L "${bashrc_file}" ]; then
-    current_link=$(readlink "${bashrc_file}")
-    if [ "${current_link}" = "${DOTFILES_DIR}/config/bashrc" ]; then
-      log_skip ".bashrc is already a symlink to dotfiles config, skipping."
-    else
-      log_info ".bashrc is a different symlink, updating to point to dotfiles config."
-      ln -sf "${DOTFILES_DIR}/config/bashrc" "${bashrc_file}"
-    fi
+    log_skip ".bashrc is a symlink, skipping."
   elif [ -e "${bashrc_file}" ]; then
-    if ! grep -Fxq "${bashrc_source}" "${bashrc_file}"; then
-      log_info "Appending source command to existing .bashrc"
-      echo "${bashrc_source}" >>"${bashrc_file}"
-    else
-      log_skip ".bashrc already sources the dotfiles bashrc."
-    fi
+    cat "${bashrc_source}" >>"${bashrc_file}"
+    log_info "Appended source command to existing .bashrc"
   else
-    create_symlink "${DOTFILES_DIR}/config/bashrc" "${bashrc_file}"
+    create_symlink "${bashrc_source}" "${bashrc_file}"
   fi
   log_info "Sourcing .bashrc..."
   # shellcheck source=/dev/null
@@ -116,7 +106,6 @@ setup_macos() {
   if ! (mole -p &>/dev/null); then
     curl -fsSL https://raw.githubusercontent.com/tw93/mole/main/install.sh | bash
   fi
-  cutler apply
 }
 
 main() {
