@@ -1,4 +1,4 @@
-name: lint
+name: Lint Configs
 
 on:
   pull_request:

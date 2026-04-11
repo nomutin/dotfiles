@@ -1,4 +1,4 @@
-name: lint-gha
+name: Lint GitHub Actions Workflows
 
 on:
   pull_request:
