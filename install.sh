@@ -62,44 +62,37 @@ deploy_xdg_configs() {
   done
 }
 
-# Deploy Bash configuration
-deploy_bashrc() {
-  local bashrc_file="${HOME}/.bashrc"
-  local bashrc_source="source \"\$HOME/.dotfiles/dot_config/bashrc\""
-  if [ -L "${bashrc_file}" ]; then
-    current_link=$(readlink "${bashrc_file}")
-    if [ "${current_link}" = "${DOTFILES_DIR}/config/bashrc" ]; then
-      log_skip ".bashrc is already a symlink to dotfiles config, skipping."
-    else
-      log_info ".bashrc is a different symlink, updating to point to dotfiles config."
-      ln -sf "${DOTFILES_DIR}/config/bashrc" "${bashrc_file}"
-    fi
-  elif [ -e "${bashrc_file}" ]; then
-    if ! grep -Fxq "${bashrc_source}" "${bashrc_file}"; then
-      log_info "Appending source command to existing .bashrc"
-      echo "${bashrc_source}" >>"${bashrc_file}"
-    else
-      log_skip ".bashrc already sources the dotfiles bashrc."
-    fi
-  else
-    create_symlink "${DOTFILES_DIR}/config/bashrc" "${bashrc_file}"
-  fi
-  log_info "Sourcing .bashrc..."
-  # shellcheck source=/dev/null
-  source "${bashrc_file}"
-}
+# Deploy all dot config files to $HOME as dotfiles
+deploy_dot_configs() {
+  for item in "${DOTFILES_DIR}/dot_config/"*; do
+    base_item=$(basename "${item}")
+    target_file="${HOME}/.${base_item}"
+    source_line="source \"\$HOME/.dotfiles/dot_config/${base_item}\""
 
-# Deploy .profile
-deploy_profile() {
-  local profile_file="${HOME}/.profile"
-  local profile_source="${HOME}/.dotfiles/dot_config/profile"
-  if [ -L "${profile_file}" ]; then
-    log_skip ".profile is a symlink, skipping."
-  elif [ -e "${profile_file}" ]; then
-    cat "${profile_source}" >>"${profile_file}"
-    log_info "Appended source command to existing .profile"
-  else
-    create_symlink "${profile_source}" "${profile_file}"
+    if [ -L "${target_file}" ]; then
+      current_link=$(readlink "${target_file}")
+      if [ "${current_link}" = "${item}" ]; then
+        log_skip "${target_file} is already a symlink to dotfiles config, skipping."
+      else
+        log_info "${target_file} is a different symlink, updating to point to dotfiles config."
+        ln -sf "${item}" "${target_file}"
+      fi
+    elif [ -e "${target_file}" ]; then
+      if ! grep -Fxq "${source_line}" "${target_file}"; then
+        log_info "Appending source command to existing ${target_file}"
+        echo "${source_line}" >>"${target_file}"
+      else
+        log_skip "${target_file} already sources the dotfiles config."
+      fi
+    else
+      create_symlink "${item}" "${target_file}"
+    fi
+  done
+
+  if [ -e "${HOME}/.bashrc" ]; then
+    log_info "Sourcing .bashrc..."
+    # shellcheck source=/dev/null
+    source "${HOME}/.bashrc"
   fi
 }
 
@@ -113,7 +106,7 @@ setup_macos() {
   if ! (xcode-select -p &>/dev/null); then
     xcode-select --install
   fi
-  if ! (mo -p &>/dev/null); then
+  if ! command -v mo >/dev/null 2>&1; then
     log_info "mole not found, installing..."
     curl -fsSL https://raw.githubusercontent.com/tw93/mole/main/install.sh | bash
   fi
@@ -123,8 +116,7 @@ main() {
   setup_macos
   clone_repo
   deploy_xdg_configs
-  deploy_bashrc
-  deploy_profile
+  deploy_dot_configs
   install_mise
   log_info "Dotfiles setup completed successfully."
 }

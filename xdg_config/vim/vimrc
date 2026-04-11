@@ -1,5 +1,3 @@
-" >>> `curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/config/vimrc -o ~/.vimrc`
-
 " ===== Builtin =====
 set encoding=utf-8
 set autoread hidden

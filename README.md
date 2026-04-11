@@ -22,3 +22,24 @@ Settings for:
 - [mise](./xdg_config/mise/config.toml) (CLI manager)
 - [cutler](./xdg_config/cutler/config.toml) (macOS systems)
 
+
+## App-Specific
+
+- bash
+
+    ```bash
+    curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/dot_config/bashrc -o ~/.bashrc
+    ```
+
+- vim
+
+    ```bash
+    curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/xdg_config/vim/vimrc -o ~/.vimrc
+    ```
+
+- tmux
+
+    ```bash
+    curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/xdg_config/tmux/tmux.conf -o ~/.tmux.conf
+    ```
+
