@@ -9,7 +9,7 @@ set completeopt=menuone,noinsert,noselect pumheight=10 shortmess+=c
 set cursorline ruler
 set expandtab tabstop=4 shiftwidth=4
 set hlsearch incsearch ignorecase smartcase
-set laststatus=2 number
+set laststatus=2
 set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+ nowrap
 set regexpengine=2
 set runtimepath+=$HOME/.local/share/vim | call mkdir($HOME.'/.local/share/vim', 'p')

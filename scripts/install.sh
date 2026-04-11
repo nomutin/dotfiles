@@ -104,33 +104,28 @@ deploy_profile() {
 }
 
 # Setup for MacOS
-setup_macos_pre() {
-  log_info "Setting up MacOS prerequisites..."
-  if [[ "$(uname)" == "Darwin" ]]; then
-    if ! (xcode-select -p &>/dev/null); then
-      xcode-select --install
-    fi
-    if ! (type 'brew' >/dev/null 2>&1); then
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
+setup_macos() {
+  if [[ "$(uname)" != "Darwin" ]]; then
+    return
   fi
-}
 
-setup_macos_post() {
-  log_info "Applying settings with cutler..."
-  if [[ "$(uname)" == "Darwin" ]]; then
-    cutler apply --brew
+  log_info "Setting up MacOS prerequisites..."
+  if ! (xcode-select -p &>/dev/null); then
+    xcode-select --install
   fi
+  if ! (mole -p &>/dev/null); then
+    curl -fsSL https://raw.githubusercontent.com/tw93/mole/main/install.sh | bash
+  fi
+  cutler apply
 }
 
 main() {
-  setup_macos_pre
+  setup_macos
   clone_repo
   deploy_xdg_configs
   deploy_bashrc
   deploy_profile
   install_mise
-  setup_macos_post
   log_info "Dotfiles setup completed successfully."
 }
 

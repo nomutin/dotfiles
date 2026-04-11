@@ -22,7 +22,7 @@ FXPreferredViewStyle = "Nlsv"
 NewWindowTarget = "PfHm"
 NewWindowTargetPath = "file://${HOME}"
 FXDefaultSearchScope = "SCcf"
-CalculateAllSizes = true
+FXCalculateAllSizes = true
 
 [set.AppleMultitouchTrackpad]
 FirstClickThreshold = 0
@@ -73,16 +73,6 @@ sudo = true
 
 [command.keymap]
 run="""
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 240 "
-{
-  enabled = 1;
-  value = { parameters = (65535, 123, 9175040); type = standard; };
-}"
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 241 "
-{
-  enabled = 1;
-  value = { parameters = (65535, 124, 9175040); type = standard; };
-}"
 hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc": 0x700000039, "HIDKeyboardModifierMappingDst": 0x7000000E0}]}'
 """
 
@@ -90,20 +80,10 @@ hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc": 0x7
 run = """
 defaults write com.apple.TextEdit RichText -bool false
 defaults -currentHost write com.apple.controlcenter Bluetooth -int 2
+defaults write com.apple.sidebarlists systemitems -dict-add "ShowApplications" -bool true
 """
 
 [command.thirdparty]
 run = """
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 """
-
-[brew]
-formulae = [
-    "make",
-    "mole",
-]
-casks = [
-    "stats",
-    "visual-studio-code",
-]
-no_deps = true
