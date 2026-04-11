@@ -21,5 +21,3 @@ jobs:
         run: bash -ic 'type ll >/dev/null'
       - name: Verify jq command
         run: bash -ic 'jq --version >/dev/null'
-      - name: Verify
-        run: bash -ic 'xxxxxxxxxxx >/dev/null'
