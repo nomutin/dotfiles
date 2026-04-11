@@ -115,9 +115,9 @@ setup_macos() {
 main() {
   setup_macos
   clone_repo
+  install_mise
   deploy_xdg_configs
   deploy_dot_configs
-  install_mise
   log_info "Dotfiles setup completed successfully."
 }
 
