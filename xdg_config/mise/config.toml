@@ -4,28 +4,28 @@ lazygit = "latest"
 ripgrep = "latest"
 
 # Optional
-bun = "latest"
-"npm:@github/copilot" = "latest"
-fzf = "latest"
-tmux = "latest"
-lazydocker = "latest"
-node = "latest"
-uv = "latest"
+# bun = "latest"
+# "npm:@github/copilot" = "latest"
+# fzf = "latest"
+# tmux = "latest"
+# lazydocker = "latest"
+# node = "latest"
+# uv = "latest"
 
 # LSP
-"npm:bash-language-server" = "latest"
-"npm:@github/copilot-language-server" = "latest"
-lua-language-server = "latest"
-tombi = "latest"
-"npm:vscode-langservers-extracted" = "latest"
-"npm:@vtsls/language-server" = "latest"
-"npm:yaml-language-server" = "latest"
+# "npm:bash-language-server" = "latest"
+# "npm:@github/copilot-language-server" = "latest"
+# lua-language-server = "latest"
+# tombi = "latest"
+# "npm:vscode-langservers-extracted" = "latest"
+# "npm:@vtsls/language-server" = "latest"
+# "npm:yaml-language-server" = "latest"
 
 # Linter/Formatter
-"npm:markuplint" = "latest"
-shellcheck = "latest"
-shfmt = "latest"
-stylua = "latest"
+# "npm:markuplint" = "latest"
+# shellcheck = "latest"
+# shfmt = "latest"
+# stylua = "latest"
 
 # MacOS
 "github:machlit/cutler" = { version = "latest", os = ["macos"] }
