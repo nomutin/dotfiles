@@ -11,7 +11,7 @@ Minimal dotfiles for my `macOS` and `Linux`.
 </div>
 
 ```shell
-bash -c "$(curl https://raw.githubusercontent.com/nomutin/dotfiles/master/install.sh)"
+curl -fsSL https://nomutin.github.io/dotfiles/install.sh | bash
 ```
 
 Settings for:
@@ -22,24 +22,26 @@ Settings for:
 - [mise](./xdg_config/mise/config.toml) (CLI manager)
 - [cutler](./xdg_config/cutler/config.toml) (macOS systems)
 
+<details>
 
-## App-Specific
+<summary>App-Specific Installation</summary>
 
-- bash
+### bash
 
-    ```bash
-    curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/dot_config/bashrc -o ~/.bashrc
-    ```
+```bash
+curl -fsSL https://nomutin.github.io/dotfiles/dot_config/bashrc -o ~/.bashrc
+```
 
-- vim
+### vim
 
-    ```bash
-    curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/xdg_config/vim/vimrc -o ~/.vimrc
-    ```
+```bash
+curl -fsSL https://nomutin.github.io/dotfiles/xdg_config/vim/vimrc -o ~/.vimrc
+```
 
-- tmux
+### tmux
 
-    ```bash
-    curl -s https://raw.githubusercontent.com/nomutin/dotfiles/master/xdg_config/tmux/tmux.conf -o ~/.tmux.conf
-    ```
+```bash
+curl -fsSL https://nomutin.github.io/dotfiles/xdg_config/tmux/tmux.conf -o ~/.tmux.conf
+```
 
+</details>
