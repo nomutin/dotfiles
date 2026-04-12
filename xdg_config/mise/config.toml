@@ -7,6 +7,7 @@ ripgrep = "latest"
 # bun = "latest"
 # "npm:@github/copilot" = "latest"
 # fzf = "latest"
+# github-cli = "latest"
 # tmux = "latest"
 # lazydocker = "latest"
 # node = "latest"
@@ -38,4 +39,4 @@ idiomatic_version_file_enable_tools = []
 experimental = true
 
 [settings.npm]
-bun = true
+package_manager = "bun"

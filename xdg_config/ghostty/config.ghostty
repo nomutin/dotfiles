@@ -1,24 +1,23 @@
-# terminal
+# Terminal
 shell-integration = bash
 term = xterm-256color
 
-# appearance
+# Appearance
 theme = carbonfox
-background-opacity = 0.9
+background-opacity = 0.8
 cursor-style-blink = false
 window-padding-x = 8
 window-padding-y = 8
 
-# feat
+# Feat
 auto-update-channel = tip
 confirm-close-surface = false
 maximize = true
 macos-titlebar-style = hidden
-macos-icon = blueprint
 keybind = ctrl+opt+enter=toggle_maximize
 
-# font
-# font-family = Cica
+# Font
+font-family = "Osaka−等幅"
 font-size = 12
 font-thicken = true
 font-feature = -dlii
