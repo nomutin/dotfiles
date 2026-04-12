@@ -106,6 +106,9 @@ setup_macos() {
   if ! (xcode-select -p &>/dev/null); then
     xcode-select --install
   fi
+  if ! (type 'brew' >/dev/null 2>&1); then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
   if ! command -v mo >/dev/null 2>&1; then
     log_info "mole not found, installing..."
     curl -fsSL https://raw.githubusercontent.com/tw93/mole/main/install.sh | bash
@@ -115,9 +118,9 @@ setup_macos() {
 main() {
   setup_macos
   clone_repo
-  install_mise
-  deploy_xdg_configs
   deploy_dot_configs
+  deploy_xdg_configs
+  install_mise
   log_info "Dotfiles setup completed successfully."
 }
 
