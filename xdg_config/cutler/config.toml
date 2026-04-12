@@ -22,7 +22,8 @@ FXPreferredViewStyle = "Nlsv"
 NewWindowTarget = "PfHm"
 NewWindowTargetPath = "file://${HOME}"
 FXDefaultSearchScope = "SCcf"
-FXCalculateAllSizes = true
+FXCalculateAllSizes = false
+_FXCalculateAllSizes = false
 
 [set.AppleMultitouchTrackpad]
 FirstClickThreshold = 0
@@ -94,8 +95,6 @@ Killall Dock
 run = """
 defaults write com.apple.TextEdit RichText -bool false
 defaults -currentHost write com.apple.controlcenter Bluetooth -int 2
-defaults write com.apple.Finder _FXCalculateAllSizes -bool true
-killall Finder
 """
 
 [command.thirdparty]
@@ -108,6 +107,7 @@ formulae = [
     "mole",
 ]
 casks = [
+    "ghostty",
     "stats",
 ]
 no_deps = true

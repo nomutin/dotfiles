@@ -109,9 +109,15 @@ setup_macos() {
   if ! (type 'brew' >/dev/null 2>&1); then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
-  if ! command -v mo >/dev/null 2>&1; then
-    log_info "mole not found, installing..."
-    curl -fsSL https://raw.githubusercontent.com/tw93/mole/main/install.sh | bash
+  if [ ! -d "/Applications/Ghostty.app" ] && [ ! -d "${HOME}/Applications/Ghostty.app" ]; then
+    log_info "Installing Ghostty..."
+    brew install --cask ghostty
+  else
+    log_skip "Ghostty is already installed."
+  fi
+  if [ "$(basename "${SHELL}")" != "bash" ]; then
+    log_info "Changing login shell to bash..."
+    chsh -s "$(command -v bash)"
   fi
 }
 
