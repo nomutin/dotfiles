@@ -14,6 +14,7 @@ Settings for:
 - [vim](./xdg_config/vim/vimrc) (text editor)
 - [tmux](./xdg_config/tmux/tmux.conf) (multiplexer)
 - [mise](./xdg_config/mise/config.toml) (CLI manager)
+- [ghostty](./xdg_config/ghostty/config.ghostty) (terminal emulator)
 
 <details>
 
