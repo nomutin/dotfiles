@@ -22,7 +22,8 @@ FXPreferredViewStyle = "Nlsv"
 NewWindowTarget = "PfHm"
 NewWindowTargetPath = "file://${HOME}"
 FXDefaultSearchScope = "SCcf"
-FXCalculateAllSizes = true
+FXCalculateAllSizes = false
+_FXCalculateAllSizes = false
 
 [set.AppleMultitouchTrackpad]
 FirstClickThreshold = 0
@@ -76,14 +77,37 @@ run = """
 hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc": 0x700000039, "HIDKeyboardModifierMappingDst": 0x7000000E0}]}'
 """
 
+[command.dock]
+run = """
+dock_item() { 
+    printf '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>%s</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>', "$1" 
+} 
+Safari=$(dock_item /System/Cryptexes/App/System/Applications/Safari.app)
+Mail=$(dock_item /System/Applications/Mail.app)
+Calendar=$(dock_item /System/Applications/Calendar.app)
+Ghostty=$(dock_item /Applications/Ghostty.app)
+defaults delete com.apple.dock persistent-apps
+defaults write com.apple.dock persistent-apps -array "$Safari" "$Mail" "$Calendar" "$Ghostty"
+killall Dock
+"""
+
 [command.other]
 run = """
 defaults write com.apple.TextEdit RichText -bool false
 defaults -currentHost write com.apple.controlcenter Bluetooth -int 2
-defaults write com.apple.sidebarlists systemitems -dict-add "ShowApplications" -bool true
 """
 
 [command.thirdparty]
 run = """
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 """
+
+[brew]
+formulae = [
+    "mole",
+]
+casks = [
+    "ghostty",
+    "stats",
+]
+no_deps = true

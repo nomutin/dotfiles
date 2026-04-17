@@ -39,7 +39,6 @@ call plug#begin('~/.local/share/vim/plugged')
         nnoremap <space>f <CMD>Files<CR>
         nnoremap <space>/ <CMD>Rg<CR>
     Plug 'vim-airline/vim-airline'
-    Plug 'prabirshrestha/vim-lsp'
         let g:airline#extensions#lsp#enabled = 1
     Plug 'mattn/vim-lsp-settings'
         let g:lsp_async_completion = 1
@@ -55,9 +54,10 @@ call plug#begin('~/.local/share/vim/plugged')
             nnoremap <space>e <plug>(lsp-document-diagnostics)
         endfunction
         aug lsp_install | au! | au User lsp_buffer_enabled cal LSPSetup() | aug END
+    Plug 'prabirshrestha/vim-lsp'
+        let g:lsp_settings_filetype_python = ['ruff', 'ty']
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
-        let g:lsp_settings = {'copilot-language-server': {'disabled': v:false}}
+    Plug 'github/copilot.vim'
 call plug#end()
 colorscheme gruvbox-material
-highlight! link NonText Comment

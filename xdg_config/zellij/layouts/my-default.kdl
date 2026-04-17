@@ -1,0 +1,41 @@
+layout {
+    tab name="$PWD" hide_floating_panes=true {
+        floating_panes {
+            pane x="6%" y="3%" width="88%" height="88%" command="bash"
+        }
+        pane split_direction="vertical" {
+            pane size="65%" command="bash"
+            pane command="bash"
+        }
+        pane size=1 borderless=true {
+            plugin location="compact-bar"
+        }
+    }
+    tab name="$PWD2" hide_floating_panes=true {
+        floating_panes {
+            pane x="6%" y="3%" width="88%" height="88%" command="bash"
+        }
+        pane split_direction="vertical" {
+            pane size="65%" name="#0" command="bash"
+            pane split_direction="horizontal" {
+                pane name="#1"
+                pane name="#2"
+            }
+        }
+        pane size=1 borderless=true {
+            plugin location="compact-bar"
+        }
+    }
+    new_tab_template cwd="$HOME" hide_floating_panes=true {
+        floating_panes {
+            pane x="6%" y="3%" width="88%" height="88%" command="bash"
+        }
+        pane split_direction="vertical" {
+            pane size="65%" command="bash"
+            pane command="bash"
+        }
+        pane size=1 borderless=true {
+            plugin location="compact-bar"
+        }
+    }
+}
