@@ -14,7 +14,9 @@ Settings for:
 - [tmux](./xdg_config/tmux/tmux.conf) (multiplexer)
 - [mise](./xdg_config/mise/config.toml) (CLI manager)
 - [ghostty](./xdg_config/ghostty/config.ghostty) (terminal emulator)
-- ~~[neovim](./xdg_config/nvim/init.vim) (text editor)~~
+- ~~[neovim](./xdg_config/nvim/init.vim) (text editor)~~ **(unused)**
+- ~~[alacritty](./xdg_config/alacritty/alacritty.toml) (terminal emulator)~~ **(unused)**
+- ~~[zellij](./xdg_config/zellij/config.kdl) (terminal multiplexer)~~ **(unused)**
 
 <details>
 
@@ -36,15 +38,3 @@ curl -fsSL https://nomutin.github.io/dotfiles/xdg_config/tmux/tmux.conf -o ~/.tm
 
 <details>
 
-<summary>Unused Settings</summary>
-
-
-### Alacritty 
-
-- [https://gist.github.com/nomutin/6f7640e77576ef585c9fb7dc15ff9f13](https://gist.github.com/nomutin/6f7640e77576ef585c9fb7dc15ff9f13)
-
-### Zellij
-
-- [https://gist.github.com/nomutin/ddf64ec5602727f43d81357648adb189](https://gist.github.com/nomutin/ddf64ec5602727f43d81357648adb189)
-
-</details>

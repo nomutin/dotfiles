@@ -12,7 +12,7 @@ DOCKER_CONFIG = "${XDG_CONFIG_HOME}/docker"
 DOTNET_CLI_HOME = "${XDG_DATA_HOME}/dotnet"
 HISTFILE = "${XDG_STATE_HOME}/bash/history"
 LESSHISTFILE = "${XDG_STATE_HOME}/less/history"
-# VIMINIT = 'let ${MYVIMRC:-}="${XDG_CONFIG_HOME}/vim/vimrc" | source ${MYVIMRC:-}'
+VIMINIT = 'source ${XDG_CONFIG_HOME}/vim/vimrc'
 
 [shell_alias]
 ls = "ls --color=auto"
@@ -29,7 +29,6 @@ enter = [
 jq = "latest"
 lazygit = "latest"
 ripgrep = "latest"
-yt-dlp = { version = "latest", rename_exe = "yt-dlp" }
 
 [settings]
 env_shell_expand = true

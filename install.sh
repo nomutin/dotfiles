@@ -46,9 +46,10 @@ setup_mise() {
     curl https://mise.run | sh
   fi
   mise_cmd="eval \"\$(~/.local/bin/mise activate bash)\""
-  if ! grep -Fxq "${mise_cmd}" "${HOME}/.bash_profile"; then
+  profile="${HOME}/.bash_profile"
+  if [ ! -f "${profile}" ] || ! grep -Fxq "${mise_cmd}" "${profile}"; then
     log_info "Adding mise activation to .bash_profile"
-    echo "${mise_cmd}" >>"${HOME}/.bash_profile"
+    echo "${mise_cmd}" >>"${profile}"
   fi
   log_info "Installing dependencies with mise..."
   mise install -yq
