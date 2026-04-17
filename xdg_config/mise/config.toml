@@ -1,43 +1,39 @@
+[env]
+MISE_ENV = "full"
+PS1 = '\u@\h \W \$ '
+HISTSIZE = 10000
+HISTFILESIZE = 20000
+
+XDG_CONFIG_HOME = "${HOME}/.config"
+XDG_DATA_HOME = "${HOME}/.local/share"
+XDG_CACHE_HOME = "${HOME}/.cache"
+XDG_STATE_HOME = "${HOME}/.local/state"
+
+DOCKER_CONFIG = "${XDG_CONFIG_HOME}/docker"
+DOTNET_CLI_HOME = "${XDG_DATA_HOME}/dotnet"
+HISTFILE = "${XDG_STATE_HOME}/bash/history"
+LESSHISTFILE = "${XDG_STATE_HOME}/less/history"
+# VIMINIT = 'let ${MYVIMRC:-}="${XDG_CONFIG_HOME}/vim/vimrc" | source ${MYVIMRC:-}'
+
+[shell_alias]
+ls = "ls --color=auto"
+ll = "ls -la"
+dd = "du -sch $(ls -A)"
+
+[hooks]
+enter = [
+  "shopt -s checkwinsize",
+  'mkdir -p "${XDG_STATE_HOME}"/bash'
+]
+
 [tools]
 jq = "latest"
 lazygit = "latest"
 ripgrep = "latest"
-
-# Optional
-# bun = "latest"
-# fd = "latest"
-# fzf = "latest"
-# github-cli = "latest"
-# tmux = "latest"
-# lazydocker = "latest"
-# node = "latest"
-# "npm:@mariozechner/pi-coding-agent" = "latest"
-# uv = "latest"
-
-# LSP
-# "npm:bash-language-server" = "latest"
-# "npm:@github/copilot-language-server" = "latest"
-# lua-language-server = "latest"
-# tombi = "latest"
-# "npm:vscode-langservers-extracted" = "latest"
-# "npm:@vtsls/language-server" = "latest"
-# "npm:yaml-language-server" = "latest"
-
-# Linter/Formatter
-# "npm:markuplint" = "latest"
-# shellcheck = "latest"
-# shfmt = "latest"
-# stylua = "latest"
-
-# MacOS
-"github:machlit/cutler" = { version = "latest", os = ["macos"] }
-colima = { version = "latest", os = ["macos"] }
-docker-cli = { version = "latest", os = ["macos"] }
-lima = { version = "latest", os = ["macos"] }
+yt-dlp = { version = "latest", rename_exe = "yt-dlp" }
 
 [settings]
+env_shell_expand = true
 idiomatic_version_file_enable_tools = []
 experimental = true
 
-[settings.npm]
-package_manager = "bun"

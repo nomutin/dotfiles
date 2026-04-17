@@ -42,12 +42,15 @@ clone_repo() {
 }
 
 # Install mise if not already installed
-install_mise() {
+setup_mise() {
   if ! command -v mise >/dev/null 2>&1; then
     log_info "Installing mise..."
     curl https://mise.run | sh
-  else
-    log_skip "Mise is already installed."
+  fi
+  mise_cmd='eval "$(~/.local/bin/mise activate bash)"'
+  if ! grep -Fxq "${mise_cmd}" "${HOME}/.bash_profile"; then
+    log_info "Adding mise activation to .bash_profile"
+    echo "${mise_cmd}" >>"${HOME}/.bash_profile"
   fi
   log_info "Installing dependencies with mise..."
   mise install -yq
@@ -60,40 +63,6 @@ deploy_xdg_configs() {
     base_item=$(basename "${item}")
     create_symlink "${item}" "${XDG_CONFIG_DIR}/${base_item}"
   done
-}
-
-# Deploy all dot config files to $HOME as dotfiles
-deploy_dot_configs() {
-  for item in "${DOTFILES_DIR}/dot_config/"*; do
-    base_item=$(basename "${item}")
-    target_file="${HOME}/.${base_item}"
-    source_line="source \"\$HOME/.dotfiles/dot_config/${base_item}\""
-
-    if [ -L "${target_file}" ]; then
-      current_link=$(readlink "${target_file}")
-      if [ "${current_link}" = "${item}" ]; then
-        log_skip "${target_file} is already a symlink to dotfiles config, skipping."
-      else
-        log_info "${target_file} is a different symlink, updating to point to dotfiles config."
-        ln -sf "${item}" "${target_file}"
-      fi
-    elif [ -e "${target_file}" ]; then
-      if ! grep -Fxq "${source_line}" "${target_file}"; then
-        log_info "Appending source command to existing ${target_file}"
-        echo "${source_line}" >>"${target_file}"
-      else
-        log_skip "${target_file} already sources the dotfiles config."
-      fi
-    else
-      create_symlink "${item}" "${target_file}"
-    fi
-  done
-
-  if [ -e "${HOME}/.bashrc" ]; then
-    log_info "Sourcing .bashrc..."
-    # shellcheck source=/dev/null
-    source "${HOME}/.bashrc"
-  fi
 }
 
 # Setup for MacOS
@@ -116,9 +85,8 @@ setup_macos() {
 main() {
   setup_macos
   clone_repo
-  deploy_dot_configs
   deploy_xdg_configs
-  install_mise
+  setup_mise
   log_info "Dotfiles setup completed successfully."
 }
 
