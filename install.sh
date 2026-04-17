@@ -75,9 +75,6 @@ setup_macos() {
   if ! (type 'brew' >/dev/null 2>&1); then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
-  if [ "$(basename "${SHELL}")" != "bash" ]; then
-    chsh -s "$(command -v bash)"
-  fi
 }
 
 main() {

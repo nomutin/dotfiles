@@ -14,6 +14,7 @@ Settings for:
 - [tmux](./xdg_config/tmux/tmux.conf) (multiplexer)
 - [mise](./xdg_config/mise/config.toml) (CLI manager)
 - [ghostty](./xdg_config/ghostty/config.ghostty) (terminal emulator)
+- ~~[neovim](./xdg_config/nvim/init.vim) (text editor)~~
 
 <details>
 
@@ -37,9 +38,6 @@ curl -fsSL https://nomutin.github.io/dotfiles/xdg_config/tmux/tmux.conf -o ~/.tm
 
 <summary>Unused Settings</summary>
 
-### Neovim
-
-- [https://gist.github.com/nomutin/512f27a7b8bf8969a43d9ff0483938da](https://gist.github.com/nomutin/512f27a7b8bf8969a43d9ff0483938da)
 
 ### Alacritty 
 

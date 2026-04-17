@@ -88,7 +88,7 @@ Calendar=$(dock_item /System/Applications/Calendar.app)
 Ghostty=$(dock_item /Applications/Ghostty.app)
 defaults delete com.apple.dock persistent-apps
 defaults write com.apple.dock persistent-apps -array "$Safari" "$Mail" "$Calendar" "$Ghostty"
-Killall Dock
+killall Dock
 """
 
 [command.other]
