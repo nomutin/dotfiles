@@ -21,13 +21,11 @@ log_skip() {
 
 # Create symbolic link if target does not exist
 create_symlink() {
-  local source="$1"
-  local target="$2"
-  if [ -e "${target}" ] || [ -L "${target}" ]; then
-    log_skip "Target exists, skipping: ${target}"
+  if [ -e "$2" ] || [ -L "$2" ]; then
+    log_skip "Target exists, skipping: $2"
   else
-    log_info "Creating symlink: ${target} -> ${source}"
-    ln -s "${source}" "${target}"
+    log_info "Creating symlink: $2 -> $1"
+    ln -s "$1" "$2"
   fi
 }
 
@@ -47,7 +45,7 @@ setup_mise() {
     log_info "Installing mise..."
     curl https://mise.run | sh
   fi
-  mise_cmd='eval "$(~/.local/bin/mise activate bash)"'
+  mise_cmd="eval \"\$(~/.local/bin/mise activate bash)\""
   if ! grep -Fxq "${mise_cmd}" "${HOME}/.bash_profile"; then
     log_info "Adding mise activation to .bash_profile"
     echo "${mise_cmd}" >>"${HOME}/.bash_profile"

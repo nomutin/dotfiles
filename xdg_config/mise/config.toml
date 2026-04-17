@@ -1,5 +1,4 @@
 [env]
-MISE_ENV = "full"
 PS1 = '\u@\h \W \$ '
 HISTSIZE = 10000
 HISTFILESIZE = 20000

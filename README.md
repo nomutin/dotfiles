@@ -10,7 +10,6 @@ curl -fsSL https://nomutin.github.io/dotfiles/install.sh | bash
 
 Settings for:
 
-- [bash](./dot_config/bashrc) (shell)
 - [vim](./xdg_config/vim/vimrc) (text editor)
 - [tmux](./xdg_config/tmux/tmux.conf) (multiplexer)
 - [mise](./xdg_config/mise/config.toml) (CLI manager)
@@ -19,12 +18,6 @@ Settings for:
 <details>
 
 <summary>App-Specific Installation</summary>
-
-### bash
-
-```bash
-curl -fsSL https://nomutin.github.io/dotfiles/dot_config/bashrc -o ~/.bashrc
-```
 
 ### vim
 
