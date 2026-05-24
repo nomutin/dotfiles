@@ -1,2 +1,4 @@
 .DS_Store
 snapshot.json
+nvim-pack-lock.json
+.netrwhist

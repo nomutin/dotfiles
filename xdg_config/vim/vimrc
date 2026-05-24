@@ -1,51 +1,40 @@
 " ===== Builtin =====
 set encoding=utf-8
-set autoread hidden
-set background=dark
-set clipboard=unnamed
-set completeopt=menuone,noinsert,noselect pumheight=10 shortmess+=c
-set cursorline ruler
-set expandtab tabstop=4 shiftwidth=4
+set autoread hidden splitright splitbelow clipboard=unnamed
+set background=dark cursorline number scrolloff=8 list listchars=tab:>\ ,trail:-,nbsp:+
+set completeopt=menuone,noinsert,noselect pumheight=10 shortmess=filnxtToOc wildmenu
+set expandtab tabstop=2 shiftwidth=0
 set hlsearch incsearch ignorecase smartcase
-set laststatus=2
-set list listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+ nowrap
-set regexpengine=2
 set runtimepath+=$HOME/.local/share/vim | call mkdir($HOME.'/.local/share/vim', 'p')
-set splitright splitbelow
-set scrolloff=8
 set noswapfile viminfo= undofile undodir=~/.cache/vim/undo | call mkdir($HOME.'/.cache/vim/undo', 'p')
-set wildmenu
-let &t_SI = "\e[5 q" | let &t_SR = "\e[4 q" | let &t_EI = "\e[2 q"
 inoremap <silent> jk <Esc>
 nnoremap <C-l> <CMD>nohlsearch<CR><Esc>
 nnoremap <space>d <CMD>vert new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
+let &t_SI = "\e[5 q" | let &t_SR = "\e[4 q" | let &t_EI = "\e[2 q"
 
 " ===== Plugin =====
 if empty(glob('~/.local/share/vim/autoload/plug.vim'))
     let plug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     silent execute '!curl -fLo ~/.local/share/vim/autoload/plug.vim --create-dirs '.plug_url
 endif
-
 call plug#begin('~/.local/share/vim/plugged')
     Plug 'sainnhe/gruvbox-material'
     Plug 'tpope/vim-commentary'
-    Plug 'preservim/nerdtree'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-        nnoremap <space>n <CMD>NERDTreeToggle<CR>
+    Plug 'tpope/vim-vinegar'
+        let g:netrw_liststyle = 3 | let g:netrw_winsize = -30
     Plug 'airblade/vim-gitgutter'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-        let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-        nnoremap <space>f <CMD>Files<CR>
-        nnoremap <space>/ <CMD>Rg<CR>
-    Plug 'vim-airline/vim-airline'
-        let g:airline#extensions#lsp#enabled = 1
-    Plug 'mattn/vim-lsp-settings'
-        let g:lsp_async_completion = 1
+        nnoremap <space>f <CMD>GFiles<CR>
+        nnoremap <space>g <CMD>GFiles?<CR>
+        command! -bang -nargs=* GGrep call fzf#vim#grep(
+          \   'git grep --line-number -- '.fzf#shellescape(<q-args>),
+          \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+        nnoremap <space>/ <CMD>GGrep<CR>
+    Plug 'prabirshrestha/vim-lsp'
         let g:lsp_semantic_enabled = 1
         function! LSPSetup() abort
             setlocal signcolumn=yes
-            setlocal omnifunc=lsp#complete
             nnoremap <C-]> <plug>(lsp-definition)
             nnoremap <C-W>] <CMD>vertical LspDefinition<CR>
             nnoremap grn <plug>(lsp-rename)
@@ -54,10 +43,10 @@ call plug#begin('~/.local/share/vim/plugged')
             nnoremap <space>e <plug>(lsp-document-diagnostics)
         endfunction
         aug lsp_install | au! | au User lsp_buffer_enabled cal LSPSetup() | aug END
-    Plug 'prabirshrestha/vim-lsp'
-        let g:lsp_settings_filetype_python = ['ruff', 'ty']
+    Plug 'mattn/vim-lsp-settings'
+        let g:lsp_settings_filetype_python = ['ty']
+        let g:lsp_settings = {'copilot-language-server': {'disabled': v:false}}
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'github/copilot.vim'
 call plug#end()
 colorscheme gruvbox-material
