@@ -8,19 +8,17 @@ PI_CODING_AGENT_DIR = "${XDG_DATA_HOME}/pi/agent"
 [tools]
 aws = "latest"
 bun = "latest"
-fd = "latest"
 github-cli = "latest"
 tmux = "latest"
 lazydocker = "latest"
 node = "latest"
-"npm:@mariozechner/pi-coding-agent" = "latest"
+pi = "latest"
 uv = "latest"
 
 # LSP
 "npm:bash-language-server" = "latest"
-"npm:@github/copilot-language-server" = "latest"
 lua-language-server = "latest"
-tombi = "latest"
+tombi = "0.9.22"
 "npm:vscode-langservers-extracted" = "latest"
 "npm:@vtsls/language-server" = "latest"
 "npm:yaml-language-server" = "latest"
@@ -35,7 +33,10 @@ stylua = "latest"
 "github:machlit/cutler" = { version = "latest", os = ["macos"] }
 colima = { version = "latest", os = ["macos"] }
 docker-cli = { version = "latest", os = ["macos"] }
+docker-compose = { version = "latest", os = ["macos"] }
 lima = { version = "latest", os = ["macos"] }
+"llama.cpp" = { version = "latest", version_prefix = "b", os = ["macos"] }
+"aqua:ouch-org/ouch" = { version = "latest", os = ["macos"] }
 
 [settings.npm]
 package_manager = "bun"

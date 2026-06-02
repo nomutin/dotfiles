@@ -27,12 +27,14 @@ vim.pack.add({
   { src = 'https://github.com/github/copilot.vim' },
   { src = 'https://github.com/ibhagwan/fzf-lua' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
+  { src = 'https://github.com/sainnhe/gruvbox-material' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/nvim-tree/nvim-tree.lua' },
 })
 require("fzf-lua").setup{}
 require("gitsigns").setup{}
 require("nvim-tree").setup{}
+vim.cmd.colorscheme("gruvbox-material")
 
 -- ====== KEYMAP ======
 vim.keymap.set("i", "jk", "<ESC>")
@@ -40,7 +42,7 @@ vim.keymap.set("n", "<leader>f", require("fzf-lua").files, { desc = "Find Files"
 vim.keymap.set("n", "<leader>/", require("fzf-lua").grep_project, { desc = "Live Grep" })
 vim.keymap.set("n", "<leader>n", "<cmd>NvimTreeToggle<cr>", { desc = "Explorer" })
 vim.keymap.set("n", "<leader>d", require("gitsigns").diffthis, { desc = "Git diff" })
-vim.keymap.set("n", "<leader>e", vim.diagnostic.setqflist, { desc = "Diagnostics" })
+vim.keymap.set("n", "<leader>e", vim.diagnostic.setloclist, { desc = "Diagnostics" })
 
 -- ====== LSP ======
 vim.diagnostic.config({ virtual_text = true })

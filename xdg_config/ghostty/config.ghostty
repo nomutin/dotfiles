@@ -17,7 +17,8 @@ macos-titlebar-style = hidden
 keybind = ctrl+opt+enter=toggle_maximize
 
 # Font
-font-family = "Osaka−等幅"
+font-family = "Monaco"
+font-family = "PCMyungjo Regular"
 font-size = 12
 font-thicken = true
 font-feature = -dlii
