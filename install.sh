@@ -45,12 +45,23 @@ setup_mise() {
     log_info "Installing mise..."
     curl https://mise.run | sh
   fi
+
+  # For non-login shell
   mise_cmd="eval \"\$(~/.local/bin/mise activate bash)\""
-  profile="${HOME}/.bash_profile"
-  if [ ! -f "${profile}" ] || ! grep -Fxq "${mise_cmd}" "${profile}"; then
-    log_info "Adding mise activation to .bash_profile"
-    echo "${mise_cmd}" >>"${profile}"
+  bashrc="${HOME}/.bashrc"
+  if [ ! -f "${bashrc}" ] || ! grep -Fxq "${mise_cmd}" "${bashrc}"; then
+    log_info "Adding mise activation to .bashrc"
+    echo "${mise_cmd}" >>"${bashrc}"
   fi
+
+  # For login shell
+  source_cmd="[[ -f ~/.bashrc ]] && source ~/.bashrc"
+  profile="${HOME}/.bash_profile"
+  if [ ! -f "${profile}" ] || ! grep -Fxq "${source_cmd}" "${profile}"; then
+    log_info "Adding .bashrc source to .bash_profile"
+    echo "${source_cmd}" >>"${profile}"
+  fi
+
   log_info "Installing dependencies with mise..."
   mise install -yq
 }
