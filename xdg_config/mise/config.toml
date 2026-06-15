@@ -1,3 +1,15 @@
+[settings]
+dotfiles.default_mode = "symlink"
+env_shell_expand = true
+idiomatic_version_file_enable_tools = []
+experimental = true
+
+[dotfiles]
+# TODO: Env var
+"~/.config/**" = "~/.dotfiles/xdg_config/**"
+"~/.bashrc" = "~/.dotfiles/.bashrc"  # For non-login shell
+"~/.bash_profile" = "~/.dotfiles/.bashrc"  # For login shell
+
 [env]
 PS1 = '\[\e[32m\]\u \[\e[$([ $? -ne 0 ] && echo 31 || echo 0)m\]➜ \[\e[34m\]\w \[\e[0m\]\$ '
 HISTSIZE = 10000
@@ -29,8 +41,19 @@ jq = "latest"
 lazygit = "latest"
 ripgrep = "latest"
 
-[settings]
-env_shell_expand = true
-idiomatic_version_file_enable_tools = []
-experimental = true
+[bootstrap.packages]
+# TODO: fix
+# "brew:mole" = "latest"
+# "brew-cask:ghostty" = "v1.3.1"
+"brew-cask:sidequest" = "latest"
+"brew-cask:stats" = "latest"
+"brew-cask:steam" = "latest"
+# "brew-cask:whiskey" = "v1.3.1"
 
+[bootstrap.macos.dock]
+autohide = true
+tilesize = 128
+orientation = "bottom"
+
+[bootstrap.hooks.post-defaults]
+run = "killall Dock || true"

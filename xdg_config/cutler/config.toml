@@ -35,8 +35,6 @@ TrackpadTrackingSpeed = 3.0
 EnableStandardClickToShowDesktop = false
 
 [set.dock]
-tilesize = 128
-autohide = true
 static-only = false
 show-recents = false
 autohide-delay = 0.0
@@ -97,17 +95,11 @@ defaults write com.apple.TextEdit RichText -bool false
 defaults -currentHost write com.apple.controlcenter Bluetooth -int 2
 """
 
-[command.thirdparty]
-run = """
-defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
-"""
-
 [brew]
 formulae = [
     "mole",
 ]
 casks = [
     "ghostty",
-    "stats",
 ]
 no_deps = true

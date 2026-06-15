@@ -24,6 +24,7 @@ nnoremap <C-l> <CMD>nohlsearch<CR>
 nnoremap <space>d <CMD>vert new<BAR>exec 'read !git show HEAD:#'<BAR>setl bt=nofile ro<BAR>difft<BAR>winc p<BAR>difft<CR>
 nnoremap <space>n <Plug>NetrwShrink
     let g:netrw_liststyle = 3 | let g:netrw_winsize = -30 | let g:netrw_banner = 0 | let g:netrw_usetab = 1
+aug cmpl | au! | au InsertCharPre * if !pumvisible() | cal feedkeys("\<c-x>\<c-o>", 'n') | en | aug END
 
 " ===== Plugin =====
 if empty(glob('~/.local/share/vim/autoload/plug.vim'))
@@ -31,7 +32,6 @@ if empty(glob('~/.local/share/vim/autoload/plug.vim'))
     silent execute '!curl -fLo ~/.local/share/vim/autoload/plug.vim --create-dirs '.plug_url
 endif
 call plug#begin('~/.local/share/vim/plugged')
-    Plug 'sainnhe/gruvbox-material'
     Plug 'tpope/vim-commentary'
     Plug 'mhinz/vim-signify'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -41,15 +41,16 @@ call plug#begin('~/.local/share/vim/plugged')
         nnoremap <space>/ <CMD>RG<CR>
     Plug 'prabirshrestha/vim-lsp'
         let g:lsp_semantic_enabled = 1
+        let g:lsp_async_completion = 1
+        set omnifunc=lsp#complete
         nnoremap <C-]> <plug>(lsp-definition)
+        nnoremap <C-W>] <CMD>vertical LspDefinition<CR>
         nnoremap grn <plug>(lsp-rename)
         nnoremap grr <plug>(lsp-references)
         nnoremap K <plug>(lsp-hover)
         nnoremap <space>e <plug>(lsp-document-diagnostics)
     Plug 'mattn/vim-lsp-settings'
         let g:lsp_settings_filetype_python = ['ty']
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
     Plug 'ggml-org/llama.vim'
 call plug#end()
-colorscheme gruvbox-material
+colorscheme habamax

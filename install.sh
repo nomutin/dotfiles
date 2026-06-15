@@ -3,7 +3,6 @@
 set -eu
 
 DOTFILES_DIR="${HOME}/.dotfiles"
-XDG_CONFIG_DIR="${HOME}/.config"
 
 RESET="\033[0m"
 GREEN="\033[32m"
@@ -17,16 +16,6 @@ log_info() {
 # Log skip message with yellow color
 log_skip() {
   echo -e "${YELLOW}[SKIP]${RESET} $1"
-}
-
-# Create symbolic link if target does not exist
-create_symlink() {
-  if [ -e "$2" ] || [ -L "$2" ]; then
-    log_skip "Target exists, skipping: $2"
-  else
-    log_info "Creating symlink: $2 -> $1"
-    ln -s "$1" "$2"
-  fi
 }
 
 # Clone repository if it doesn't exist
@@ -45,34 +34,9 @@ setup_mise() {
     log_info "Installing mise..."
     curl https://mise.run | sh
   fi
-
-  # For non-login shell
-  mise_cmd="eval \"\$(~/.local/bin/mise activate bash)\""
-  bashrc="${HOME}/.bashrc"
-  if [ ! -f "${bashrc}" ] || ! grep -Fxq "${mise_cmd}" "${bashrc}"; then
-    log_info "Adding mise activation to .bashrc"
-    echo "${mise_cmd}" >>"${bashrc}"
-  fi
-
-  # For login shell
-  source_cmd="[[ -f ~/.bashrc ]] && source ~/.bashrc"
-  profile="${HOME}/.bash_profile"
-  if [ ! -f "${profile}" ] || ! grep -Fxq "${source_cmd}" "${profile}"; then
-    log_info "Adding .bashrc source to .bash_profile"
-    echo "${source_cmd}" >>"${profile}"
-  fi
-
   log_info "Installing dependencies with mise..."
-  mise install -yq
-}
-
-# Deploy all XDG config files
-deploy_xdg_configs() {
-  mkdir -p "${XDG_CONFIG_DIR}"
-  for item in "${DOTFILES_DIR}/xdg_config/"*; do
-    base_item=$(basename "${item}")
-    create_symlink "${item}" "${XDG_CONFIG_DIR}/${base_item}"
-  done
+  "${HOME}/.local/bin/mise" install -yq
+  "${HOME}/.local/bin/mise" bootstrap -y
 }
 
 # Setup for MacOS
@@ -92,7 +56,6 @@ setup_macos() {
 main() {
   setup_macos
   clone_repo
-  deploy_xdg_configs
   setup_mise
   log_info "Dotfiles setup completed successfully."
 }
