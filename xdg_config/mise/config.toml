@@ -5,10 +5,9 @@ idiomatic_version_file_enable_tools = []
 experimental = true
 
 [dotfiles]
-# TODO: Env var
 "~/.config/**" = "~/.dotfiles/xdg_config/**"
-"~/.bashrc" = "~/.dotfiles/.bashrc"  # For non-login shell
-"~/.bash_profile" = "~/.dotfiles/.bashrc"  # For login shell
+"~/.bashrc/activate" = { block = 'eval "$(~/.local/bin/mise activate bash)"' }  # For non-login shell
+"~/.bash_profile/activate" = { block = 'eval "$(~/.local/bin/mise activate bash)"' }  # For non-login shell
 
 [env]
 PS1 = '\[\e[32m\]\u \[\e[$([ $? -ne 0 ] && echo 31 || echo 0)m\]➜ \[\e[34m\]\w \[\e[0m\]\$ '
@@ -41,14 +40,16 @@ jq = "latest"
 lazygit = "latest"
 ripgrep = "latest"
 
+[bootstrap.user]
+login_shell = "/bin/bash"
+
 [bootstrap.packages]
-# TODO: fix
 # "brew:mole" = "latest"
-# "brew-cask:ghostty" = "v1.3.1"
+# "brew-cask:ghostty" = "latest"  # TODO: fix
 "brew-cask:sidequest" = "latest"
 "brew-cask:stats" = "latest"
 "brew-cask:steam" = "latest"
-# "brew-cask:whiskey" = "v1.3.1"
+# "brew-cask:whisky" = "latest"
 
 [bootstrap.macos.dock]
 autohide = true
