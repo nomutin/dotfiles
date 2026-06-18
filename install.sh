@@ -42,22 +42,19 @@ setup_mise() {
     curl https://mise.run | sh
   fi
 
-  # Create symlinks for mise config so mise can discover dotfiles,
-  # bootstrap tasks, shell aliases, etc. before running commands
+  # Symlink the entire mise config directory so mise discovers
+  # [dotfiles], [bootstrap.*], [shell_alias] etc.
   DOTFILES_DIR="${HOME}/.dotfiles"
   XDG_CONFIG_DIR="${HOME}/.config"
-  for config in config config.macos config.development; do
-    src="${DOTFILES_DIR}/xdg_config/mise/${config}.toml"
-    dst="${XDG_CONFIG_DIR}/mise/${config}.toml"
-    if [ -f "${src}" ] && [ ! -e "${dst}" ]; then
-      mkdir -p "${XDG_CONFIG_DIR}/mise"
-      log_info "Linking mise config: ${config}.toml"
-      ln -s "${src}" "${dst}"
-    fi
-  done
+  src_dir="${DOTFILES_DIR}/xdg_config/mise"
+  dst_dir="${XDG_CONFIG_DIR}/mise"
+  if [ -d "${src_dir}" ] && [ ! -e "${dst_dir}" ]; then
+    mkdir -p "${XDG_CONFIG_DIR}"
+    log_info "Linking mise config directory"
+    ln -s "${src_dir}" "${dst_dir}"
+  fi
 
   log_info "Installing dependencies with mise..."
-  "${HOME}/.local/bin/mise" install -yq
   MISE_EXPERIMENTAL=true "${HOME}/.local/bin/mise" bootstrap -y
 }
 
