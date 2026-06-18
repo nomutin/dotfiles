@@ -41,21 +41,9 @@ setup_mise() {
     log_info "mise not found in PATH, installing"
     curl https://mise.run | sh
   fi
-
-  # Symlink the entire mise config directory so mise discovers
-  # [dotfiles], [bootstrap.*], [shell_alias] etc.
-  DOTFILES_DIR="${HOME}/.dotfiles"
-  XDG_CONFIG_DIR="${HOME}/.config"
-  src_dir="${DOTFILES_DIR}/xdg_config/mise"
-  dst_dir="${XDG_CONFIG_DIR}/mise"
-  if [ -d "${src_dir}" ] && [ ! -e "${dst_dir}" ]; then
-    mkdir -p "${XDG_CONFIG_DIR}"
-    log_info "Linking mise config directory"
-    ln -s "${src_dir}" "${dst_dir}"
-  fi
-
   log_info "Installing dependencies with mise..."
-  MISE_EXPERIMENTAL=true "${HOME}/.local/bin/mise" bootstrap -y
+  "${HOME}/.local/bin/mise" install -yq
+  MISE_EXPERIMENTAL=true "${HOME}/.local/bin/mise" dotfiles apply
 }
 
 main() {
