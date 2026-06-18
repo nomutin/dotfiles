@@ -1,11 +1,12 @@
 [settings]
+dotfiles.root = "~/.dotfiles"
 dotfiles.default_mode = "symlink"
 env_shell_expand = true
 idiomatic_version_file_enable_tools = []
 experimental = true
 
 [dotfiles]
-"~/.config/**" = "~/.dotfiles/xdg_config/**"
+"~/.config/**" = {}
 "~/.bashrc/activate" = { block = 'eval "$(~/.local/bin/mise activate bash)"' }  # For non-login shell
 "~/.bash_profile/activate" = { block = 'eval "$(~/.local/bin/mise activate bash)"' }  # For non-login shell
 
