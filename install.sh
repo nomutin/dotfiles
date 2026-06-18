@@ -41,6 +41,21 @@ setup_mise() {
     log_info "mise not found in PATH, installing"
     curl https://mise.run | sh
   fi
+
+  # Create symlinks for mise config so mise can discover dotfiles,
+  # bootstrap tasks, shell aliases, etc. before running commands
+  DOTFILES_DIR="${HOME}/.dotfiles"
+  XDG_CONFIG_DIR="${HOME}/.config"
+  for config in config config.macos config.development; do
+    src="${DOTFILES_DIR}/xdg_config/mise/${config}.toml"
+    dst="${XDG_CONFIG_DIR}/mise/${config}.toml"
+    if [ -f "${src}" ] && [ ! -e "${dst}" ]; then
+      mkdir -p "${XDG_CONFIG_DIR}/mise"
+      log_info "Linking mise config: ${config}.toml"
+      ln -s "${src}" "${dst}"
+    fi
+  done
+
   log_info "Installing dependencies with mise..."
   "${HOME}/.local/bin/mise" install -yq
   MISE_EXPERIMENTAL=true "${HOME}/.local/bin/mise" bootstrap -y
