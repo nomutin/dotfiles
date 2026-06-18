@@ -1,6 +1,7 @@
 [env]
 AWS_CONFIG_FILE = "${XDG_CONFIG_HOME}/aws/config"
 AWS_SHARED_CREDENTIALS_FILE = "${XDG_CONFIG_HOME}/aws/credentials"
+DOCKER_CONFIG = "${XDG_CONFIG_HOME}/docker"
 NPM_CONFIG_USERCONFIG = "${XDG_CONFIG_HOME}/npm/npmrc"
 PI_CONFIG_DIR = "${XDG_CONFIG_HOME}/pi"
 PI_CODING_AGENT_DIR = "${XDG_DATA_HOME}/pi/agent"
@@ -16,21 +17,21 @@ pi = "latest"
 uv = "latest"
 
 # LSP
-"npm:bash-language-server" = "latest"
+"npm:bash-language-server" = { version = "latest", depends = ["bun"] }
 lua-language-server = "latest"
 tombi = "0.9.22"
-"npm:vscode-langservers-extracted" = "latest"
-"npm:@vtsls/language-server" = "latest"
-"npm:yaml-language-server" = "latest"
+ty = "latest"
+"npm:vscode-langservers-extracted" = { version = "latest", depends = ["bun"] }
+"npm:@vtsls/language-server" = { version = "latest", depends = ["bun"] }
+"npm:yaml-language-server" = { version = "latest", depends = ["bun"] }
 
 # Linter/Formatter
-"npm:markuplint" = "latest"
+"npm:markuplint" = { version = "latest", depends = ["bun"] }
 shellcheck = "latest"
 shfmt = "latest"
 stylua = "latest"
 
 # MacOS
-"github:machlit/cutler" = { version = "latest", os = ["macos"] }
 colima = { version = "latest", os = ["macos"] }
 docker-cli = { version = "latest", os = ["macos"] }
 docker-compose = { version = "latest", os = ["macos"] }

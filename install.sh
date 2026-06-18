@@ -2,9 +2,6 @@
 
 set -eu
 
-DOTFILES_DIR="${HOME}/.dotfiles"
-XDG_CONFIG_DIR="${HOME}/.config"
-
 RESET="\033[0m"
 GREEN="\033[32m"
 YELLOW="\033[33m"
@@ -19,18 +16,17 @@ log_skip() {
   echo -e "${YELLOW}[SKIP]${RESET} $1"
 }
 
-# Create symbolic link if target does not exist
-create_symlink() {
-  if [ -e "$2" ] || [ -L "$2" ]; then
-    log_skip "Target exists, skipping: $2"
-  else
-    log_info "Creating symlink: $2 -> $1"
-    ln -s "$1" "$2"
+# Install git
+install_git() {
+  if [[ "$(uname)" == "Darwin" ]] && ! xcode-select -p &>/dev/null; then
+    log_info "Setting up MacOS prerequisites..."
+    xcode-select --install
   fi
 }
 
 # Clone repository if it doesn't exist
 clone_repo() {
+  DOTFILES_DIR="${HOME}/.dotfiles"
   if [ ! -d "${DOTFILES_DIR}" ]; then
     log_info "Cloning dotfiles into ${DOTFILES_DIR}..."
     git clone https://github.com/nomutin/dotfiles.git "${DOTFILES_DIR}"
@@ -42,57 +38,17 @@ clone_repo() {
 # Install mise if not already installed
 setup_mise() {
   if ! command -v mise >/dev/null 2>&1; then
-    log_info "Installing mise..."
+    log_info "mise not found in PATH, installing"
     curl https://mise.run | sh
   fi
-
-  # For non-login shell
-  mise_cmd="eval \"\$(~/.local/bin/mise activate bash)\""
-  bashrc="${HOME}/.bashrc"
-  if [ ! -f "${bashrc}" ] || ! grep -Fxq "${mise_cmd}" "${bashrc}"; then
-    log_info "Adding mise activation to .bashrc"
-    echo "${mise_cmd}" >>"${bashrc}"
-  fi
-
-  # For login shell
-  source_cmd="[[ -f ~/.bashrc ]] && source ~/.bashrc"
-  profile="${HOME}/.bash_profile"
-  if [ ! -f "${profile}" ] || ! grep -Fxq "${source_cmd}" "${profile}"; then
-    log_info "Adding .bashrc source to .bash_profile"
-    echo "${source_cmd}" >>"${profile}"
-  fi
-
   log_info "Installing dependencies with mise..."
-  mise install -yq
-}
-
-# Deploy all XDG config files
-deploy_xdg_configs() {
-  mkdir -p "${XDG_CONFIG_DIR}"
-  for item in "${DOTFILES_DIR}/xdg_config/"*; do
-    base_item=$(basename "${item}")
-    create_symlink "${item}" "${XDG_CONFIG_DIR}/${base_item}"
-  done
-}
-
-# Setup for MacOS
-setup_macos() {
-  if [[ "$(uname)" != "Darwin" ]]; then
-    return
-  fi
-  log_info "Setting up MacOS prerequisites..."
-  if ! (xcode-select -p &>/dev/null); then
-    xcode-select --install
-  fi
-  if ! (type 'brew' >/dev/null 2>&1); then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  fi
+  "${HOME}/.local/bin/mise" install -yq
+  MISE_EXPERIMENTAL=true "${HOME}/.local/bin/mise" dotfiles apply
 }
 
 main() {
-  setup_macos
+  install_git
   clone_repo
-  deploy_xdg_configs
   setup_mise
   log_info "Dotfiles setup completed successfully."
 }
