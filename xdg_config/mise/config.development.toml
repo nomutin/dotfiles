@@ -32,7 +32,6 @@ shfmt = "latest"
 stylua = "latest"
 
 # MacOS
-"github:machlit/cutler" = { version = "latest", os = ["macos"] }
 colima = { version = "latest", os = ["macos"] }
 docker-cli = { version = "latest", os = ["macos"] }
 docker-compose = { version = "latest", os = ["macos"] }

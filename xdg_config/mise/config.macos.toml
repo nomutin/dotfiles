@@ -1,0 +1,98 @@
+[bootstrap.hooks.pre-defaults]
+run = """
+scutil --set ComputerName MBA
+scutil --set HostName MBA
+scutil --set LocalHostName MBA
+
+hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc": 0x700000039, "HIDKeyboardModifierMappingDst": 0x7000000E0}]}'
+
+dock_item() { 
+    printf '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>%s</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>', "$1" 
+} 
+Safari=$(dock_item /System/Cryptexes/App/System/Applications/Safari.app)
+Mail=$(dock_item /System/Applications/Mail.app)
+Calendar=$(dock_item /System/Applications/Calendar.app)
+Ghostty=$(dock_item /Applications/Ghostty.app)
+defaults delete com.apple.dock persistent-apps
+defaults write com.apple.dock persistent-apps -array "$Safari" "$Mail" "$Calendar" "$Ghostty"
+killall Dock
+"""
+
+[bootstrap.packages]
+"brew:mole" = "latest"
+# "brew-cask:ghostty" = "latest"
+"brew-cask:stats" = "latest"
+
+[bootstrap.macos.dock]
+autohide = true
+tilesize = 128
+orientation = "bottom"
+show_recents = false
+
+[bootstrap.macos.finder]
+show_all_files = true
+show_pathbar = true
+preferred_view_style = "list"
+
+[bootstrap.macos.keyboard]
+key_repeat = 1
+initial_key_repeat = 10
+
+[bootstrap.macos.trackpad]
+tap_to_click = true
+
+[bootstrap.macos.defaults]
+"com.apple.dock" = {
+  autohide-delay = 0.0,
+  static-only = false,
+  autohide-time-modifier = 0.0,
+  expose-group-apps = false,
+  wvous-bl-corner = 10,
+  wvous-br-corner = 5,
+}
+"com.apple.finer" = {
+  AppleShowAllExtensions = true,
+  ShowExternalHardDrivesOnDesktop = false,
+  ShowHardDrivesOnDesktop = false,
+  ShowMountedServersOnDesktop = false,
+  SidebarTagsSctionDisclosedState = true,
+  ShowRecentTags = false,
+  FXEnableExtensionChangeWarning = false,
+  NewWindowTarget = "PfHm",
+  FXDefaultSearchScope = "SCcf",
+  FXCalculateAllSizes = false,
+}
+"com.apple.menuextra.clock" = {
+  FlashDateSeparators = false,
+  Show24Hour = true,
+  ShowAMPM = true,
+  ShowDate = true,
+  ShowDayOfWeek = true,
+  ShowSeconds = true,
+}
+"com.apple.screencapture" = {
+  type = "jpg",
+}
+"com.apple.TextEdit" = {
+  RichText = false,
+}
+"com.apple.WindowManager" = {
+  EnableStandardClickToShowDesktop = false,
+}
+"com.apple.controlcenter" = {
+  "NSStatusItem VisibleCC Bluetooth" = 1,
+  # defaults -currentHost write com.apple.controlcenter Bluetooth -int 2
+}
+"com.apple.AppleMultitouchTrackpad" = {
+  TrackpadThreeFingerDrag = false,
+  Clicking = true,
+  TrackpadTrackingSpeed = 3.0,
+}
+"NSGlobalDomain" = {
+  trackpad = 3.0,
+  mouse = 3.0,
+  AppleInterfaceStyle = "Dark",
+}
+
+[bootstrap.hooks.post-defaults]
+run = "killall Finder || killall Dock || true"
