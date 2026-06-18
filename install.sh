@@ -43,7 +43,7 @@ setup_mise() {
   fi
   log_info "Installing dependencies with mise..."
   "${HOME}/.local/bin/mise" install -yq
-  "${HOME}/.local/bin/mise" bootstrap -y
+  MISE_EXPERIMENTAL=true "${HOME}/.local/bin/mise" bootstrap -y
 }
 
 main() {

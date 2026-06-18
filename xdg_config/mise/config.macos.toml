@@ -50,7 +50,7 @@ tap_to_click = true
   wvous-bl-corner = 10,
   wvous-br-corner = 5,
 }
-"com.apple.finer" = {
+"com.apple.finder" = {
   AppleShowAllExtensions = true,
   ShowExternalHardDrivesOnDesktop = false,
   ShowHardDrivesOnDesktop = false,
