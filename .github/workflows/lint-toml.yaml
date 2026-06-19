@@ -15,4 +15,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: Run taplo
-        run: npx @taplo/cli@0.9.3 fmt --check
+        run: find . -name '*.toml' -not -path './.git/*' -print0 | xargs -0 npx @taplo/cli@0.7.0 fmt --check
