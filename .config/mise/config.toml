@@ -7,8 +7,8 @@ experimental = true
 
 [dotfiles]
 "~/.config/**" = {}
-"~/.bashrc/activate" = { block = 'eval "$(~/.local/bin/mise activate bash)"' }  # For non-login shell
-"~/.bash_profile/activate" = { block = 'eval "$(~/.local/bin/mise activate bash)"' }  # For non-login shell
+"~/.bashrc/activate" = { block = 'eval "$(~/.local/bin/mise activate bash)"' }  # non-login shell
+"~/.bash_profile/activate" = { block = 'eval "$(~/.local/bin/mise activate bash)"' }  # login shell
 
 [env]
 PS1 = '\[\e[32m\]\u \[\e[$([ $? -ne 0 ] && echo 31 || echo 0)m\]➜ \[\e[34m\]\w \[\e[0m\]\$ '

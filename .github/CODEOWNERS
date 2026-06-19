@@ -1,0 +1,3 @@
+# CODEOWNERS: nomutin のみがコードオーナー
+# すべてのファイルのレビュー承認は nomutin のみ可能
+* @nomutin

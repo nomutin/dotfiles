@@ -1,9 +1,11 @@
-name: Lint Configs
+name: Lint Shell
 
 on:
   pull_request:
     branches:
       - master
+    paths:
+      - "**/*.sh"
 
 jobs:
   linting:
@@ -19,7 +21,3 @@ jobs:
           reporter: github-pr-review
           pattern: "*.sh"
           exclude: "./.git/*"
-      - name: Run Vint
-        uses: ludvighz/vint-action@31fa19d060969bb48fcfd9044773d665bf03e8c3 # v1
-        with:
-          path: .config/vim/vimrc

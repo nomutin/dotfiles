@@ -1,0 +1,20 @@
+name: Lint Vimscript
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "**/vimrc"
+
+jobs:
+  linting:
+    name: Lint Shell Scripts and Workflows
+    runs-on: ubuntu-slim
+    steps:
+      - name: Checkout
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - name: Run Vint
+        uses: ludvighz/vint-action@31fa19d060969bb48fcfd9044773d665bf03e8c3 # v1
+        with:
+          path: .config/vim/vimrc
