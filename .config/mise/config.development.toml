@@ -41,4 +41,3 @@ lima = { version = "latest", os = ["macos"] }
 
 [settings.npm]
 package_manager = "bun"
-

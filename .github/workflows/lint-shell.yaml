@@ -1,17 +1,19 @@
-name: Lint Configs
+name: Lint Shell
 
 on:
   pull_request:
     branches:
       - master
+    paths:
+      - "**/*.sh"
 
 jobs:
   linting:
-    name: Lint Shell Scripts and Workflows
-    runs-on: ubuntu-latest
+    name: Lint Shell Scripts
+    runs-on: ubuntu-slim
     steps:
       - name: Checkout
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: Run ShellCheck
         uses: reviewdog/action-shellcheck@5ebd09ddbe2ebb471646ce234c6c8dd18663ca7c # v1.30.0
         with:
@@ -19,7 +21,3 @@ jobs:
           reporter: github-pr-review
           pattern: "*.sh"
           exclude: "./.git/*"
-      - name: Run Vint
-        uses: ludvighz/vint-action@31fa19d060969bb48fcfd9044773d665bf03e8c3 # v1
-        with:
-          path: .config/vim/vimrc
