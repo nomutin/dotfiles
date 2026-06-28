@@ -11,8 +11,6 @@ experimental = true
 "~/.bash_profile/activate" = { block = 'eval "$(~/.local/bin/mise activate bash)"' } # login shell
 
 [env]
-# MISE_ENV = 'development'
-# MISE_AUTO_ENV = true
 PS1 = '\[\e[32m\]\u \[\e[$([ $? -ne 0 ] && echo 31 || echo 0)m\]➜ \[\e[34m\]\w \[\e[0m\]\$ '
 HISTSIZE = 10000
 HISTFILESIZE = 20000
