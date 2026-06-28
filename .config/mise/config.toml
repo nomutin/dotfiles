@@ -11,15 +11,15 @@ experimental = true
 "~/.bash_profile/activate" = { block = 'eval "$(~/.local/bin/mise activate bash)"' } # login shell
 
 [env]
+# MISE_ENV = 'development'
+# MISE_AUTO_ENV = true
 PS1 = '\[\e[32m\]\u \[\e[$([ $? -ne 0 ] && echo 31 || echo 0)m\]➜ \[\e[34m\]\w \[\e[0m\]\$ '
 HISTSIZE = 10000
 HISTFILESIZE = 20000
-
 XDG_CONFIG_HOME = "${HOME}/.config"
 XDG_DATA_HOME = "${HOME}/.local/share"
 XDG_CACHE_HOME = "${HOME}/.cache"
 XDG_STATE_HOME = "${HOME}/.local/state"
-
 DOTNET_CLI_HOME = "${XDG_DATA_HOME}/dotnet"
 HISTFILE = "${XDG_STATE_HOME}/bash/history"
 LESSHISTFILE = "${XDG_STATE_HOME}/less/history"
@@ -34,7 +34,6 @@ dd = "du -sch $(ls -A)"
 enter = ["shopt -s checkwinsize", 'mkdir -p "${XDG_STATE_HOME}"/bash']
 
 [tools]
-jq = "latest"
 lazygit = "latest"
 ripgrep = "latest"
 

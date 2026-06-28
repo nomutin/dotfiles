@@ -9,9 +9,9 @@ set expandtab tabstop=2 shiftwidth=0
 set hidden
 set hlsearch incsearch ignorecase smartcase
 set list listchars=tab:>\ ,trail:-,nbsp:+
-set number
 set runtimepath+=$HOME/.local/share/vim
     call mkdir($HOME.'/.local/share/vim', 'p')
+set ruler
 set scrolloff=8
 set splitright splitbelow
 set shortmess=filnxtToOc

@@ -1,0 +1,20 @@
+name: Lint Tmux
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "**/tmux.conf"
+
+jobs:
+  linting:
+    name: Lint tmux config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - name: Install tmux
+        run: sudo apt-get update && sudo apt-get install -y tmux
+      - name: Validate config
+        run: tmux -f .config/tmux/tmux.conf new-session -d
