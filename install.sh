@@ -42,8 +42,7 @@ setup_mise() {
     curl https://mise.run | sh
   fi
   log_info "Installing dependencies with mise..."
-  "${HOME}/.local/bin/mise" install -yq
-  MISE_EXPERIMENTAL=true "${HOME}/.local/bin/mise" dotfiles apply
+  "${HOME}/.local/bin/mise" dotfiles apply
 }
 
 main() {
