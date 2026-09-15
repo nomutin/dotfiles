@@ -1,0 +1,87 @@
+[bootstrap.hooks.pre-defaults]
+run = """
+scutil --set ComputerName MBA
+scutil --set HostName MBA
+scutil --set LocalHostName MBA
+hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc": 0x700000039, "HIDKeyboardModifierMappingDst": 0x7000000E0}]}'
+"""
+
+[bootstrap.packages]
+"brew:container" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew:mole" = "latest"
+"brew-cask:stats" = "latest"
+
+[bootstrap.macos.dock]
+autohide = true
+autohide_delay = 0.0
+autohide_time_modifier = 0.0
+tilesize = 128
+orientation = "bottom"
+show_recents = false
+apps = [
+  "/System/Cryptexes/App/System/Applications/Safari.app",
+  "/System/Applications/Mail.app",
+  "/System/Applications/Calendar.app",
+  "/Applications/Ghostty.app",
+]
+
+[bootstrap.macos.finder]
+show_all_files = true
+show_pathbar = true
+preferred_view_style = "list"
+
+[bootstrap.macos.keyboard]
+key_repeat = 1
+initial_key_repeat = 10
+
+[bootstrap.macos.trackpad]
+tap_to_click = true
+
+[bootstrap.macos.defaults."com.apple.dock"]
+static-only = false
+expose-group-apps = false
+wvous-bl-corner = 10
+wvous-br-corner = 5
+
+[bootstrap.macos.defaults."com.apple.finder"]
+AppleShowAllExtensions = true
+ShowExternalHardDrivesOnDesktop = false
+ShowHardDrivesOnDesktop = false
+ShowMountedServersOnDesktop = false
+SidebarTagsSctionDisclosedState = true
+ShowRecentTags = false
+FXEnableExtensionChangeWarning = false
+NewWindowTarget = "PfHm"
+FXDefaultSearchScope = "SCcf"
+FXCalculateAllSizes = false
+
+[bootstrap.macos.defaults."com.apple.menuextra.clock"]
+FlashDateSeparators = false
+Show24Hour = true
+ShowAMPM = true
+ShowDate = true
+ShowDayOfWeek = true
+ShowSeconds = true
+
+[bootstrap.macos.defaults."com.apple.screencapture"]
+type = "jpg"
+
+[bootstrap.macos.defaults."com.apple.WindowManager"]
+EnableStandardClickToShowDesktop = false
+
+[bootstrap.macos.defaults."com.apple.controlcenter"]
+"NSStatusItem VisibleCC Bluetooth" = 1
+
+[bootstrap.macos.defaults."com.apple.AppleMultitouchTrackpad"]
+TrackpadThreeFingerDrag = false
+Clicking = true
+TrackpadTrackingSpeed = 3.0
+
+[bootstrap.macos.defaults.NSGlobalDomain]
+trackpad = 3.0
+mouse = 3.0
+AppleInterfaceStyle = "Dark"
+
+[bootstrap.hooks.post-defaults]
+run = "killall Finder || killall Dock || true"
