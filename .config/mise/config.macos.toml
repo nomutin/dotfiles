@@ -96,4 +96,3 @@ AppleInterfaceStyle = "Dark"
 
 [bootstrap.hooks.post-defaults]
 run = "killall Finder || killall Dock || true"
-
