@@ -30,7 +30,6 @@ vim.cmd.colorscheme("catppuccin")
 vim.pack.add({
   { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
-  { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/ggml-org/llama.vim" },
 })
 require("fzf-lua").setup{}
@@ -46,14 +45,6 @@ vim.keymap.set("n", "<leader>n", "<Plug>NetrwShrink", { desc = "Explorer" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.setloclist, { desc = "Diagnostics" })
 
 -- ====== LSP ======
+vim.lsp.config.kakehashi = { cmd = { "kakehashi" }, root_markers = { ".git" }}
+vim.lsp.enable("kakehashi")
 vim.diagnostic.config({ virtual_text = true })
-vim.lsp.enable({
-  "bashls",
-  "html",
-  "jsonls",
-  "lua_ls",
-  "tombi",
-  "ty",
-  "vtsls",
-  "yamlls",
-})

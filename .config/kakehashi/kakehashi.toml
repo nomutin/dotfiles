@@ -1,0 +1,61 @@
+searchPaths = [".", "~/Library/Application Support/kakehashi", "~/.local/share/kakehashi"]
+
+[languages._]
+autoInstall = true
+
+[languages._.bridge._self]
+enabled = true
+
+[languageServers.bashls]
+cmd = ["bash-language-server", "start"]
+languages = ["bash", "sh"]
+root_markers = [".git"]
+
+[languageServers.html]
+cmd = ["vscode-html-language-server", "--stdio"]
+languages = ["html", "package.json"]
+root_markers = [".git"]
+
+[languageServers.jsonls]
+cmd = ["vscode-json-language-server", "--stdio"]
+languages = ["json", "jsonc"]
+root_markers = [".git"]
+
+[languageServers.lua_ls]
+cmd = ["lua-language-server"]
+languages = ["lua"]
+root_markers = [
+  ".git",
+  ".emmyrc.json",
+  ".luarc.json",
+  ".luarc.jsonc",
+  ".luacheckrc",
+  ".stylua.toml",
+  "stylua.toml",
+  "selene.toml",
+  "selene.yml",
+]
+
+[languageServers.tombi]
+cmd = ["tombi", "lsp"]
+languages = ["toml"]
+root_markers = ["tombi.toml", "pyproject.toml", ".git"]
+
+[languageServers.ty]
+cmd = ["ty", "server"]
+languages = ["python"]
+
+[languageServers.vtsls]
+cmd = ["vtsls", "--stdio"]
+languages = [
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact",
+]
+root_markers = [".git"]
+
+[languageServers.yamlls]
+cmd = ["yaml-language-server", "--stdio"]
+languages = ["yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values"]
+root_markers = [".git"]

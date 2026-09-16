@@ -44,27 +44,23 @@ aws = "latest"
 bun = "latest"
 github-cli = "latest"
 jq = "latest"
+"github:atusy/kakehashi" = "latest"
 lazydocker = "latest"
 lazygit = "latest"
 "llama.cpp" = { version = "latest", version_prefix = "b", os = ["macos"] }
-lua-language-server = "latest"
 shellcheck = "latest"
 shfmt = "latest"
-stylua = "latest"
 tmux = "latest"
 tombi = "latest"
 ripgrep = "latest"
-ty = "latest"
 uv = "latest"
 "npm:vscode-langservers-extracted" = { version = "latest", depends = ["bun"] }
-"npm:@vtsls/language-server" = { version = "latest", depends = ["bun"] }
 "aqua:ouch-org/ouch" = { version = "latest", os = ["macos"] }
 pi = "latest"
 "npm:yaml-language-server" = { version = "latest", depends = ["bun"] }
-"github:atusy/kakehashi" = "latest"
 
 [settings.npm]
-package_manager = "bun"
+package_manager = "bun"  # TODO: aube
 
 [bootstrap.user]
 login_shell = "/bin/bash"
