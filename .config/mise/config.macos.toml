@@ -1,5 +1,5 @@
 [tools]
-"github:totota-08/BacklightKit" = { version = "latest", os = ["macos"] }
+"github:totota-08/BacklightKit" = { version = "0.5.0", os = ["macos"] }
 "aqua:ouch-org/ouch" = { version = "latest", os = ["macos"] }
 "llama.cpp" = { version = "latest", version_prefix = "b", os = ["macos"] }
 
