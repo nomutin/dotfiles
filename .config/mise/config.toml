@@ -27,7 +27,6 @@ HISTFILE = "${XDG_STATE_HOME}/bash/history"
 NPM_CONFIG_USERCONFIG = "${XDG_CONFIG_HOME}/npm/npmrc"
 LESSHISTFILE = "${XDG_STATE_HOME}/less/history"
 PI_CONFIG_DIR = "${XDG_CONFIG_HOME}/pi"
-PI_CODING_AGENT_DIR = "${XDG_DATA_HOME}/pi/agent"
 VIMINIT = 'source ${XDG_CONFIG_HOME}/vim/vimrc'
 
 [shell_alias]
@@ -47,7 +46,6 @@ jq = "latest"
 "github:atusy/kakehashi" = "latest"
 lazydocker = "latest"
 lazygit = "latest"
-"llama.cpp" = { version = "latest", version_prefix = "b", os = ["macos"] }
 shellcheck = "latest"
 shfmt = "latest"
 tmux = "latest"
@@ -55,8 +53,7 @@ tombi = "latest"
 ripgrep = "latest"
 uv = "latest"
 "npm:vscode-langservers-extracted" = { version = "latest", depends = ["bun"] }
-"aqua:ouch-org/ouch" = { version = "latest", os = ["macos"] }
-pi = "latest"
+oh-my-pi = { version = "latest", rename_exe = "omp", postinstall = 'mkdir -p "${XDG_DATA_HOME}/omp" && omp config init-xdg' }
 "npm:yaml-language-server" = { version = "latest", depends = ["bun"] }
 
 [bootstrap.user]

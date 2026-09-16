@@ -1,9 +1,20 @@
+[tools]
+"github:totota-08/BacklightKit" = { version = "0.5.0", os = ["macos"] }
+"aqua:ouch-org/ouch" = { version = "latest", os = ["macos"] }
+"llama.cpp" = { version = "latest", version_prefix = "b", os = ["macos"] }
+
 [bootstrap.hooks.pre-defaults]
 run = """
 scutil --set ComputerName MBA
 scutil --set HostName MBA
 scutil --set LocalHostName MBA
 hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc": 0x700000039, "HIDKeyboardModifierMappingDst": 0x7000000E0}]}'
+"""
+
+[bootstrap.hooks.post-tools]
+run = """
+mise exec -- backlit auto off
+mise exec -- backlit set 0
 """
 
 [bootstrap.packages]
