@@ -1,4 +1,8 @@
-searchPaths = [".", "~/Library/Application Support/kakehashi", "~/.local/share/kakehashi"]
+searchPaths = [
+  ".",
+  "~/Library/Application Support/kakehashi",
+  "~/.local/share/kakehashi",
+]
 
 [languages._]
 autoInstall = true
@@ -47,12 +51,7 @@ languages = ["python"]
 
 [languageServers.vtsls]
 cmd = ["vtsls", "--stdio"]
-languages = [
-  "javascript",
-  "javascriptreact",
-  "typescript",
-  "typescriptreact",
-]
+languages = ["javascript", "javascriptreact", "typescript", "typescriptreact"]
 root_markers = [".git"]
 
 [languageServers.yamlls]

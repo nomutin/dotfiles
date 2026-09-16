@@ -59,8 +59,5 @@ uv = "latest"
 pi = "latest"
 "npm:yaml-language-server" = { version = "latest", depends = ["bun"] }
 
-[settings.npm]
-package_manager = "bun"  # TODO: aube
-
 [bootstrap.user]
 login_shell = "/bin/bash"
