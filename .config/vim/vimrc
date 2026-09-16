@@ -49,8 +49,13 @@ call plug#begin('~/.local/share/vim/plugged')
         nnoremap grr <plug>(lsp-references)
         nnoremap K <plug>(lsp-hover)
         nnoremap <space>e <plug>(lsp-document-diagnostics)
-    Plug 'mattn/vim-lsp-settings'
-        let g:lsp_settings_filetype_python = ['ty']
+        if executable('kakehashi')
+            au User lsp_setup call lsp#register_server({
+                \ 'name': 'kakehashi',
+                \ 'cmd': {server_info->['kakehashi']},
+                \ 'allowlist': ['*'],
+                \ })
+        endif
     Plug 'ggml-org/llama.vim'
 call plug#end()
 colorscheme habamax

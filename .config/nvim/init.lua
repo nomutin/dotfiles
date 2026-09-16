@@ -13,23 +13,24 @@ vim.opt.list = true
 vim.opt.pumheight = 10
 vim.opt.scrolloff = 8
 vim.opt.smartcase = true
+vim.opt.shiftwidth = 0
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.swapfile = false
+vim.opt.tabstop = 2
 vim.opt.termguicolors = true
 vim.opt.undofile = true
 vim.g.netrw_liststyle = 3
 vim.g.netrw_winsize = -30
 vim.g.netrw_banner = 0
 vim.g.netrw_usetab = 1
-vim.diagnostic.config({ virtual_text = true })
 vim.cmd.colorscheme("catppuccin")
 
 -- ====== PLUGIN ======
 vim.pack.add({
   { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
-  { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/ggml-org/llama.vim" },
 })
 require("fzf-lua").setup{}
 require("gitsigns").setup{}
@@ -42,3 +43,8 @@ vim.keymap.set("n", "<leader>g", require("fzf-lua").git_status, { desc = "Git St
 vim.keymap.set("n", "<leader>d", require("gitsigns").diffthis, { desc = "Git diff" })
 vim.keymap.set("n", "<leader>n", "<Plug>NetrwShrink", { desc = "Explorer" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.setloclist, { desc = "Diagnostics" })
+
+-- ====== LSP ======
+vim.lsp.config.kakehashi = { cmd = { "kakehashi" }, root_markers = { ".git" }}
+vim.lsp.enable("kakehashi")
+vim.diagnostic.config({ virtual_text = true })
