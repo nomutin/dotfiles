@@ -94,5 +94,59 @@ trackpad = 3.0
 mouse = 3.0
 AppleInterfaceStyle = "Dark"
 
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["237"]
+value = { enabled = true, value = { parameters = [
+  65535,
+  36,
+  786432,
+], type = "standard" } }
+
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["240"]
+value = { enabled = true, value = { parameters = [
+  65535,
+  123,
+  9175040,
+], type = "standard" } }
+
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["241"]
+value = { enabled = true, value = { parameters = [
+  65535,
+  124,
+  9175040,
+], type = "standard" } }
+
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["242"]
+value = { enabled = true, value = { parameters = [
+  65535,
+  126,
+  9175040,
+], type = "standard" } }
+
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["243"]
+value = { enabled = true, value = { parameters = [
+  65535,
+  125,
+  9175040,
+], type = "standard" } }
+
 [bootstrap.hooks.post-defaults]
-run = "killall Finder || killall Dock || true"
+run = """
+killall Finder || true
+killall Dock || true
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+"""
