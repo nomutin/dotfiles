@@ -8,7 +8,8 @@ set cursorline
 set expandtab tabstop=2 shiftwidth=0
 set hidden
 set hlsearch incsearch ignorecase smartcase
-set list listchars=tab:>\ ,trail:-,nbsp:+
+set list listchars=tab:>\ ,trail:-,nbsp:+,extends:>,precedes:<
+set regexpengine=0
 set runtimepath+=$HOME/.local/share/vim
     call mkdir($HOME.'/.local/share/vim', 'p')
 set ruler
@@ -18,6 +19,7 @@ set shortmess=filnxtToOc
 set noswapfile viminfo=
 set undofile undodir=$HOME/.cache/vim/undo
     call mkdir($HOME.'/.cache/vim/undo', 'p')
+set nowrap
 
 inoremap <silent> jk <Esc>
 nnoremap <C-l> <CMD>nohlsearch<CR>
@@ -32,11 +34,13 @@ if empty(glob('~/.local/share/vim/autoload/plug.vim'))
     silent execute '!curl -fLo ~/.local/share/vim/autoload/plug.vim --create-dirs '.plug_url
 endif
 call plug#begin('~/.local/share/vim/plugged')
+    Plug 'sainnhe/gruvbox-material'
     Plug 'tpope/vim-commentary'
     Plug 'mhinz/vim-signify'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-        nnoremap <space>f <CMD>GFiles<CR>
+        let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+        nnoremap <space>f <CMD>Files<CR>
         nnoremap <space>g <CMD>GFiles?<CR>
         nnoremap <space>/ <CMD>RG<CR>
     Plug 'prabirshrestha/vim-lsp'
@@ -56,6 +60,5 @@ call plug#begin('~/.local/share/vim/plugged')
                 \ 'allowlist': ['*'],
                 \ })
         endif
-    Plug 'ggml-org/llama.vim'
 call plug#end()
-colorscheme habamax
+colorscheme gruvbox-material
