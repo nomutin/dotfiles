@@ -48,6 +48,12 @@ root_markers = ["tombi.toml", "pyproject.toml", ".git"]
 [languageServers.ty]
 cmd = ["ty", "server"]
 languages = ["python"]
+root_markers = ["ty.toml", "pyproject.toml", "requirements.txt", ".git"]
+
+[languageServers.ruff]
+cmd = ["ruff", "server"]
+languages = ["python"]
+root_markers = ["ruff.toml", "pyproject.toml", ".git"]
 
 [languageServers.vtsls]
 cmd = ["vtsls", "--stdio"]
