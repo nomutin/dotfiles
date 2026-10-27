@@ -11,7 +11,7 @@ autoInstall = true
 enabled = true
 
 [languageServers.bashls]
-cmd = ["bash-language-server", "start"]
+cmd = ["bashls"]
 languages = ["bash", "sh"]
 root_markers = [".git"]
 
@@ -61,6 +61,6 @@ languages = ["javascript", "javascriptreact", "typescript", "typescriptreact"]
 root_markers = [".git"]
 
 [languageServers.yamlls]
-cmd = ["yaml-language-server", "--stdio"]
+cmd = ["rlsp-yaml"]
 languages = ["yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values"]
-root_markers = [".git"]
+workspaceMarkers = [".git"]

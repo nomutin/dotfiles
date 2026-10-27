@@ -19,14 +19,10 @@ XDG_DATA_HOME = "${HOME}/.local/share"
 XDG_CACHE_HOME = "${HOME}/.cache"
 XDG_STATE_HOME = "${HOME}/.local/state"
 
-AWS_CONFIG_FILE = "${XDG_CONFIG_HOME}/aws/config"
-AWS_SHARED_CREDENTIALS_FILE = "${XDG_CONFIG_HOME}/aws/credentials"
-DOCKER_CONFIG = "${XDG_CONFIG_HOME}/docker"
 DOTNET_CLI_HOME = "${XDG_DATA_HOME}/dotnet"
 HISTFILE = "${XDG_STATE_HOME}/bash/history"
 NPM_CONFIG_USERCONFIG = "${XDG_CONFIG_HOME}/npm/npmrc"
 LESSHISTFILE = "${XDG_STATE_HOME}/less/history"
-PI_CONFIG_DIR = ".config/omp"
 VIMINIT = 'source ${XDG_CONFIG_HOME}/vim/vimrc'
 
 [shell_alias]
@@ -35,16 +31,13 @@ ll = "ls -la"
 dd = "du -sch $(ls -A)"
 
 [hooks]
-enter = ["shopt -s checkwinsize", 'mkdir -p "${XDG_STATE_HOME}"/bash']
+enter = ['mkdir -p "${XDG_STATE_HOME}"/bash']
 
 [tools]
-aws = "latest"
-"npm:bash-language-server" = { version = "latest", depends = ["bun"] }
-bun = "latest"
+"github:k8s-1/bashls" = "latest"
 github-cli = "latest"
 jq = "latest"
 "github:atusy/kakehashi" = "latest"
-lazydocker = "latest"
 lazygit = "latest"
 shellcheck = "latest"
 shfmt = "latest"
@@ -52,9 +45,7 @@ tmux = "latest"
 tombi = "latest"
 ripgrep = "latest"
 uv = "latest"
-"npm:vscode-langservers-extracted" = { version = "latest", depends = ["bun"] }
-oh-my-pi = { version = "latest", rename_exe = "omp", postinstall = 'mkdir -p "${XDG_CONFIG_HOME}/omp/agent" "${XDG_DATA_HOME}/omp" "${XDG_STATE_HOME}/omp" "${XDG_CACHE_HOME}/omp"' }
-"npm:yaml-language-server" = { version = "latest", depends = ["bun"] }
+"github:chdalski/rlsp" = { version = "latest", version_prefix = "rlsp-yaml-v" }
 
 [bootstrap.user]
 login_shell = "/bin/bash"
