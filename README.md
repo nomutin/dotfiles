@@ -13,10 +13,10 @@ Settings for:
 - [vim](./.config/vim/vimrc) (text editor)
 - [tmux](./.config/tmux/tmux.conf) (multiplexer)
 - [mise](./.config/mise/config.toml) (CLI manager)
+- [kakehashi](./.config/kakehashi/kakehashi.toml) (LSP bridge)
 - [ghostty](./.config/ghostty/config.ghostty) (terminal emulator)
 - **(unused)** ~~[neovim](./.config/nvim/init.lua) (text editor)~~
 - **(unused)** ~~[alacritty](./.config/alacritty/alacritty.toml) (terminal emulator)~~
-- **(unused)** ~~[zellij](./.config/zellij/config.kdl) (terminal multiplexer)~~
 
 <details>
 
