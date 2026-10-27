@@ -1,7 +1,12 @@
+[env]
+PI_CONFIG_DIR = ".config/omp"
+
 [tools]
-"github:totota-08/BacklightKit" = { version = "0.5.0", os = ["macos"] }
-"aqua:ouch-org/ouch" = { version = "latest", os = ["macos"] }
-"llama.cpp" = { version = "latest", version_prefix = "b", os = ["macos"] }
+"github:totota-08/BacklightKit" = { version = "0.5.0" }
+"conda:ttyd" = "latest"
+"aqua:ouch-org/ouch" = { version = "latest" }
+mole = "latest"
+oh-my-pi = { version = "latest", rename_exe = "omp", postinstall = "omp config init-xdg" }
 
 [bootstrap.hooks.pre-defaults]
 run = """
@@ -9,6 +14,7 @@ scutil --set ComputerName MBA
 scutil --set HostName MBA
 scutil --set LocalHostName MBA
 hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc": 0x700000039, "HIDKeyboardModifierMappingDst": 0x7000000E0}]}'
+touch ~/.bash_sessions_disable
 """
 
 [bootstrap.hooks.post-tools]
@@ -20,8 +26,8 @@ mise exec -- backlit set 0
 [bootstrap.packages]
 "brew:container" = "latest"
 "brew-cask:ghostty" = "latest"
-"brew:mole" = "latest"
 "brew-cask:stats" = "latest"
+"brew-cask:tailscale" = "latest"
 
 [bootstrap.macos.dock]
 autohide = true
