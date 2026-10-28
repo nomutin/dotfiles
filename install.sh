@@ -23,12 +23,14 @@ setup_mise() {
   if ! command -v mise >/dev/null 2>&1; then
     log_info "mise not found in PATH, installing"
     curl https://mise.run | sh
+    export PATH="$HOME/.local/bin:$PATH"
   fi
   log_info "Bootstraping..."
-  "${HOME}/.local/bin/mise" bootstrap \
+  mise bootstrap \
       --from https://github.com/nomutin/dotfiles.git \
       --from-dir ~/.dotfiles \
-      --config-dir .config/mise
+      --config-dir .config/mise \
+      --skip packages,macos-defaults
 }
 
 main() {

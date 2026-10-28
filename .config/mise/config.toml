@@ -21,7 +21,6 @@ XDG_STATE_HOME = "${HOME}/.local/state"
 
 DOTNET_CLI_HOME = "${XDG_DATA_HOME}/dotnet"
 HISTFILE = "${XDG_STATE_HOME}/bash/history"
-NPM_CONFIG_USERCONFIG = "${XDG_CONFIG_HOME}/npm/npmrc"
 LESSHISTFILE = "${XDG_STATE_HOME}/less/history"
 VIMINIT = 'source ${XDG_CONFIG_HOME}/vim/vimrc'
 
