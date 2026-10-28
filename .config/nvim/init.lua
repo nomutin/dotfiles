@@ -30,7 +30,6 @@ vim.cmd.colorscheme("catppuccin")
 vim.pack.add({
   { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
-  { src = "https://github.com/ggml-org/llama.vim" },
 })
 require("fzf-lua").setup{}
 require("gitsigns").setup{}
