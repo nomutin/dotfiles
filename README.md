@@ -18,7 +18,10 @@ Settings for:
 - **(unused)** ~~[neovim](./.config/nvim/init.lua) (text editor)~~
 - **(unused)** ~~[alacritty](./.config/alacritty/alacritty.toml) (terminal emulator)~~
 
-## App-Specific Installation
+<!-- markdownlint-disable MD033 MD001 -->
+<details>
+
+<summary>App-Specific Installation</summary>
 
 ### vim
 
@@ -31,3 +34,6 @@ curl -fsSL https://nomutin.github.io/dotfiles/.config/vim/vimrc -o ~/.vimrc
 ```bash
 curl -fsSL https://nomutin.github.io/dotfiles/.config/tmux/tmux.conf -o ~/.tmux.conf
 ```
+
+</details>
+<!-- markdownlint-enable MD033 MD001 -->
