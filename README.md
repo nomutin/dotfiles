@@ -18,9 +18,7 @@ Settings for:
 - **(unused)** ~~[neovim](./.config/nvim/init.lua) (text editor)~~
 - **(unused)** ~~[alacritty](./.config/alacritty/alacritty.toml) (terminal emulator)~~
 
-<details>
-
-<summary>App-Specific Installation</summary>
+## App-Specific Installation
 
 ### vim
 
@@ -33,6 +31,3 @@ curl -fsSL https://nomutin.github.io/dotfiles/.config/vim/vimrc -o ~/.vimrc
 ```bash
 curl -fsSL https://nomutin.github.io/dotfiles/.config/tmux/tmux.conf -o ~/.tmux.conf
 ```
-
-</details>
-
